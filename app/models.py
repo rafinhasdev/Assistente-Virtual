@@ -16,18 +16,18 @@ class Usuarios(models.Model):
 class Backlogs(models.Model):
     num_versao = models.IntegerField(unique=True, null=True)
     data_postagem = models.DateField(auto_now_add=True)
-    data_alteracao = models.DateTimeField(auto_now_add=True)
+    data_alteracao = models.DateTimeField(auto_now_add=False)
     descricao = models.TextField(null=False, blank=False)
     dev_responsavel = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
         return f"Versionamento: {self.num_versao}::{self.data_alteracao}"
 
-class Waha (models.Model):
+class Waha(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
     num_sessao = models.CharField(max_length=255, null=True, unique=True)
     data_ultima_alteracao = models.DateField(auto_now_add=True)
     token_api_suap = models.CharField(max_length=255, unique=True, null=True)
 
     def __str__(self):
-        return f"Sessão: {self.usuario.nome}"
+        return f"Sessão: {self.num_sessao}"
