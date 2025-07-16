@@ -31,3 +31,19 @@ class Waha(models.Model):
 
     def __str__(self):
         return f"Sessão: {self.num_sessao}"
+
+class Credenciais(models.Model):
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
+    jwt = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return f"Token: {self.usuario.nome}, Login: {self.usuario.data_ultimo_login}"
+    
+class SupportMensagens(models.Model):
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
+    descricao = models.TextField(null=True)
+    data_envio = models.DateTimeField(auto_now_add=True,null=True)
+    
+    def __str__(self):
+        return f"{self.usuario.nome}: {self.data_envio}"
+
