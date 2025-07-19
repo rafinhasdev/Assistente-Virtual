@@ -18,12 +18,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path
 from django.conf.urls.static import static
-from app.views import index, criar_usuario
+from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('criar_usuario/', criar_usuario, name="login")
+    path('criar_usuario/', criar_usuario, name="login"),
+    path('support/', support, name="support"),
+    path('backlogs/', backlogs, name="backlogs"),
+    path('about/', about, name="about"),
 ]
 
 if settings.DEBUG:

@@ -5,6 +5,15 @@ from .forms import UsuarioForm
 def index(request):
     return render(request, "app/index.html")
 
+def support(request):
+    return render(request, "app/support.html")
+
+def backlogs(request):
+    return render(request, "app/backlogs.html")
+
+def about(request):
+    return render(request, "app/about.html")
+
 def login(request):
     return render(request, "app/login.html")
 
