@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import UsuarioForm
+from .forms import UsuarioForm, SupporteForms
 
 
 def index(request):
@@ -27,5 +27,16 @@ def criar_usuario(request):
         form = UsuarioForm()
     
     return render(request, "app/login.html", {'form': form})
+
+def criar_support(request):
+    if request.method == 'POST':
+        form = SupporteForms(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            form = SupporteForms()
+    else:
+        form = SupporteForms()
+    
+    return render(request, "app/support.html", {'form': form})
 
 # Create your views here.

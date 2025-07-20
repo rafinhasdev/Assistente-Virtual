@@ -4,4 +4,19 @@
 
 <h1>Suporte page.</h1>
 
+<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="usuario">Usuário</label>
+            {{ form.usuario }}
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Digite aqui...</label>
+            {{ form.descricao }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
 {% endblock %}
