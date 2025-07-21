@@ -2,6 +2,25 @@
 
 {% block center %}
 
-<h1>Backlogs page.</h1>
+<div class="container">
+
+    {% for backlog in backlogs %}
+
+        <div class="backlog-item versao"> 
+            {{backlog.num_versao}} 
+        </div>
+        <div class="backlog-item descricao">
+            {{backlog.descricao}}
+        </div>
+        <div class="backlog-item data_postagem">
+            {{backlog.data_postagem}}
+        </div>
+        <div class="backlog-item responsavel">
+            {{backlog.dev_responsavel}}
+        </div>
+
+    {% endfor %}
+
+</div>
 
 {% endblock %}

@@ -26,6 +26,7 @@ urlpatterns = [
     path('criar_usuario/', criar_usuario, name="login"),
     path('support/', support, name="support"),
     path('backlogs/', backlogs, name="backlogs"),
+    path('backlogs/att_backlogs/', att_backlogs, name="att_backlogs"),
     path('about/', about, name="about"),
 ]
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import UsuarioForm, SupporteForms
+from .models import Backlogs
 
 
 def index(request):
@@ -38,5 +39,12 @@ def criar_support(request):
         form = SupporteForms()
     
     return render(request, "app/support.html", {'form': form})
+
+def att_backlogs(request):
+    backlogs = Backlogs.objects.all()
+    context = {
+        'backlogs': backlogs
+    }
+    return render(request, "app/backlogs.html", context)
 
 # Create your views here.
