@@ -31,43 +31,39 @@
 
         <div class="backlogs"
         style="
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: start;
             text-align: justify;
             background-color: rgba(240, 255, 255, 0.1);
             width: 100%;
             height: 100%;
             border-radius: 30px;
-            padding: 1rem;
+            padding: 3.5rem;
             "
         >
 
             {% for backlog in backlogs %}
 
                 <div class="backlog-item versao"
-                    style=" grid-area: 1 / 1 / 2 / 4;"> 
+                    style=" align-self: flex-start; width: 100%; height: 50px;"> 
                     ATUALIZAÇÃO:
                     {{backlog.num_versao}} 
-                </div>
-                <div class="backlog-item descricao"
-                style=" grid-area: 2 / 1 / 3 / 4;">
-                    {{backlog.descricao}}
-                </div>
-                <div class="backlog-item responsavel"
-                style=" grid-area: 3 / 1 / 4 / 3;">
-                    Por:
-                    {{backlog.dev_responsavel}}
-                </div>
-                <div class="backlog-item data_postagem"
-                style=" grid-area: 3 / 3 / 4 / 4;">
-                    Data:
                     {{backlog.data_postagem}}
                 </div>
+                <div class="backlog-item descricao"
+                style=" align-self: flex-start; margin-bottom: 25px;">
+                    {{backlog.descricao}}
+                </div>
+                <div class="backlog-item responsavel_e_data"
+                style=" align-self: flex-end; display: flex; align-items: end; justify-content: end; opacity: 50%; margin-bottom: 20px;">
+                    <strong style="padding-inline-start: 10px;">Por:</strong> 
+                    {{backlog.dev_responsavel}}
+                    <strongs style="padding-inline-start: 10px;">Data:</strong>  
+                    {{backlog.data_alteracao}}
+                </div>
                 
-
             {% endfor %}
     
     </div>
