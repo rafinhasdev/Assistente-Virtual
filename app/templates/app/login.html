@@ -1,43 +1,28 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Document</title>
 </head>
 <body>
-    <h2>Login</h2>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="matricula" class="form-label">Matricula</label>
-            {{ form.matricula }}
+    <div class="container_main">
+        <div class="div_img">
+            <img src="{% static 'img/logoifrn.png' %}" alt="IFRN">
+            <img src="" alt="Placeholder">
         </div>
-
-        <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            {{ form.email }}
+        <div class="content">
+            <h1>BEM VINDO!</h1>
+            <div>
+                <h2>FELIPE</h2>
+                <p>SEU ASSISTENTE VIRTUAL</p>
+            </div>
+            <button type="button">Entrar com o SUAP</button>
         </div>
-
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            {{ form.nome }}
-        </div>
-
-        <div class="mb-3">
-            <label for="sobrenome" class="form-label">Sobrenome</label>
-            {{ form.sobrenome }}
-        </div>
-
-        <div class="mb-3">
-            <label for="numero" class="form-label">Numero</label>
-            {{ form.numero }}
-        </div>
-
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-
+    </div>
 
 </body>
 </html>

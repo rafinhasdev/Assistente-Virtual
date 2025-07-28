@@ -23,7 +23,7 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('criar_usuario/', criar_usuario, name="login"),
+    path('login/', login, name="login"),
     path('support/', support, name="support"),
     path('backlogs/', att_backlogs, name="backlogs"),
     path('about/', about, name="about"),
