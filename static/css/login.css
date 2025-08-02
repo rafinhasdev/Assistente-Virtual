@@ -59,7 +59,9 @@ body{
     
     }
 
-    button{
+    a{
+        font-style: none;
+        text-decoration: none;
         margin-bottom: 30px;
         background-color: #8CCE3B;
         color: #171717;
