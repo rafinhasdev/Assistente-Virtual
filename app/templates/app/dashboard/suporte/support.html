@@ -1,0 +1,28 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+  <h2 class="text-light">Mensagens recebidas</h2>
+
+  <table class="table table-bordered text-light">
+    <thead>
+      <tr>
+        <th>Usuário</th>
+        <th>Descricao</th>
+        <th>Data de envio</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in support %}
+      <tr>
+        <td>{{ i.usuario.nome }}</td>
+        <td>{{ i.descricao }}</td>
+        <td>{{ i.data_envio}}</td>
+        <td>
+
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

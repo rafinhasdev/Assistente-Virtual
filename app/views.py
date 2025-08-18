@@ -54,14 +54,15 @@ def dashboard(request):
 # ------------------------------------- CRUD SUPORTE --------------------------------------------
 
 def support(request):
-    return render(request, "app/support/support.html")
+    return render(request, "app/dashboard/suporte/support.html")
+
 
 def support_listar(request):
     support = SupportMensagens.objects.all()
     context = {
         'support': support
     }
-    return render(request, "app/support/support_listar.html", context)
+    return render(request, "app/dashboard/suporte/support.html", context)
 
 def support_criar(request):
     if request.method == 'POST':
