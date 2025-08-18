@@ -31,7 +31,7 @@ urlpatterns = [
     path('support/support_remover/<int:pk>/', support_remover, name="support_remover"),
 
     path('backlogs/', att_backlogs, name="backlogs"),
-    path('dashboard/backlogs/', dashboard, name="backlogs"),
+    path('dashboard/', dashboard, name="backlogs"),
     path('about/', about, name="about"),
     
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from .forms import UsuarioForm, SupporteForms
-from .models import Backlogs, SupportMensagens
+from .models import Backlogs, SupportMensagens, Usuarios
 
 
 def index(request):
@@ -37,11 +37,21 @@ def att_backlogs(request):
 # Create your views here.
 
 def dashboard(request):
-    return render(request, "app/dashboard/backlogs/backlogs.html")
+    total_usuarios = Usuarios.objects.count()
+    support = SupportMensagens.objects.all()
+    total_backlogs = Backlogs.objects.count()
+
+    context = {
+        'total_usuarios': total_usuarios,
+        'total_backlogs': total_backlogs,
+        'support': support,
+    }
+
+    return render(request, "app/dashboard/dashboard.html", context)
 
 
 
-# Create CRUD Support here.
+# ------------------------------------- CRUD SUPORTE --------------------------------------------
 
 def support(request):
     return render(request, "app/support/support.html")
@@ -80,5 +90,6 @@ def support_remover(request, pk):
     support = get_list_or_404(SupportMensagens, pk=pk)
     support.delete()
     return redirect('support_listar')
-        
+
+# ------------------------------------- CRUD SUPORTE --------------------------------------------
     
