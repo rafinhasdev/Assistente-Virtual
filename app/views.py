@@ -1,13 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_list_or_404
 from .forms import UsuarioForm, SupporteForms
-from .models import Backlogs
+from .models import Backlogs, SupportMensagens
 
 
 def index(request):
     return render(request, "app/index.html")
 
-def support(request):
-    return render(request, "app/support.html")
 
 def backlogs(request):
     return render(request, "app/backlogs.html")
@@ -29,17 +27,6 @@ def criar_usuario(request):
     
     return render(request, "app/login.html", {'form': form})
 
-def criar_support(request):
-    if request.method == 'POST':
-        form = SupporteForms(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            form = SupporteForms()
-    else:
-        form = SupporteForms()
-    
-    return render(request, "app/support.html", {'form': form})
-
 def att_backlogs(request):
     backlogs = Backlogs.objects.all()
     context = {
@@ -48,3 +35,50 @@ def att_backlogs(request):
     return render(request, "app/backlogs.html", context)
 
 # Create your views here.
+
+def dashboard(request):
+    return render(request, "app/dashboard/backlogs/backlogs.html")
+
+
+
+# Create CRUD Support here.
+
+def support(request):
+    return render(request, "app/support/support.html")
+
+def support_listar(request):
+    support = SupportMensagens.objects.all()
+    context = {
+        'support': support
+    }
+    return render(request, "app/support/support_listar.html", context)
+
+def support_criar(request):
+    if request.method == 'POST':
+        form = SupporteForms(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            form = SupporteForms()
+    else:
+        form = SupporteForms()
+    
+    return render(request, "app/support/support.html", {'form': form})
+
+def support_editar(request, pk):
+    support = get_list_or_404(SupportMensagens, pk=pk)
+    if request.method == 'POST':
+        form = SupporteForms(request.POST, instance=support)
+        if form.is_valid():
+            form.save()
+            return redirect('support_listar')
+    else:
+        form = SupporteForms(instance=support)
+    
+    return render(request, "app/support/support_editar.html", {'form': form})
+
+def support_remover(request, pk):
+    support = get_list_or_404(SupportMensagens, pk=pk)
+    support.delete()
+    return redirect('support_listar')
+        
+    

@@ -25,8 +25,15 @@ urlpatterns = [
     path('', index, name="index"),
     path('login/', login, name="login"),
     path('support/', support, name="support"),
+    path('support/support_listar/', support_listar, name="support_listar"),
+    path('support/support_criar/', support_criar, name="support_criar"),
+    path('support/support_editar/<int:pk>/', support_editar, name="support_editar"),
+    path('support/support_remover/<int:pk>/', support_remover, name="support_remover"),
+
     path('backlogs/', att_backlogs, name="backlogs"),
+    path('dashboard/backlogs/', dashboard, name="backlogs"),
     path('about/', about, name="about"),
+    
 ]
 
 if settings.DEBUG:
