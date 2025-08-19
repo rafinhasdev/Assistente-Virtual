@@ -19,7 +19,7 @@
         <td>{{ i.descricao }}</td>
         <td>{{ i.data_envio}}</td>
         <td>
-
+          <a href="{% url 'support_remover' pk=i.id %}" class="btn btn-success btn-sm">Responder</a>
         </td>
       </tr>
       {% endfor %}

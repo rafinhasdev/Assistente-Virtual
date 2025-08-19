@@ -1,0 +1,34 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+  <h2 class="text-light">Lista de Usuários</h2>
+
+  <table class="table table-bordered text-light">
+    <thead>
+      <tr>
+        <th>Matricula</th>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Email</th>
+        <th>Número</th>
+        <th>Data_cadastro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in usuarios %}
+      <tr>
+        <td>{{ i.matricula }}</td>
+        <td>{{ i.nome }}</td>
+        <td>{{ i.sobrenome}}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.numero }}</td>
+        <td>{{ i.data_cadastro }}</td>
+        <td>
+          <a href="{% url 'usuarios_remover' pk=i.id %}" class="btn btn-danger btn-sm">Remover</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -24,14 +24,26 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('login/', login, name="login"),
-    path('dashboard/', support, name="support"),
-    path('dashboard/support_listar/', support_listar, name="support_listar"),
-    path('dashboard/support_criar/', support_criar, name="support_criar"),
-    path('dashboard/support_editar/<int:pk>/', support_editar, name="support_editar"),
-    path('dashboard/support_remover/<int:pk>/', support_remover, name="support_remover"),
+    path('dashboard/', dashboard, name="dashboard"),
+
+    path('dashboard/support/', support_listar, name="support"), #Funciona
+    path('dashboard/support_criar/', support_criar, name="support_criar"), #Falta criar
+    path('dashboard/support_editar/<int:pk>/', support_editar, name="support_editar"), #Falta criar
+    path('dashboard/support_remover/<int:pk>/', support_remover, name="support_remover"), #Funciona
+
+    path('dashboard/usuarios', usuarios, name="usuarios"), #Funciona
+    path('dashboard/usuarios_detail/<int:pk>', usuario_detail, name="usuario_detail"), #Falta criar
+    path('dashboard/usuarios_criar', usuarios_criar, name="usuarios_criar"), #Falta criar
+    path('dashboard/usuarios_editar/<int:pk>/', usuarios_editar, name="usuarios_editar"), #Falta criar
+    path('dashboard/usuarios_remover/<int:pk>/', usuarios_remover, name="usuarios_remover"), #Funciona
+    
+    path('dashboard/backlogs/', backlogs, name="backlogs"), #Corrigir o erro de redicionamento
+    path('dashboard/backlogs_criar', backlogs_criar, name="backlogs_criar"), #Funciona
+    path('dashboard/backlogs_editar/<int:pk>/', backlogs_editar, name="backlogs_editar"), #Funciona
+    path('dashboard/backlogs_remover/<int:pk>/', backlogs_remover, name="backlogs_remover"), #Funciona
+
 
     path('backlogs/', att_backlogs, name="backlogs"),
-    path('dashboard/', dashboard, name="backlogs"),
     path('about/', about, name="about"),
     
 ]

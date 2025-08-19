@@ -1,0 +1,31 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+    <h2>Adicionar Backlogs</h2>
+    <form class="container text-light" method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="nome" class="form-label">Versionamento</label>
+            {{ form.num_versao }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="data_alteracao" class="form-label">Data de Alteração</label>
+            {{ form.data_alteracao }}
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            {{ form.descricao }}
+        </div> 
+
+        <div class="mb-3">
+            <label for="dev_responsavel" class="form-label">Dev responsável</label>
+            {{ form.dev_responsavel }}
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+{% endblock %}

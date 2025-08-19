@@ -1,0 +1,32 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+  <h2 class="text-light">Backlogs</h2>
+    <a href="{% url 'backlogs_criar' %}" class="btn btn-danger btn-sm">Criar</a>
+  <table class="table table-bordered text-light">
+    <thead>
+      <tr>
+        <th>Versionamento</th>
+        <th>Data da Postagem</th>
+        <th>Data de Alteração</th>
+        <th>Descrição</th>
+        <th>Dev responsável</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in backlogs %}
+      <tr>
+        <td>{{ i.num_versao }}</td>
+        <td>{{ i.data_postagem }}</td>
+        <td>{{ i.data_alteracao }}</td>
+        <td>{{ i.descricao }}</td>
+        <td>{{ i.dev_responsavel }}</td>
+        <td>
+          <a href="{% url 'backlogs_remover' pk=i.id %}" class="btn btn-danger btn-sm">Remover</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

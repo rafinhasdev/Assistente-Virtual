@@ -14,7 +14,7 @@ class Usuarios(models.Model):
         return self.nome
 
 class Backlogs(models.Model):
-    num_versao = models.IntegerField(unique=True, null=True)
+    num_versao = models.FloatField(unique=True, null=True)
     data_postagem = models.DateField(auto_now_add=True)
     data_alteracao = models.DateTimeField(auto_now_add=False)
     descricao = models.TextField(null=False, blank=False)
