@@ -7,9 +7,6 @@ def index(request):
     return render(request, "app/index.html")
 
 
-def backlogs(request):
-    return render(request, "app/backlogs.html")
-
 def about(request):
     return render(request, "app/about.html")
 
@@ -27,7 +24,7 @@ def criar_usuario(request):
     
     return render(request, "app/login.html", {'form': form})
 
-def att_backlogs(request):
+def listar_backlogs(request):
     backlogs = Backlogs.objects.all()
     context = {
         'backlogs': backlogs

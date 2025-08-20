@@ -42,9 +42,8 @@ urlpatterns = [
     path('dashboard/backlogs_editar/<int:pk>/', backlogs_editar, name="backlogs_editar"), #Funciona
     path('dashboard/backlogs_remover/<int:pk>/', backlogs_remover, name="backlogs_remover"), #Funciona
 
-
-    path('backlogs/', att_backlogs, name="backlogs"),
     path('about/', about, name="about"),
+    path('backlogs/', listar_backlogs, name="listar_backlogs")
     
 ]
 
