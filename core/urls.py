@@ -23,7 +23,6 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('login/', login, name="login"),
     path('dashboard/', dashboard, name="dashboard"),
 
     path('dashboard/support/', support_listar, name="support"), #Funciona
@@ -43,7 +42,8 @@ urlpatterns = [
     path('dashboard/backlogs_remover/<int:pk>/', backlogs_remover, name="backlogs_remover"), #Funciona
 
     path('about/', about, name="about"),
-    path('backlogs/', listar_backlogs, name="listar_backlogs")
+    path('backlogs/', listar_backlogs, name="listar_backlogs"),
+    path('suporte/', forms_support, name="forms_support")
     
 ]
 

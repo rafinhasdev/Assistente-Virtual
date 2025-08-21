@@ -56,7 +56,7 @@ padding-left: 5%;
             grid-row-gap: 0px;
 
         ">
-        <button type="button"
+        <button type="button" onclick="abrirCaixa()"
             style="
                 background-color: #8CCE3B;
                 color: #1B232E;
@@ -68,6 +68,7 @@ padding-left: 5%;
                 height: 70px;
                 border-radius: 20px;
                 grid-area: 1 / 1 / 1 / 1;
+                cursor: pointer;
 
             
             " >Fale comigo!</button>
@@ -84,10 +85,31 @@ padding-left: 5%;
             text-decoration: underline;
             border: none;
             grid-area: 2 / 2 / 2 / 2;
+            cursor: pointer;
             ">ME ADICIONE!</button>
         </div>
 
     </div>
+
+    <div class="overlay text-light">
+
+        AAAAAAA
+
+    </div>
+
+    <script>
+
+        function abrirCaixa() {
+            console.log("abriu caixa")
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        function fecharCaixa() {
+            document.getElementById("overlay").style.display = "none";
+        }
+
+
+    </script>
     
 </div>
 
