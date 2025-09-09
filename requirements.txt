@@ -4,4 +4,7 @@ pydantic==2.10.6
 pydantic_core==2.27.2
 uvicorn==0.34.0
 virtualenv==20.29.2
-django==4.2.2
+djangorestframework==3.14.0
+pillow
+django==3.2
+psycopg2-binary

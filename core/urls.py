@@ -16,13 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
 from app.views import *
+
+
+router = DefaultRouter()
+router.register(r'usuarios', UsuariosViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
+    path('login/', login, name="login"),
     path('dashboard/', dashboard, name="dashboard"),
 
     path('dashboard/support/', support_listar, name="support"), #Funciona
@@ -43,7 +49,9 @@ urlpatterns = [
 
     path('about/', about, name="about"),
     path('backlogs/', listar_backlogs, name="listar_backlogs"),
-    path('suporte/', forms_support, name="forms_support")
+    path('suporte/', forms_support, name="forms_support"),
+
+    path('api/', include(router.urls)),
     
 ]
 

@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from rest_framework import viewsets
+from .serializers import UsuariosSerializer 
 from .forms import UsuarioForm, SupporteForms, BacklogsForm
 from .models import Backlogs, SupportMensagens, Usuarios
 
@@ -99,7 +102,7 @@ def usuarios(request):
     return render(request, "app/dashboard/usuarios/usuarios.html", context)
 
 def usuario_detail(request, pk):
-    usuario = get_list_or_404(Usuarios, pk=pk)
+    usuario = get_object_or_404(Usuarios, pk=pk)
     context = {
         'usuario': usuario
     }
@@ -176,3 +179,13 @@ def backlogs_remover(request, pk):
 
 
 # ------------------------------------- CRUD BACKLOGS --------------------------------------------
+
+# ------------------------------------- LOGIN --------------------------------------------
+
+def login(request):
+    return render(request, "app/login.html")
+
+
+class UsuariosViewSet(viewsets.ModelViewSet):
+    queryset = Usuarios.objects.all()
+    serializer_class = UsuariosSerializer
