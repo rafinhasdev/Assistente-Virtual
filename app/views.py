@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import FormView, TemplateView, ListView
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
-from .forms import UsuarioForm, SupporteForms, BacklogsForm
+from .forms import UsuarioForm, SupporteForms, BacklogsForm, LoginForm
 from .models import Backlogs, SupportMensagens, Usuarios
 
 
@@ -189,3 +192,4 @@ def login(request):
 class UsuariosViewSet(viewsets.ModelViewSet):
     queryset = Usuarios.objects.all()
     serializer_class = UsuariosSerializer
+

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dotenv
+from django.conf import global_settings
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +43,18 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
 ]
+
+THIRD_PARTY_APPS = [
+    'django_extensions',
+    'django_jinja',
+    'social.app.django_app.default',
+    'social_django',
+]
+
+dotenv.load_dotenv(".env")
+
+SOCIAL_AUTH_SUAP_KEY = os.getenv("SOCIAL_AUTH_SUAP_KEY")
+SOCIAL_AUTH_SUAP_SECRET = os.getenv("SOCIAL_AUTH_SUAP_SECRET")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,6 +134,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/'),]
+
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

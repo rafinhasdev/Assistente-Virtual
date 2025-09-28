@@ -52,6 +52,8 @@ urlpatterns = [
     path('suporte/', forms_support, name="forms_support"),
 
     path('api/', include(router.urls)),
+    path('social', include('social_django.urls', namespace='social'))
+    
     
 ]
 
