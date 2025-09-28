@@ -41,11 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'rest_framework',
+    'usuarios',
+    'dashboard',
+    'support',
+    'backlogs',
+
+
 ]
 
 THIRD_PARTY_APPS = [
     'django_extensions',
+    'rest_framework',
     'django_jinja',
     'social.app.django_app.default',
     'social_django',
