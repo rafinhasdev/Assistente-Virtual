@@ -28,7 +28,7 @@ router.register(r'usuarios', UsuariosViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('login/', login, name="login"),
+    path('suap/login', login, name="login"),
     path('dashboard/', dashboard, name="dashboard"),
 
     path('dashboard/support/', support_listar, name="support"), #Funciona
