@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('login/', login, name="login"),
-    path('login/suap', login_suap, name="suap_login"),
+    path('login/suap', suap_login, name="suap_login"),
     path('dashboard/', dashboard, name="dashboard"),
 
     path('dashboard/support/', support_listar, name="support"), #Funciona
@@ -54,7 +54,7 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('social', include('social_django.urls', namespace='social')),
-    path('suap/complete', callback, name="callback")
+    path('complete/suap/', callback, name="callback")
     
     
 ]

@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView, TemplateView, ListView
+from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import requests
-import dotenv, os
+from dotenv import load_dotenv
+import os
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
 from .forms import UsuarioForm, SupporteForms, BacklogsForm
 from .models import Backlogs, SupportMensagens, Usuarios
+
+load_dotenv()
 
 
 def index(request):
@@ -195,39 +200,14 @@ def login(request):
 def suap_login(request):
     if request.method != 'POST':
         return JsonResponse({'error': 'Método não permitido'}, status=405)
-    
-    
-    TOKEN_URL = 'https://suap.ifrn.edu.br/o/token/',
-    USER_DATA_URL = 'https://suap.ifrn.edu.br/api/eu/',
-    AUTHORIZATION_URL = 'https://suap.ifrn.edu.br/o/authorize/',
-    CLIENT_ID = os.getenv("SOCIAL_AUTH_SUAP_KEY"),
-    CLIENT_SECRET = os.getenv("SOCIAL_AUTH_SUAP_SECRET"),
-    REDIRECT_URL = "http://localhost:8000/suap/callback/" ##AJUSTAR DPS
 
-    token_data = {
-        "grand_type": "authorization_code",
-        "code": request.POST.get("code"),
-        "redirect_uri": REDIRECT_URL,
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
-    }
 
-    token_response = requests.post(TOKEN_URL, data=token_data)
     
-    if token_response.status_code != 200:
-        return JsonResponse({'error': 'Falha na autenticação'}, status=401)
-    
-    token_json = token_response.json()
-    access_token = token_json.get('access_token')
 
-    headers = {"Authorization": f"Bearer {access_token}"} 
-    user_response = requests.get(USER_DATA_URL, headers=headers) 
-
-    if user_response.status_code != 200: 
-        return JsonResponse({'error': 'Falha ao obter dados do usuário'}, status=401) 
-    
-    user_data = user_response.json() 
-    return JsonResponse({ "token": token_json, "usuario": user_data }, status=200)
+    return JsonResponse({
+        "token": token_json,
+        "headers": headers
+    }, status=200)
 
 
                                
