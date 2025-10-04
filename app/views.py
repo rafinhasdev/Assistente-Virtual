@@ -8,7 +8,7 @@ import dotenv, os
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
-from .forms import UsuarioForm, SupporteForms, BacklogsForm, LoginForm
+from .forms import UsuarioForm, SupporteForms, BacklogsForm
 from .models import Backlogs, SupportMensagens, Usuarios
 
 
@@ -202,7 +202,7 @@ def suap_login(request):
     AUTHORIZATION_URL = 'https://suap.ifrn.edu.br/o/authorize/',
     CLIENT_ID = os.getenv("SOCIAL_AUTH_SUAP_KEY"),
     CLIENT_SECRET = os.getenv("SOCIAL_AUTH_SUAP_SECRET"),
-    REDIRECT_URL = "http://localhost:8000/suap/login/" ##AJUSTAR DPS
+    REDIRECT_URL = "http://localhost:8000/suap/callback/" ##AJUSTAR DPS
 
     token_data = {
         "grand_type": "authorization_code",
@@ -231,7 +231,8 @@ def suap_login(request):
 
 
                                
-  
+def callback(request):
+    return render(request, "app/index.html")
 
 
 

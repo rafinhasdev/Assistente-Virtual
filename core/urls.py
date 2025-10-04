@@ -28,7 +28,8 @@ router.register(r'usuarios', UsuariosViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('suap/login', login, name="login"),
+    path('login/', login, name="login"),
+    path('login/suap', login_suap, name="suap_login"),
     path('dashboard/', dashboard, name="dashboard"),
 
     path('dashboard/support/', support_listar, name="support"), #Funciona
@@ -52,7 +53,8 @@ urlpatterns = [
     path('suporte/', forms_support, name="forms_support"),
 
     path('api/', include(router.urls)),
-    path('social', include('social_django.urls', namespace='social'))
+    path('social', include('social_django.urls', namespace='social')),
+    path('suap/complete', callback, name="callback")
     
     
 ]

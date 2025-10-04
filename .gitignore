@@ -1,3 +1,2 @@
 .venv
-.settings.sample.js
-.javascript
+.env
