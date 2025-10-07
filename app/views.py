@@ -5,17 +5,12 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-import requests
-from dotenv import load_dotenv
-import os
+
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
 from .forms import UsuarioForm, SupporteForms, BacklogsForm
 from .models import Backlogs, SupportMensagens, Usuarios
-
-load_dotenv()
-
 
 def index(request):
     return render(request, "app/index.html")
@@ -193,28 +188,12 @@ def backlogs_remover(request, pk):
 
 # ------------------------------------- LOGIN --------------------------------------------
 
-def login(request):
-    return render(request, "app/login.html")
-
-@csrf_exempt
-def suap_login(request):
-    if request.method != 'POST':
-        return JsonResponse({'error': 'Método não permitido'}, status=405)
-
-
-    
-
-    return JsonResponse({
-        "token": token_json,
-        "headers": headers
-    }, status=200)
-
-
                                
 def callback(request):
     return render(request, "app/index.html")
 
-
+def login(request):
+    return render(request, "app/login.html")
 
 
 class UsuariosViewSet(viewsets.ModelViewSet):

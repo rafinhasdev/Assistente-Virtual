@@ -1,4 +1,3 @@
-import re
 from social_core.backends.oauth import SuapOAuth2
 
 class SuapOAuth2(SuapOAuth2):

@@ -18,7 +18,13 @@
                 <h2>FELIPE</h2>
                 <p>SEU ASSISTENTE VIRTUAL</p>
             </div>
-            <a href="#" target="_blank" rel="noopener noreferrer" onclick="login();">Entrar com o Suap</a>
+            <span>
+                    <a href="{% url 'social:begin' 'suap' %}"
+                        title="Clique nesse link para logar com o SUAP"
+                    >
+                    Entre com o Suap
+                    </a>
+                </span>
         </div>
     </div>
 
