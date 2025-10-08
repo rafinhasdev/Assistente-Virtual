@@ -10,8 +10,6 @@ class Usuarios(models.Model):
     data_cadastro = models.DateField(auto_now_add=True, null=True)
     data_ultimo_login = models.DateTimeField(auto_now_add=True, null=True)
     
-    def __str__(self):
-        return self.nome
 
 class Backlogs(models.Model):
     num_versao = models.FloatField(unique=True, null=True)

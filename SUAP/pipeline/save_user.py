@@ -8,12 +8,12 @@ def save_suap_user(strategy, details, user=None, response=None, *args, **kwargs)
     if not response:
         return
 
-    matricula = response.get('identificacao') or '---'
-    nome = response.get('primeiro_nome') or '---'
-    sobrenome = response.get('ultimo_nome') or '---'
-    email = response.get('email_segundario') or '---'
+    matricula = response.get('identificacao') 
+    nome = response.get('primeiro_nome') 
+    sobrenome = response.get('ultimo_nome') 
+    email = response.get('email_segundario') 
     numero = response.get('telefone') or '---'
-    token = response.get('access_token') or '---'
+    token = response.get('access_token') 
 
     usuario, created = Usuarios.objects.update_or_create(
         matricula=matricula,

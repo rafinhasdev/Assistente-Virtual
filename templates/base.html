@@ -21,6 +21,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% endif %}
+
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'index' %}">
               <img src="{% static 'img/icon_index.svg' %}" alt="home" width="24" height="24">
