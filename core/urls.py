@@ -53,6 +53,7 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('', include('social_django.urls', namespace='social')),
+    path('callback/', callback, name='callback')
     
     
 ]

@@ -23,18 +23,9 @@ class Backlogs(models.Model):
     def __str__(self):
         return f"Versionamento: {self.num_versao}::{self.data_alteracao}"
 
-class Waha(models.Model):
-    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
-    num_sessao = models.CharField(max_length=255, null=True, unique=True)
-    data_ultima_alteracao = models.DateField(auto_now_add=True)
-    token_api_suap = models.CharField(max_length=255, unique=True, null=True)
-
-    def __str__(self):
-        return f"Sessão: {self.num_sessao}"
-
 class Credenciais(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
-    jwt = models.CharField(max_length=255, null=True)
+    suap_TOKEN = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return f"Token: {self.usuario.nome}, Login: {self.usuario.data_ultimo_login}"

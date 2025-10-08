@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView, TemplateView, ListView
+from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -190,7 +191,14 @@ def backlogs_remover(request, pk):
 
                                
 def callback(request):
-    return render(request, "app/index.html")
+    error = request.GET.get('error')
+
+    if error:
+
+        messages.error(request, "Autenticação negada.")
+        return redirect('login')
+    
+    return redirect('index')
 
 def login(request):
     return render(request, "app/login.html")
