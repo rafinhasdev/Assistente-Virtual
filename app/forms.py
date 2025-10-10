@@ -43,3 +43,9 @@ class BacklogsForm(ModelForm):
             'descricao' : forms.TextInput(attrs={'class': 'form-control' }),
             'dev_responsavel' : forms.TextInput(attrs={'class': 'form-control' }),
         }
+
+
+class EmailForm(forms.Form):
+    pergunta = forms.CharField(max_length=100, label='Assunto')
+    resposta= forms.CharField(widget=forms.Textarea, label='Mensagem')
+    destinatario = forms.ModelChoiceField(queryset=Usuarios.objects.all(), label="destinatario")

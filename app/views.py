@@ -7,10 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 
+from django.conf import settings
+
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
-from .forms import UsuarioForm, SupporteForms, BacklogsForm
+from .forms import UsuarioForm, SupporteForms, BacklogsForm, EmailForm
 from .models import Backlogs, SupportMensagens, Usuarios, Credenciais
 
 def index(request):
@@ -222,4 +224,32 @@ def logout(request):
 class UsuariosViewSet(viewsets.ModelViewSet):
     queryset = Usuarios.objects.all()
     serializer_class = UsuariosSerializer
+
+# ---------------------------------- EMAIL --------------------------------
+    
+def enviar_email(request, email):
+    send = False
+
+
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            pergunta = form.cleaned_data['pergunta']
+            resposta = form.cleaned_data['resposta']
+            destinatario = form.cleaned_data['destinatario']
+
+            send_mail(
+                pergunta,
+                resposta,
+                settings.EMAIL_HOST_USER,
+                [destinatario],
+                fail_silently=False,
+            )
+
+            send = True
+    
+    else:
+        form = EmailForm()
+
+    return render(request, 'dashboard/suporte/support.html', {'form': form, 'enviado': send})
 
