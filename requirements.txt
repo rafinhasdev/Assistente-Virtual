@@ -6,8 +6,9 @@ uvicorn==0.34.0
 virtualenv==20.29.2
 djangorestframework==3.14.0
 pillow
-django==3.2
+django==5.2
 python-dotenv
 psycopg2-binary
 social-auth-core
 social-auth-app-django
+dotenv

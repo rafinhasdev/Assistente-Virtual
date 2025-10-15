@@ -6,88 +6,153 @@
 style="
 display: flex;
 background-color: #1B232E;
-flex-direction: column;
-align-items: flex-start;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 width: 100%;
 height: 100vh;
 padding-left: 5%;
+padding-right: 5%;
+position: relative;
+overflow: hidden;
 ">
 
-    <h1 class="title" 
-    style="
-    color: #8CCE3B;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font: 64pt;"
-    >FELIPE</h1>
+    <!-- Quadradinhos decorativos - Canto superior direito (vazios) -->
+    <div style="position: absolute; top: 8%; right: 32%; display: flex; gap: 10px;">
+        <img src="../../../static/img/cell_up_left.png" alt="" style="width: 175px; height: auto;">
+    </div>
 
-    <h2 class="subtitle"
-    style="
-    color: rgb(255, 255, 255); 
-    font-style: bold;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font: 32pt;"
-    >Assistente Virtual</h2>
-    <p class="desc" 
-    style="
-    color: rgb(255, 255, 255);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font: 16pt;
-    text-align: justify;"
-    >Um Assistente Virtual para te ajudar nas atividades acadêmicas <br>no SUAP. Fale comigo e te ajudarei em qualquer demanda <br>necessária!</p>
 
-    <div class="container_buttons"
-        style="
-        
+    <!-- Quadradinhos decorativos - Lado esquerdo inferior -->
+    <div style="position: absolute; bottom: 19%; left: 1%; display: flex; flex-direction: column; gap: 8px;">
+        <img src="../../../static/img/button_down_left.png" alt="" style="width: 100px; height: auto;">
+    </div>
+
+    <!-- Quadradinhos decorativos - Centro inferior (vazios) -->
+    <div style="position: absolute; bottom: 16%; left: 23%; display: flex; gap: 12px;">
+        <img src="../../../static/img/add_me_right.png" alt="" style="width: 120px; height: auto;">
+    </div>
+
+    <!-- Quadradinhos decorativos - Lado direito inferior -->
+    <div style="position: absolute; bottom: 0%; right: 7%; display: flex; flex-direction: column; gap: 10px;">
+        <img src="../../../static/img/cell-down-left.png" alt="" style="width: 115px; height: auto;">
+    </div>
+
+    <div class="content_left" style="
         display: flex;
         flex-direction: column;
-        align-items: start;
-        justify-content: end;
-        flex-wrap: wrap;
-        width: 100vh;
-        height: 50%;
-        "
-    >
-        <div class="button"
+        align-items: flex-start;
+        width: 50%;
+        z-index: 10;
+    ">
+        <h1 class="title" 
         style="
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+        color: #8CCE3B;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 64pt;
+        margin: 0;
+        "
+        >FELIPE</h1>
 
-        ">
-        <button type="button" onclick="abrirCaixa()"
+        <h2 class="subtitle"
+        style="
+        color: rgb(255, 255, 255); 
+        font-weight: bold;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 32pt;
+        margin: 10px 0;
+        "
+        >ASSISTENTE VIRTUAL</h2>
+        <p class="desc" 
+        style="
+        color: rgb(255, 255, 255);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 14pt;
+        text-align: justify;
+        max-width: 450px;
+        line-height: 1.5;
+        "
+        >Um Assistente Virtual para te ajudar nas atividades acadêmicas no SUAP. Fale comigo e te ajudarei em qualquer demanda necessária!</p>
+
+        <div class="container_buttons"
             style="
-                background-color: #8CCE3B;
-                color: #1B232E;
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                font-size: 18pt;
-                font-weight: bold;
-                text-align: center;
-                width: 200px;
-                height: 70px;
-                border-radius: 20px;
-                grid-area: 1 / 1 / 1 / 1;
-                cursor: pointer;
-
-            
-            " >Fale comigo!</button>
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: end;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            gap: 20px;
+            "
+        >
+            <div style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            ">
+                <button type="button" onclick="abrirCaixa()"
+                    style="
+                        background-color: #8CCE3B;
+                        color: #1B232E;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-size: 18pt;
+                        font-weight: bold;
+                        text-align: center;
+                        width: 220px;
+                        height: 70px;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        border: none;
+                    
+                    " >FALE COMIGO!</button>
+                <img src="../../../static/img/phone-outgoing.svg" alt="Phone Icon" style="
+                    width: 50px;
+                    height: 50px;
+                ">
+            </div>
             <button type="button"
             style="
             background: none;
             color: #8CCE3B;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-size: 12pt;
+            font-size: 14pt;
             font-weight: bold;
             text-align: center;
-            width: 150px;
+            width: 200px;
             height: 50px;
             text-decoration: underline;
             border: none;
-            grid-area: 2 / 2 / 2 / 2;
             cursor: pointer;
+            margin-left: 90px;
             ">ME ADICIONE!</button>
         </div>
+    </div>
+
+    <div class="content_right" style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 80%;
+        position: relative;
+        z-index: 5;
+    ">
+        <img src="../../../static/img/Felipe_asset.svg" alt="Felipe Assets" style="
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            z-index: 2;
+            left: -50%;
+            top: 20%;
+
+        ">
+        <img src="../../../static/img/telphone.svg" alt="Telephone Icon" style="
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+        ">
     </div>
     
 </div>
