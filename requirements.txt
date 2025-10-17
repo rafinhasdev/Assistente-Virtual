@@ -11,3 +11,4 @@ python-dotenv
 psycopg2-binary
 social-auth-core
 social-auth-app-django
+dotenv
