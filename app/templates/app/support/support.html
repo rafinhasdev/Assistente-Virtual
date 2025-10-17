@@ -1,4 +1,6 @@
+
 {% extends 'base.html' %}
+{% load static %}
 
 {% block center %}
 
@@ -26,6 +28,41 @@
         border-color: #8CCE3B;
         box-shadow: 0 0 10px rgba(140, 206, 59, 0.3);
     }
+
+    .imagens {
+        display: grid;
+        width: 900px;
+        height: 700px;
+        position: absolute;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: -5px;
+        grid-row-gap: -5px;
+
+    }
+
+    .img_1 { 
+        grid-area: 1 / 1 / 2 / 2; 
+        width: 20px;
+        height: 20px;
+
+    }
+    .img_2 { 
+        grid-area: 1 / 3 / 2 / 4;
+        justify-self: center;
+        margin-top: 5%;
+        width: 20px;
+        height: 20px;
+    }
+    .img_3 {
+        position: absolute;
+        top: -40%;
+        left: -20%;
+
+        grid-area: 3 / 1 / 4 / 2;
+    }
+    
+
 </style>
 
 <div class="container_main"
@@ -40,17 +77,22 @@ height: 100vh;
 padding: 5%;
 color: white;
 ">
-    <div style="position: absolute; top: 29%; left: 18%; display: flex; gap: 12px;">
+
+<div class="imagens">
+
+    <div class="img_1">
         <img src="../../../../static/img/support_page_1.png" alt="" style="width: 130px; height: auto;">
     </div>
 
-    <div style="position: absolute; bottom: 4%; right: 18%; display: flex; gap: 12px;">
+    <div class="img_2">
         <img src="../../../../static/img/support_page_2.png" alt="" style="width: 130px; height: auto;">
     </div>
-
-    <div style="position: absolute; bottom: -12%; left: 8%; display: flex; gap: 12px;">
-        <img src="../../../../static/img/felipe_asset_question.svg" alt="" style="width: 410px; height: auto;">
+    <div class="img_3">
+        <img src="{% static 'img/felipe_asset_question.svg' %}" alt="" style="width: auto; height: auto;">
     </div>
+
+</div>
+    
 
     <h1 style="color: #8CCE3B; margin-bottom: 10px;">Teve algum problema?</h1>
     <h4 style="margin-bottom: 30px;">Digite aqui o que aconteceu!</h4>
