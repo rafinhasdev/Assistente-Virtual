@@ -1,0 +1,9 @@
+from django.urls import path
+from API import views
+
+urlpatterns = [
+    path('cadastrar/', views.CredenciaisCreateView.as_view(), name='cadastrar-credenciais'),
+    path('usuarios/', views.UsuariosListView.as_view(), name='listar-usuarios'),
+    path('usuarios-slim/', views.UsuariosSlimListView.as_view(), name='listar-usuarios-slim'),
+    path('getcredentiais/', views.CredenciaisListView.as_view(), name='get_credentiais'),
+]

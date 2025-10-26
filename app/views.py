@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from rest_framework import viewsets
 from .serializers import UsuariosSerializer 
 from .forms import UsuarioForm, SupporteForms, BacklogsForm
-from .models import Backlogs, SupportMensagens, Usuarios, Credenciais
+from .models import Backlogs, SupportMensagens, Usuarios
 
 def index(request):
     return render(request, "app/index.html")
@@ -205,21 +205,7 @@ def login(request):
 
 def logout(request):
 
-    if request.user.is_authenticated:
-        try:
-            # Busca a instância do usuário no model Usuarios
-            usuario_instance = Usuarios.objects.get(matricula=request.user.username)
-            
-            # Limpa o token SUAP
-            Credenciais.objects.filter(usuario=usuario_instance).update(suap_TOKEN=None)
-        except Usuarios.DoesNotExist:
-            pass
-
     django_logout(request)
     return redirect('login')
 
-
-class UsuariosViewSet(viewsets.ModelViewSet):
-    queryset = Usuarios.objects.all()
-    serializer_class = UsuariosSerializer
 

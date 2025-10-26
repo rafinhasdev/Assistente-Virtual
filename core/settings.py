@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'social_django',
     'app',
     'rest_framework',
+    'API',
 ]
 
 THIRD_PARTY_APPS = [

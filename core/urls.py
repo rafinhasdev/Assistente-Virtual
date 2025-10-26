@@ -22,9 +22,6 @@ from rest_framework.routers import DefaultRouter
 from app.views import *
 
 
-router = DefaultRouter()
-router.register(r'usuarios', UsuariosViewSet)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
@@ -52,7 +49,7 @@ urlpatterns = [
     path('backlogs/', listar_backlogs, name="listar_backlogs"),
     path('suporte/', forms_support, name="forms_support"),
 
-    path('api/', include(router.urls)),
+    path('api/', include('API.urls')),
     path('', include('social_django.urls', namespace='social')),
     path('callback/', callback, name='callback')
     
