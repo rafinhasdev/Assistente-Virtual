@@ -2,56 +2,254 @@
 
 {% block center %}
 
-<div class="container_main"
-style="
-display: flex;
-background-color: #1B232E;
-flex-direction: column;
-align-items: flex-start;
-width: 100%;
-height: 100vh;
-padding-left: 5%;
+<div class="container_main" style="
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 5%;
 ">
 
+    <!-- Primeira linha de cards -->
+    <div class="row" style="width: 100%; margin-bottom: 40px;">
+        <!-- Card Número de Usuários -->
+        <div style="width: 33%; padding-right: 15px;">
+            <div style="
+                background-color: #374151;
+                border: 2px solid #8CCE3B;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                position: relative;
+                min-height: 200px;
+            ">
+                <h1 style="
+                    font-size: 64px;
+                    font-weight: bold;
+                    color: #a4d65e;
+                    margin: 0;
+                ">65</h1>
+                <p style="
+                    font-size: 14px;
+                    color: #a0a0a0;
+                    margin: 5px 0 30px 0;
+                ">Número de Usuários</p>
+                
+                <div style="
+                    position: absolute;
+                    bottom: 20px;
+                    left: 30px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                ">
+                    <span style="color: #8CCE3B; font-size: 18px;">↗ 25</span>
+                </div>
+                
+                <div style="
+                    position: absolute;
+                    bottom: 20px;
+                    right: 20px;
+                    background-color: #8CCE3B;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                ">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d3a2f" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
 
-<div class="row mt-3">
-  <div class="col-md-4">
-    <div class="card text-white bg-primary mb-3">
-      <div class="card-header">Usuários</div>
-      <div class="card-body">
-        <h5 class="card-title">Total de Usuários</h5>
-        <p class="card-text"> {{ total_usuarios }} </p> <!-- Substitua pelo valor real -->
-      </div>
+        <!-- Card Total de mensagens do Suporte -->
+        <div style="width: 18%; padding-right: 15px; margin-left: 55px;">
+            <div style="
+                background-color: #8CCE3B;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 140px;
+            ">
+                <h1 style="
+                    font-size: 60px;
+                    font-weight: bold;
+                    margin: 0;
+                    color: white;
+                ">12</h1>
+            </div>
+            <p style="
+                font-size: 13px;
+                text-align: center;
+                margin-top: 10px;
+                color: #8CCE3B;
+                font-weight: 500;
+            ">Total de mensagens<br>do Suporte</p>
+        </div>
+
+        <!-- Card Total de mensagens não respondidos -->
+        <div style="width: 18%; padding-right: 15px;">
+            <div style="
+                background-color: #374151;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 140px;
+            ">
+                <h1 style="
+                    font-size: 60px;
+                    font-weight: bold;
+                    margin: 0;
+                    color: white;
+                ">5</h1>
+            </div>
+            <p style="
+                font-size: 13px;
+                text-align: center;
+                margin-top: 10px;
+                color: #8CCE3B;
+                font-weight: 500;
+            ">Total de mensagens<br>não respondidos</p>
+        </div>
+
+        <!-- Card Total de mensagens respondidas -->
+        <div style="width: 18%;">
+            <div style="
+                background-color: #5B7FE8;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 140px;
+            ">
+                <h1 style="
+                    font-size: 60px;
+                    font-weight: bold;
+                    margin: 0;
+                    color: white;
+                ">7</h1>
+            </div>
+            <p style="
+                font-size: 13px;
+                text-align: center;
+                margin-top: 10px;
+                color: #8CCE3B;
+                font-weight: 500;
+            ">Total de mensagens<br>respondidas</p>
+        </div>
     </div>
-  </div>
 
+    <!-- Linha divisória -->
+    <div style="
+        width: 100%;
+        height: 2px;
+        background-color: #4b5563;
+        margin: 30px 0;
+    "></div>
 
-  {% for i in support %}
+    <!-- Segunda linha de cards -->
+    <div class="row" style="width: 100%;">
+        <!-- Card Ativo -->
+        <div class="col-md-4">
+            <div style="
+                background-color: #374151;
+                border: 2px solid #8CCE3B;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                min-height: 150px;
+            ">
+                <h2 style="
+                    font-size: 36px;
+                    font-weight: bold;
+                    color: #8CCE3B;
+                    margin: 0;
+                ">Ativo</h2>
+                <p style="
+                    font-size: 14px;
+                    color: #9ca3af;
+                    margin-top: 5px;
+                ">Conexão do Agente Felipe</p>
+            </div>
+        </div>
 
-  <div class="col-md-4">
-    <div class="card text-white bg-success mb-3">
-      <div class="card-header">Suporte</div>
-      <div class="card-body">
-        <h5 class="card-title">Mensangens não respondidas</h5>
-        <p class="card-text"> {{ i.descricao }}, de: {{ i.usuario.nome }}</p> <!-- Substitua pelo valor real -->
-      </div>
+        <!-- Card Número de Grupos do Agente -->
+        <div class="col-md-4">
+            <div style="
+                background-color: #374151;
+                border: 2px solid #8CCE3B;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 150px;
+            ">
+                <h1 style="
+                    font-size: 80px;
+                    font-weight: bold;
+                    margin: 0;
+                    color: #8CCE3B;
+                ">3</h1>
+                <p style="
+                    font-size: 13px;
+                    text-align: center;
+                    margin-top: 10px;
+                    color: #9ca3af;
+                ">Número de Grupos<br>do Agente</p>
+            </div>
+        </div>
+
+        <!-- Card Número de conversas do Agente -->
+        <div class="col-md-4">
+            <div style="
+                background-color: #374151;
+                border: 2px solid #8CCE3B;
+                border-radius: 15px;
+                padding: 30px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 150px;
+            ">
+                <h1 style="
+                    font-size: 80px;
+                    font-weight: bold;
+                    margin: 0;
+                    color: #8CCE3B;
+                ">13</h1>
+                <p style="
+                    font-size: 13px;
+                    text-align: center;
+                    margin-top: 10px;
+                    color: #9ca3af;
+                ">Número de conversas<br>do Agente</p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  {% endfor %}
-
-  <div class="col-md-4">
-    <div class="card text-white bg-info mb-3">
-      <div class="card-header">Backlogs</div>
-      <div class="card-body">
-        <h5 class="card-title">Total de Backlogs</h5>
-        <p class="card-text"> {{ total_backlogs }} </p> <!-- Substitua pelo valor real -->
-      </div>
-    </div>
-  </div>
-</div>
-
-    
 </div>
 
 {% endblock %}

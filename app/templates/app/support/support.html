@@ -2,6 +2,31 @@
 
 {% block center %}
 
+<style>
+    /* Estilizar o textarea */
+    #id_descricao {
+        width: 100%;
+        height: 100%;
+        background-color: #2a3545;
+        border: 2px solid #8CCE3B;
+        border-radius: 15px;
+        color: white;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 14pt;
+        padding: 20px;
+        resize: none;
+        outline: none;
+    }
+    
+    #id_descricao::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    
+    #id_descricao:focus {
+        border-color: #8CCE3B;
+        box-shadow: 0 0 10px rgba(140, 206, 59, 0.3);
+    }
+</style>
 
 <div class="container_main"
 style="
@@ -12,47 +37,77 @@ align-items: center;
 justify-content: center;
 width: 100%;
 height: 100vh;
-padding-left: 5%;
+padding: 5%;
 color: white;
 ">
-    <h1 style="color: #8CCE3B;">Teve algum problema?</h1>
-    <h4>Digite aqui o que aconteceu!</h2>
+    <div style="position: absolute; top: 29%; left: 18%; display: flex; gap: 12px;">
+        <img src="../../../../static/img/support_page_1.png" alt="" style="width: 130px; height: auto;">
+    </div>
 
+    <div style="position: absolute; bottom: 4%; right: 18%; display: flex; gap: 12px;">
+        <img src="../../../../static/img/support_page_2.png" alt="" style="width: 130px; height: auto;">
+    </div>
+
+    <div style="position: absolute; bottom: -12%; left: 8%; display: flex; gap: 12px;">
+        <img src="../../../../static/img/felipe_asset_question.svg" alt="" style="width: 410px; height: auto;">
+    </div>
+
+    <h1 style="color: #8CCE3B; margin-bottom: 10px;">Teve algum problema?</h1>
+    <h4 style="margin-bottom: 30px;">Digite aqui o que aconteceu!</h4>
 
     <div class="forms"
     style="
-    background-color: rgba(255, 255, 255, 0.05);
-    border: solid 1px #8CCE3B;
-    border-radius: 20px;    
-    margin-top: 20px;
     width: 700px;
     height: 500px;
+    margin-bottom: 0px;
     ">
         <form method="post" enctype="multipart/form-data"
-        style="height: 100%;"
-        
-        
+        style="
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        "
         >
             {% csrf_token %}
 
             <div class="mb-3"
-            style="height: 100%;
-            padding: 20px;
-            color: rgba(255, 255, 255, 0.5);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-size: 12pt;"
-            
+            style="
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            "
             >
-                <label for="descricao" class="form-label">Digite aqui...</label>
                 {{ form.descricao }}
             </div>
-            
-
-            <button type="submit" class="btn btn-primary"
-            style="background-color: rgba(255, 255, 255, 0.05);
-            border: solid 1px #8CCE3B; "
-            >Enviar</button>
         </form>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; width: 50%;">
+        <button type="submit"
+        style="
+        background-color: transparent;
+        border: 1px solid #8CCE3B;
+        color: #8CCE3B;
+        font-weight: bold;
+        font-size: 16pt;
+        padding: 5px 25px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        "
+        onclick="document.querySelector('form').submit();"
+        >
+            Enviar
+            <img src="../../../../static/img/send.svg" alt="Enviar" style="
+                width: 20px;
+                height: 20px;
+                filter: brightness(0) saturate(100%) invert(73%) sepia(71%) saturate(344%) hue-rotate(27deg) brightness(95%) contrast(87%);
+            ">
+        </button>
     </div>
 
 </div>
