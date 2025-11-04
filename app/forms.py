@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Usuarios, SupportMensagens, Backlogs
+from .models import Usuarios
+from Dashboard.models import Backlogs, SupportMensagens
+
 
 
 class UsuarioForm(ModelForm):

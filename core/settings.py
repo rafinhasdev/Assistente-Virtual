@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'API',
+    'Dashboard',    
 ]
 
 THIRD_PARTY_APPS = [
