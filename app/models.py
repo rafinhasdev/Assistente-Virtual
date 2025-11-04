@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-class Usuarios(models.Model):
+class Usuarios(AbstractUser):
     matricula = models.CharField(max_length=14, unique=True, null=True)
     email = models.EmailField(null=True)
     nome = models.CharField(max_length=255, null=True)
@@ -12,23 +13,4 @@ class Usuarios(models.Model):
 
     def __str__(self):
         return f"{self.nome} {self.matricula}"
-    
-
-class Backlogs(models.Model):
-    num_versao = models.FloatField(unique=True, null=True)
-    data_postagem = models.DateField(auto_now_add=True)
-    data_alteracao = models.DateTimeField(auto_now_add=False)
-    descricao = models.TextField(null=False, blank=False)
-    dev_responsavel = models.CharField(max_length=255, blank=False)
-
-    def __str__(self):
-        return f"Versionamento: {self.num_versao}::{self.data_alteracao}"
-    
-class SupportMensagens(models.Model):
-    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
-    descricao = models.TextField(null=True)
-    data_envio = models.DateTimeField(auto_now_add=True,null=True)
-    
-    def __str__(self):
-        return f"{self.usuario.nome}: {self.data_envio}"
 
