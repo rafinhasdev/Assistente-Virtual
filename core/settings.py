@@ -164,6 +164,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
+AUTH_USER_MODEL = 'app.Usuarios'
+
 AUTHENTICATION_BACKENDS = (
     'SUAP.backends.SuapOAuth2',
     'django.contrib.auth.backends.ModelBackend',

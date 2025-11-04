@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from .views import *
 
-urlspatterns = [
+urlpatterns = [
     ##path('', index, name='index'),
     path('backlogs/', BacklogsListView.as_view(), name='backlogs_list'),
     path('backlogs/<int:pk>/', BacklogsDetailView.as_view(), name='backlogs_detail'),

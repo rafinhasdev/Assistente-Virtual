@@ -3,6 +3,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Backlogs, SupportMensagens, Usuarios
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 @login_required
@@ -10,98 +12,87 @@ def index(request):
     return render(request, 'dashboard/index.html')
 
 
-@login_required
-class BacklogsListView(ListView):
+
+class BacklogsListView(LoginRequiredMixin, ListView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_list.html'
     context_object_name = 'backlogs'
 
-@login_required
-class BacklogsDetailView(DetailView):
+
+class BacklogsDetailView(LoginRequiredMixin, DetailView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_detail.html'
     context_object_name = 'backlogs'
 
-@login_required
-class BacklogsCreateView(CreateView):
+
+class BacklogsCreateView(LoginRequiredMixin, CreateView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_form.html'
     fields = '__all__'
     success_url = reverse_lazy('backlogs_list')
 
-@login_required
-class BacklogsUpdateView(UpdateView):
+
+class BacklogsUpdateView(LoginRequiredMixin, UpdateView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_form.html'
     fields = '__all__'
     success_url = reverse_lazy('backlogs_list')
 
-@login_required
-class BacklogsDeleteView(DeleteView):
+class BacklogsDeleteView(LoginRequiredMixin, DeleteView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_confirm_delete.html'
     success_url = reverse_lazy('backlogs_list')
 
-@login_required
-class SupportMensagensListView(ListView):
+class SupportMensagensListView(LoginRequiredMixin, ListView):
     model = SupportMensagens
     template_name = 'dashboard/support/support_list.html'
     context_object_name = 'support'
 
-@login_required
-class SupportMensagensDetailView(DetailView):
+class SupportMensagensDetailView(LoginRequiredMixin, DetailView):
     model = SupportMensagens
     template_name = 'dashboard/support/support_detail.html'
     context_object_name = 'support'
 
-@login_required
-class SupportMensagensCreateView(CreateView):
+class SupportMensagensCreateView(LoginRequiredMixin, CreateView):
     model = SupportMensagens
     template_name = 'dashboard/support/support_form.html'
     fields = '__all__'
     success_url = reverse_lazy('support_list')
 
-@login_required
-class SupportMensagensUpdateView(UpdateView):
+class SupportMensagensUpdateView(LoginRequiredMixin, UpdateView):
     model = SupportMensagens
     template_name = 'dashboard/support/support_form.html'
     fields = '__all__'
     success_url = reverse_lazy('support_list')
 
-@login_required
-class SupportMensagensDeleteView(DeleteView):
+class SupportMensagensDeleteView(LoginRequiredMixin, DeleteView):
     model = SupportMensagens
     template_name = 'dashboard/support/support_confirm_delete.html'
     success_url = reverse_lazy('support_list')
 
-@login_required
-class UsuariosListView(ListView):
+class UsuariosListView(LoginRequiredMixin, ListView):
     model = Usuarios
     template_name = 'dashboard/usuarios/usuarios_list.html'
     context_object_name = 'usuarios'
 
-@login_required
-class UsuariosDetailView(DetailView):
+class UsuariosDetailView(LoginRequiredMixin, DetailView):
     model = Usuarios
     template_name = 'dashboard/usuarios/usuarios_detail.html'
     context_object_name = 'usuarios'
 
-@login_required
-class UsuariosCreateView(CreateView):
+class UsuariosCreateView(LoginRequiredMixin, CreateView):
     model = Usuarios
     template_name = 'dashboard/usuarios/usuarios_form.html'
     fields = '__all__'
     success_url = reverse_lazy('usuarios_list')
 
-@login_required
-class UsuariosUpdateView(UpdateView):
+class UsuariosUpdateView(LoginRequiredMixin, UpdateView):
     model = Usuarios
     template_name = 'dashboard/usuarios/usuarios_form.html'
     fields = '__all__'
     success_url = reverse_lazy('usuarios_list')
 
-@login_required
-class UsuariosDeleteView(DeleteView):
+class UsuariosDeleteView(LoginRequiredMixin, DeleteView):
     model = Usuarios
     template_name = 'dashboard/usuarios/usuarios_confirm_delete.html'
     success_url = reverse_lazy('usuarios_list')
