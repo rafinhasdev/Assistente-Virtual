@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import *
 
 urlspatterns = [
-    path('', index.as_view(), name='index'),
+    ##path('', index, name='index'),
     path('backlogs/', BacklogsListView.as_view(), name='backlogs_list'),
     path('backlogs/<int:pk>/', BacklogsDetailView.as_view(), name='backlogs_detail'),
     path('backlogs/create/', BacklogsCreateView.as_view(), name='backlogs_create'),
