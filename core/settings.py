@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'API',
     'Dashboard',    
+    'accounts',
 ]
 
 THIRD_PARTY_APPS = [
@@ -139,8 +140,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/'),]
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -164,7 +166,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-AUTH_USER_MODEL = 'app.Usuarios'
+AUTH_USER_MODEL = 'accounts.Usuarios'
 
 AUTHENTICATION_BACKENDS = (
     'SUAP.backends.SuapOAuth2',

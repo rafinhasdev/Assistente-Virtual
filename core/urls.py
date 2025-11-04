@@ -24,20 +24,23 @@ from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('SingUp/', login, name="login"),
-    path('logout/', logout, name="logout"),
-    path('dashboard/', include('Dashboard.urls')),
+   
+    path('', index, name="home"),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
-    path('about/', about, name="about"),
-    path('backlogs/', listar_backlogs, name="listar_backlogs"),
-    path('suporte/', forms_support, name="forms_support"),
+    path('dashboard/', include('Dashboard.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('app/', include('app.urls')),
 
     path('api/', include('API.urls')),
-    path('', include('social_django.urls', namespace='social')),
-    path('callback/', callback, name='callback')
+
+
+   
     
     
 ]
 
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

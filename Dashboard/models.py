@@ -1,5 +1,5 @@
 from django.db import models
-from app.models import Usuarios
+from accounts.models import Usuarios
 
 
 class Backlogs(models.Model):

@@ -1,8 +1,8 @@
 from rest_framework import generics
 from .models import Credenciais
 from .serializers import CredenciaisSerializer, CredentiaisView
-from app.models import Usuarios
-from app.serializers import UsuariosSerializer, UsuariosSlimSerializerGet
+from accounts.models import Usuarios
+from accounts.serializers import UsuariosSerializer, UsuariosSlimSerializerGet
 
 
 class CredenciaisCreateView(generics.CreateAPIView):

@@ -1,5 +1,5 @@
 from django.db import models
-from app.models import Usuarios
+from accounts.models import Usuarios
 
 class Credenciais(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)

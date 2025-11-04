@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Credenciais
-from app.models import Usuarios
-from app.serializers import UsuariosSerializer
+from accounts.models import Usuarios
+from accounts.serializers import UsuariosSerializer
 
 class CredenciaisSerializer(serializers.ModelSerializer):
     usuario = UsuariosSerializer()

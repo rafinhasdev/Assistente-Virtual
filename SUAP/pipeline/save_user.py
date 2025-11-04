@@ -16,16 +16,16 @@ def save_suap_user(strategy, details, user=None, response=None, *args, **kwargs)
     token = response.get('access_token') 
 
     usuario, created = Usuarios.objects.update_or_create(
-        matricula=matricula,
-        defaults={
-            'email': email,
-            'nome': nome,
-            'sobrenome': sobrenome,
-            'numero': numero,
-            'data_cadastro': timezone.now(),
-            'data_ultimo_login': timezone.now()
-        }
-    )
+    matricula=matricula,
+    defaults={
+        'username': matricula,
+        'email': email or f'{matricula}@ifrn.edu.br',
+        'nome': nome or '---',
+        'sobrenome': sobrenome or '---',
+        'numero': numero or '---',
+        'data_ultimo_login': timezone.now()
+    }
+)
 
     Credenciais.objects.update_or_create(
         usuario=usuario,

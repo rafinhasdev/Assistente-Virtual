@@ -15,7 +15,7 @@
        <a class="navbar-brand" href="#">
       <img src="{% static 'img/icon_ifrn.svg'%}" alt="IFRN" width="30" height="24">
       </a>
-      <a class="navbar-brand" href="{% url 'index' %}">IFRN</a>
+      <a class="navbar-brand" href="{% url 'home' %}">IFRN</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,7 +29,7 @@
           {% endif %}
 
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'index' %}">
+            <a class="nav-link" aria-current="page" href="{% url 'home' %}">
               <img src="{% static 'img/icon_index.svg' %}" alt="home" width="24" height="24">
               Principal
             </a>
@@ -43,12 +43,6 @@
             <a class="nav-link" href="{% url 'listar_backlogs' %}">
               <img src="{% static 'img/icon_backlogs.svg' %}" alt="file" width="24" height="24">
               Backlogs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'forms_support'%}">
-              <img src="{% static 'img/icon_suporte.svg' %}" alt="gear" width="24" height="24">
-              Suporte
             </a>
           </li>
         </ul>
