@@ -34,11 +34,6 @@ urlpatterns = [
     path('app/', include('app.urls')),
 
     path('api/', include('API.urls')),
-
-
-   
-    
-    
 ]
 
 if settings.DEBUG:

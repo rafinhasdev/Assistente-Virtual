@@ -1,35 +1,31 @@
-from django.utils import timezone
-from app.models import Usuarios, Credenciais
+from django.contrib.auth import get_user_model
 
-def save_suap_user(strategy, details, user=None, response=None, *args, **kwargs):
-    """
-    Salva/atualiza o usuário e suas credenciais no banco de dados.
-    """
-    if not response:
+User = get_user_model()
+
+def save_suap_user(backend, user, response, *args, **kwargs):
+    # Dados que vêm do SUAP
+    matricula = response.get("matricula") or response.get("username")
+    nome = response.get("nome")
+    email = response.get("email")
+
+    if not matricula:  # Segurança extra
         return
 
-    matricula = response.get('identificacao') 
-    nome = response.get('primeiro_nome') 
-    sobrenome = response.get('ultimo_nome') 
-    email = response.get('email_segundario') 
-    numero = response.get('telefone') or '---'
-    token = response.get('access_token') 
+    # 1. Verifica se o usuário já existe
+    try:
+        user = User.objects.get(username=matricula)
+        return {"is_new": False, "user": user}
+    except User.DoesNotExist:
+        pass
 
-    usuario, created = Usuarios.objects.update_or_create(
-    matricula=matricula,
-    defaults={
-        'username': matricula,
-        'email': email or f'{matricula}@ifrn.edu.br',
-        'nome': nome or '---',
-        'sobrenome': sobrenome or '---',
-        'numero': numero or '---',
-        'data_ultimo_login': timezone.now()
-    }
-)
-
-    Credenciais.objects.update_or_create(
-        usuario=usuario,
-        defaults={'suap_TOKEN': token}
+    # 2. Se não existir, cria um novo
+    user = User.objects.create_user(
+        username=matricula,  # agora username = matrícula
+        email=email,
+        first_name=nome.split()[0] if nome else "",
+        last_name=" ".join(nome.split()[1:]) if nome else "",
+        password=None  # autenticação social não usa senha
     )
 
-    return {'usuario': usuario}
+    return {"is_new": True, "user": user}
+
