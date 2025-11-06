@@ -9,8 +9,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, "Saindo!")
     return redirect('login')
-
-def callback_view(request):
-    return redirect('home')

@@ -11,8 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def index(request):
     return render(request, 'dashboard/index.html')
 
-
-
 class BacklogsListView(LoginRequiredMixin, ListView):
     model = Backlogs
     template_name = 'dashboard/backlogs/backlogs_list.html'

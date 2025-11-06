@@ -6,10 +6,11 @@ from Dashboard.models import SupportMensagens, Backlogs
 def index(request):
     return render(request, "app/index.html")
 
+@login_required
 def about(request):
     return render(request, "app/about.html")
 
-
+@login_required
 def listar_backlogs(request):
     backlogs = Backlogs.objects.all()
     context = {

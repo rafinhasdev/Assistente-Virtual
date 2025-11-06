@@ -24,7 +24,7 @@
                 <li class="list-none">
                   <a class="flex items-center gap-3 px-4 py-3 no-underline transition-colors duration-200 hover:opacity-80" 
                      style="color: {% if request.resolver_match.url_name == 'dashboard' %}#8CCE3B{% else %}#344153{% endif %}; background-color: #171717;"
-                     href="{% url 'dashboard' %}">
+                     href="{% url 'dashboard_index' %}">
                     <svg width="24" height=auto viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M30.9312 23.459C30.0034 25.6531 28.5523 27.5864 26.7048 29.0901C24.8572 30.5938 22.6694 31.622 20.3327 32.0848C17.9959 32.5476 15.5814 32.4309 13.3002 31.745C11.0189 31.0591 8.94043 29.8248 7.24642 28.15C5.55242 26.4752 4.29446 24.411 3.58253 22.1377C2.8706 19.8645 2.72638 17.4514 3.16248 15.1095C3.59857 12.7677 4.6017 10.5683 6.08417 8.70367C7.56664 6.83905 9.48331 5.36596 11.6666 4.41321" stroke="{% if request.resolver_match.url_name == 'dashboard' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M32.0833 17.7861C32.0833 15.871 31.7061 13.9746 30.9732 12.2053C30.2404 10.436 29.1662 8.82831 27.812 7.47412C26.4578 6.11993 24.8501 5.04573 23.0808 4.31285C21.3115 3.57997 19.4151 3.20276 17.5 3.20276V17.7861H32.0833Z" stroke="{% if request.resolver_match.url_name == 'dashboard' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,7 +35,7 @@
                 <li class="list-none">
                   <a class="flex items-center gap-3 px-4 py-3 no-underline transition-colors duration-200 hover:opacity-80" 
                      style="color: {% if request.resolver_match.url_name == 'usuarios' %}#8CCE3B{% else %}#344153{% endif %}; background-color: #171717;"
-                     href="{% url 'usuarios' %}">
+                     href="{% url 'usuarios_list' %}">
                     <svg width="24" height=auto viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_120_43)">
                     <path d="M24.7918 30.9111V27.9945C24.7918 26.4474 24.1772 24.9636 23.0833 23.8697C21.9893 22.7757 20.5056 22.1611 18.9585 22.1611H7.29183C5.74473 22.1611 4.261 22.7757 3.16704 23.8697C2.07308 24.9636 1.4585 26.4474 1.4585 27.9945V30.9111" stroke="{% if request.resolver_match.url_name == 'usuarios' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -55,7 +55,7 @@
                 <li class="list-none">
                   <a class="flex items-center gap-3 px-4 py-3 no-underline transition-colors duration-200 hover:opacity-80" 
                      style="color: {% if request.resolver_match.url_name == 'support' %}#8CCE3B{% else %}#344153{% endif %}; background-color: #171717;"
-                     href="{% url 'support' %}">
+                     href="{% url 'support_list' %}">
                     <svg width="24" height=auto viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_122_5)">
                     <path d="M17.5 22.1611C19.9162 22.1611 21.875 20.2024 21.875 17.7861C21.875 15.3699 19.9162 13.4111 17.5 13.4111C15.0838 13.4111 13.125 15.3699 13.125 17.7861C13.125 20.2024 15.0838 22.1611 17.5 22.1611Z" stroke="{% if request.resolver_match.url_name == 'support' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -73,7 +73,7 @@
                 <li class="list-none">
                   <a class="flex items-center gap-3 px-4 py-3 no-underline transition-colors duration-200 hover:opacity-80" 
                      style="color: {% if request.resolver_match.url_name == 'backlogs' %}#8CCE3B{% else %}#344153{% endif %}; background-color: #171717;"
-                     href="{% url 'backlogs' %}">
+                     href="{% url 'backlogs_list' %}">
                     <svg width="24" height=auto viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.3335 6.11951H26.2502C27.0237 6.11951 27.7656 6.4268 28.3126 6.97378C28.8595 7.52076 29.1668 8.26263 29.1668 9.03617V29.4528C29.1668 30.2264 28.8595 30.9683 28.3126 31.5152C27.7656 32.0622 27.0237 32.3695 26.2502 32.3695H8.75016C7.97661 32.3695 7.23475 32.0622 6.68777 31.5152C6.14079 30.9683 5.8335 30.2264 5.8335 29.4528V9.03617C5.8335 8.26263 6.14079 7.52076 6.68777 6.97378C7.23475 6.4268 7.97661 6.11951 8.75016 6.11951H11.6668" stroke="{% if request.resolver_match.url_name == 'backlogs' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M21.8748 3.20276H13.1248C12.3194 3.20276 11.6665 3.85568 11.6665 4.66109V7.57776C11.6665 8.38317 12.3194 9.03609 13.1248 9.03609H21.8748C22.6803 9.03609 23.3332 8.38317 23.3332 7.57776V4.66109C23.3332 3.85568 22.6803 3.20276 21.8748 3.20276Z" stroke="{% if request.resolver_match.url_name == 'backlogs' %}#8CCE3B{% else %}#344153{% endif %}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

@@ -22,5 +22,9 @@ class UsuariosSlimListView(generics.ListAPIView):
     queryset = Usuarios.objects.all()
     serializer_class = UsuariosSlimSerializerGet
 
+class UsuariosDeleteView(generics.DestroyAPIView):
+    queryset = Usuarios.objects.all()
+    serializer_class = UsuariosSerializer
+    lookup_field = 'pk'
 
 # Create your views here.

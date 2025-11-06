@@ -3,19 +3,22 @@ from django.utils.timezone import now
 from django.contrib.auth.models import AbstractUser
 
 class Usuarios(AbstractUser):
-    matricula = models.CharField(max_length=14, unique=True)
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
-    email = models.EmailField(null=True, blank=True, unique=False) 
-    numero = models.CharField(max_length=20, null=True, blank=True)
-    data_cadastro = models.DateTimeField(default=now, null=False, blank=False)
-    data_ultimo_login = models.DateTimeField(auto_now=True, null=True, blank=True)
+    username = models.CharField(max_length=150, verbose_name='Usuário', null=True, blank=True)
+    email = models.EmailField(verbose_name='E-mail', max_length=255, null=True, blank=True)
+    numero = models.CharField(verbose_name='Numero', max_length=20, null=True, blank=True)
+    first_name = models.CharField(verbose_name='Nome', max_length=255, null=True, blank=True)
+    last_name = models.CharField(verbose_name='Sobrenome', max_length=255, null=True, blank=True)
+
+    USERNAME_FIELD='username'
+    REQUIRED_FIELDS=['email']
+
 
     def __str__(self):
-        return f"{self.nome} ({self.matricula})"
+        return self.username
 
     def is_admin(self):
         return self.groups.filter(name='ADMINISTRADOR').exists()
 
     def is_user_simples(self):
         return self.groups.filter(name='USUARIO_SIMPLES').exists()
+

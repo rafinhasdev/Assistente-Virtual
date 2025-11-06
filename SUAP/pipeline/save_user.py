@@ -1,31 +1,30 @@
-from django.contrib.auth import get_user_model
+from accounts.models import Usuarios
+import logging
 
-User = get_user_model()
+logger = logging.getLogger(__name__)
 
-def save_suap_user(backend, user, response, *args, **kwargs):
-    # Dados que vêm do SUAP
-    matricula = response.get("matricula") or response.get("username")
-    nome = response.get("nome")
-    email = response.get("email")
+def save_suap_user(strategy, details, response, backend, *args, **kwargs):
+    if backend.name != "suap":
+        return {}
 
-    if not matricula:  # Segurança extra
-        return
+    suap_id = response.get("identificacao")
+    first_name = response.get("primeiro_nome", "") or response.get("nome", "").split()[0]
+    last_name = response.get("ultimo_nome", "") or (
+        response.get("nome", "").split()[-1] if len(response.get("nome", "").split()) > 1 else ""
+    )
+    email = response.get("email_preferencial") or response.get("email") or ""
 
-    # 1. Verifica se o usuário já existe
-    try:
-        user = User.objects.get(username=matricula)
-        return {"is_new": False, "user": user}
-    except User.DoesNotExist:
-        pass
+    username = suap_id
+    numero = "" 
 
-    # 2. Se não existir, cria um novo
-    user = User.objects.create_user(
-        username=matricula,  # agora username = matrícula
-        email=email,
-        first_name=nome.split()[0] if nome else "",
-        last_name=" ".join(nome.split()[1:]) if nome else "",
-        password=None  # autenticação social não usa senha
+    user, created = Usuarios.objects.get_or_create(
+        username=username,
+        defaults={
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "numero": numero,
+        }
     )
 
-    return {"is_new": True, "user": user}
-
+    return {"is_new": created, "user": user}
