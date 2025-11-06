@@ -60,6 +60,9 @@ dotenv.load_dotenv(".env")
 SOCIAL_AUTH_SUAP_KEY = os.getenv("SOCIAL_AUTH_SUAP_KEY")
 SOCIAL_AUTH_SUAP_SECRET = os.getenv("SOCIAL_AUTH_SUAP_SECRET")
 
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
+SOCIAL_AUTH_SANITIZE_REDIRECTS = False
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -154,16 +157,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.user.create_user',
-    'SUAP.pipeline.save_user.save_suap_user', 
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.social_details',      
+    'social_core.pipeline.social_auth.social_uid',          
+    'social_core.pipeline.social_auth.auth_allowed',        
+    'social_core.pipeline.social_auth.social_user',         
+    'social_core.pipeline.user.get_username',               
+    'SUAP.pipeline.save_user.save_suap_user',               
+    'social_core.pipeline.social_auth.associate_user',     
+    'social_core.pipeline.social_auth.load_extra_data',    
+    'social_core.pipeline.user.user_details',               
 )
 
 AUTH_USER_MODEL = 'accounts.Usuarios'
