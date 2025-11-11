@@ -6,16 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0003_rename_jwt_credenciais_suap_token_and_more'),
+        ("app", "0003_rename_jwt_credenciais_suap_token_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='usuarios',
-            name='email',
+            model_name="usuarios",
+            name="email",
             field=models.EmailField(max_length=254, null=True),
         ),
         migrations.DeleteModel(
-            name='Credenciais',
+            name="Credenciais",
         ),
     ]

@@ -6,21 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0002_alter_backlogs_data_alteracao_supportmensagens_and_more'),
+        ("app", "0002_alter_backlogs_data_alteracao_supportmensagens_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='credenciais',
-            old_name='jwt',
-            new_name='suap_TOKEN',
+            model_name="credenciais",
+            old_name="jwt",
+            new_name="suap_TOKEN",
         ),
         migrations.AlterField(
-            model_name='backlogs',
-            name='num_versao',
+            model_name="backlogs",
+            name="num_versao",
             field=models.FloatField(null=True, unique=True),
         ),
         migrations.DeleteModel(
-            name='Waha',
+            name="Waha",
         ),
     ]

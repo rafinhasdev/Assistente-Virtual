@@ -1,0 +1,98 @@
+[project]
+name = "AVF"
+version = "0.1.0"
+description = "Projeto Django integrado autenticado via SUAP"
+authors = [
+    { name = "Rafael", email = "heyakilloficial@gmail.com" }
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "django==5.2",
+    "djangorestframework==3.14.0",
+    "python-dotenv",
+    "psycopg2-binary",
+    "social-auth-core",
+    "social-auth-app-django",
+    "pillow",
+    "fastapi==0.115.8",
+    "uvicorn==0.34.0",
+    "asyncpg==0.30.0",
+    "pydantic==2.10.6",
+    "pydantic_core==2.27.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "isort",
+    "pytest",
+    "pytest-django",
+    "pytest-asyncio",
+]
+lint = [
+    "black",
+    "flake8",
+    "isort",
+]
+test = [
+    "pytest",
+    "pytest-django",
+    "pytest-asyncio",
+]
+prod = [
+    "gunicorn",
+    "whitenoise"
+]
+
+# --- Configuração do Black ---
+[tool.black]
+line-length = 88
+target-version = ['py310']
+skip-string-normalization = false
+exclude = '''
+/(
+    \\.git
+  | \\.mypy_cache
+  | \\.pytest_cache
+  | \\.venv
+  | venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+# --- Configuração do Flake8 ---
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203,W503"
+exclude = """
+\\.git,
+__pycache__,
+venv,
+\\.venv,
+migrations,
+static,
+templates
+"""
+
+per-file-ignores = '''
+__init__.py:F401
+'''
+
+
+# --- Configuração do isort ---
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = [
+    "app",
+    "accounts",
+    "API",
+    "Dashboard",
+    "core",
+    "SUAP"
+]
+skip = ["venv", "migrations"]

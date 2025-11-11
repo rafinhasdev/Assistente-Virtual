@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('API', '0003_alter_credenciais_usuario'),
-        ('app', '0005_delete_backlogs_alter_usuarios_options_and_more'),
+        ("API", "0003_alter_credenciais_usuario"),
+        ("app", "0005_delete_backlogs_alter_usuarios_options_and_more"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Usuarios',
+            name="Usuarios",
         ),
     ]

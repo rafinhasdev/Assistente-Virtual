@@ -1,5 +1,6 @@
 import BaseAuth2
 
+
 class SuapOAuth2(BaseAuth2):
     name = "suap"
     AUTHORIZATION_URL = "https://suap.ifrn.edu.br/o/authorire/"

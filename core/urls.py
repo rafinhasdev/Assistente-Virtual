@@ -14,26 +14,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.conf import settings
-from django.urls import path, include
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+
 from app.views import *
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-   
-    path('', index, name="home"),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('oauth/', include('social_django.urls', namespace='social')),
-
-    path('dashboard/', include('Dashboard.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('app/', include('app.urls')),
-
-    path('api/', include('API.urls')),
+    path("admin/", admin.site.urls),
+    path("", index, name="home"),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("oauth/", include("social_django.urls", namespace="social")),
+    path("dashboard/", include("Dashboard.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("app/", include("app.urls")),
+    path("api/", include("API.urls")),
 ]
 
 if settings.DEBUG:

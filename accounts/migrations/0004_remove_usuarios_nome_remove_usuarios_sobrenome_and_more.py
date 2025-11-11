@@ -8,51 +8,58 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0003_alter_usuarios_username'),
+        ("accounts", "0003_alter_usuarios_username"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='usuarios',
-            name='nome',
+            model_name="usuarios",
+            name="nome",
         ),
         migrations.RemoveField(
-            model_name='usuarios',
-            name='sobrenome',
+            model_name="usuarios",
+            name="sobrenome",
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='data_cadastro',
+            model_name="usuarios",
+            name="data_cadastro",
             field=models.DateTimeField(default=django.utils.timezone.now),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='data_ultimo_login',
+            model_name="usuarios",
+            name="data_ultimo_login",
             field=models.DateTimeField(auto_now=True, null=True),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='email',
+            model_name="usuarios",
+            name="email",
             field=models.EmailField(blank=True, max_length=254, null=True),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='first_name',
+            model_name="usuarios",
+            name="first_name",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='last_name',
+            model_name="usuarios",
+            name="last_name",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='password',
-            field=models.CharField(max_length=128, verbose_name='password'),
+            model_name="usuarios",
+            name="password",
+            field=models.CharField(max_length=128, verbose_name="password"),
         ),
         migrations.AlterField(
-            model_name='usuarios',
-            name='username',
-            field=models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username'),
+            model_name="usuarios",
+            name="username",
+            field=models.CharField(
+                error_messages={"unique": "A user with that username already exists."},
+                help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                max_length=150,
+                unique=True,
+                validators=[django.contrib.auth.validators.UnicodeUsernameValidator()],
+                verbose_name="username",
+            ),
         ),
     ]

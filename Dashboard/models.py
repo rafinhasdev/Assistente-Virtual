@@ -1,4 +1,5 @@
 from django.db import models
+
 from accounts.models import Usuarios
 
 
@@ -11,11 +12,12 @@ class Backlogs(models.Model):
 
     def __str__(self):
         return f"Versionamento: {self.num_versao}::{self.data_alteracao}"
-    
+
+
 class SupportMensagens(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
     descricao = models.TextField(null=True)
-    data_envio = models.DateTimeField(auto_now_add=True,null=True)
-    
+    data_envio = models.DateTimeField(auto_now_add=True, null=True)
+
     def __str__(self):
         return f"{self.usuario.nome}: {self.data_envio}"

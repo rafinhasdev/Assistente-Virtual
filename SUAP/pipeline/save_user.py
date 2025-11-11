@@ -1,9 +1,11 @@
 # SUAP/pipeline/save_user.py
 
-from accounts.models import Usuarios
 import logging
 
+from accounts.models import Usuarios
+
 logger = logging.getLogger(__name__)
+
 
 def save_suap_user(strategy, details, response, backend, *args, **kwargs):
     if backend.name != "suap":
@@ -11,9 +13,13 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
 
     suap_id = response.get("identificacao")
 
-    first_name = response.get("primeiro_nome", "") or response.get("nome", "").split()[0]
+    first_name = (
+        response.get("primeiro_nome", "") or response.get("nome", "").split()[0]
+    )
     last_name = response.get("ultimo_nome", "") or (
-        response.get("nome", "").split()[-1] if len(response.get("nome", "").split()) > 1 else ""
+        response.get("nome", "").split()[-1]
+        if len(response.get("nome", "").split()) > 1
+        else ""
     )
 
     email = (
@@ -44,10 +50,9 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
             email=email,
         )
         created = True
-    
 
     logger.info(f"{'Criado' if created else 'Atualizado'} usuário {user.username}")
-    
+
     return {
         "is_new": created,
         "user": user,
@@ -56,10 +61,5 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "email": user.email,
-        }
-
-        
+        },
     }
-
-
-

@@ -7,30 +7,60 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0001_initial'),
+        ("app", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backlogs',
-            name='data_alteracao',
+            model_name="backlogs",
+            name="data_alteracao",
             field=models.DateTimeField(),
         ),
         migrations.CreateModel(
-            name='SupportMensagens',
+            name="SupportMensagens",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('descricao', models.TextField(null=True)),
-                ('data_envio', models.DateTimeField(auto_now_add=True, null=True)),
-                ('usuario', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='app.usuarios')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("descricao", models.TextField(null=True)),
+                ("data_envio", models.DateTimeField(auto_now_add=True, null=True)),
+                (
+                    "usuario",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="app.usuarios",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Credenciais',
+            name="Credenciais",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('jwt', models.CharField(max_length=255, null=True)),
-                ('usuario', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='app.usuarios')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("jwt", models.CharField(max_length=255, null=True)),
+                (
+                    "usuario",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="app.usuarios",
+                    ),
+                ),
             ],
         ),
     ]

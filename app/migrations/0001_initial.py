@@ -8,42 +8,81 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Backlogs',
+            name="Backlogs",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('num_versao', models.IntegerField(null=True, unique=True)),
-                ('data_postagem', models.DateField(auto_now_add=True)),
-                ('data_alteracao', models.DateTimeField(auto_now_add=True)),
-                ('descricao', models.TextField()),
-                ('dev_responsavel', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("num_versao", models.IntegerField(null=True, unique=True)),
+                ("data_postagem", models.DateField(auto_now_add=True)),
+                ("data_alteracao", models.DateTimeField(auto_now_add=True)),
+                ("descricao", models.TextField()),
+                ("dev_responsavel", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Usuarios',
+            name="Usuarios",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('matricula', models.CharField(max_length=14, null=True, unique=True)),
-                ('email', models.EmailField(max_length=254, null=True, unique=True)),
-                ('nome', models.CharField(max_length=255, null=True)),
-                ('sobrenome', models.CharField(max_length=255)),
-                ('numero', models.CharField(max_length=20)),
-                ('data_cadastro', models.DateField(auto_now_add=True, null=True)),
-                ('data_ultimo_login', models.DateTimeField(auto_now_add=True, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("matricula", models.CharField(max_length=14, null=True, unique=True)),
+                ("email", models.EmailField(max_length=254, null=True, unique=True)),
+                ("nome", models.CharField(max_length=255, null=True)),
+                ("sobrenome", models.CharField(max_length=255)),
+                ("numero", models.CharField(max_length=20)),
+                ("data_cadastro", models.DateField(auto_now_add=True, null=True)),
+                (
+                    "data_ultimo_login",
+                    models.DateTimeField(auto_now_add=True, null=True),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Waha',
+            name="Waha",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('num_sessao', models.CharField(max_length=255, null=True, unique=True)),
-                ('data_ultima_alteracao', models.DateField(auto_now_add=True)),
-                ('token_api_suap', models.CharField(max_length=255, null=True, unique=True)),
-                ('usuario', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='app.usuarios')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "num_sessao",
+                    models.CharField(max_length=255, null=True, unique=True),
+                ),
+                ("data_ultima_alteracao", models.DateField(auto_now_add=True)),
+                (
+                    "token_api_suap",
+                    models.CharField(max_length=255, null=True, unique=True),
+                ),
+                (
+                    "usuario",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="app.usuarios",
+                    ),
+                ),
             ],
         ),
     ]
