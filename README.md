@@ -54,7 +54,7 @@ docker-compose up -d
 Crie um arquivo `.env` na raiz do projeto e adicione as chaves necessárias, incluindo sua **API Key do SUAP**:
 
 ```env
-SUAP_API_KEY="sua_chave_aqui"
+SUAP_API_KEY=
 ```
 
 Documentação da API do SUAP:
@@ -123,7 +123,7 @@ flowchart TD
     C --> G[OpenAI / Google Cloud 🤖]
     D --> H[SUAP API 🏫]
 
-    subgraph Infraestrutura Docker 🐳
+    subgraph
         B
         C
         D
@@ -149,24 +149,15 @@ Assistente-Virtual/
 ├── accounts/              # Autenticação e usuários
 ├── dashboard/             # Interface principal
 ├── core/                  # Configurações Django
-├── workflows/             # Integrações com n8n e Evolution
+├── app/                   # Integrações com n8n e Evolution
 ├── Dockerfile
 ├── docker-compose.yml
-├── requirements.txt
+├── pyproject.toml
 └── manage.py
 ```
-
----
-
-## 📜 Licença
-
-Este projeto é de uso acadêmico e experimental.
-Verifique o arquivo `LICENSE` para mais detalhes.
-
----
 
 ## 💬 Contato
 
 Desenvolvido por **Rafael (rafinhasdev)**
-📧 [rafinhasdev@example.com](mailto:rafinhasdev@example.com)
+📧 [rafaelnunes.prof@gmail.com](mailto:rafaelnunes.prof@gmail.com)
 🔗 [GitHub - rafinhasdev](https://github.com/rafinhasdev)
