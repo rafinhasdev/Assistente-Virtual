@@ -19,12 +19,34 @@ def index(request):
 
 
 class BacklogsListView(LoginRequiredMixin, ListView):
+    """
+    View responsável por listar todos os Backlogs no dashboard.
+
+    Permite a filtragem do queryset por:
+    - Desenvolvedor responsável (`dev`)
+    - Número da versão (`versao`)
+    - Data mínima de postagem (`data_ini`)
+
+    Attributes:
+        model (Model): O modelo Django a ser usado (Backlogs).
+        template_name (str): O caminho do template para renderização.
+        context_object_name (str): O nome da variável de contexto para a lista de objetos.
+        paginate_by (int): O número de itens por página.
+    """
     model = Backlogs
     template_name = "dashboard/backlogs/backlogs_list.html"
     context_object_name = "backlogs"
     paginate_by = 10
 
     def get_queryset(self):
+        """
+        Retorna o queryset de Backlogs, aplicando filtros baseados em GET request.
+
+        A listagem é ordenada pela data de postagem de forma decrescente.
+
+        Returns:
+            QuerySet: Um QuerySet filtrado e ordenado do modelo Backlogs.
+        """
         queryset = super().get_queryset()
 
         filtro_dev = self.request.GET.get('dev')
@@ -35,6 +57,7 @@ class BacklogsListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(dev_responsavel__icontains=filtro_dev)
 
         if filtro_version:
+            filtro_version = float(filtro_version)
             queryset = queryset.filter(num_versao__exact=filtro_version)
         
         if filtro_date:
@@ -43,6 +66,15 @@ class BacklogsListView(LoginRequiredMixin, ListView):
         return queryset.order_by('-data_postagem')
 
     def get_context_data(self, **kwargs):
+        """
+        Adiciona os valores dos filtros de busca atuais ao contexto.
+
+        Esses valores são usados para preencher novamente os campos do formulário
+        de busca no template após a filtragem.
+
+        Returns:
+            dict: O dicionário de contexto estendido.
+        """
         context = super().get_context_data(**kwargs)
 
         context['filtro_dev'] = self.request.GET.get('dev', '') 
@@ -77,12 +109,21 @@ class BacklogsDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class SupportMensagensListView(LoginRequiredMixin, ListView):
+    """
+    Lista todas as mensagens de suporte enviadas pelos usuários.
+
+    Permite a filtragem por nome de usuário, data de envio e descrição.
+    """
     model = SupportMensagens
     template_name = "dashboard/suporte/support_list.html"
     context_object_name = "support"
     paginate_by = 10
 
     def get_queryset(self):
+        """
+        Aplica filtros baseados em GET request (user, data_env, descricao)
+        e ordena por data de envio.
+        """
         queryset = super().get_queryset()
 
         filtro_user = self.request.GET.get('user')
@@ -100,6 +141,7 @@ class SupportMensagensListView(LoginRequiredMixin, ListView):
 
         return queryset.order_by('data_envio')
     def get_context_data(self, **kwargs):
+        """Adiciona os valores dos filtros de busca ao contexto."""
         context = super().get_context_data(**kwargs)
 
         context['filtro_user'] = self.request.GET.get('user', '') 
@@ -134,12 +176,21 @@ class SupportMensagensDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class UsuariosListView(LoginRequiredMixin, ListView):
+    """
+    Lista todos os usuários registrados no sistema.
+
+    Permite a busca por nome/sobrenome e filtragem por username ou email.
+    """
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_list.html"
     context_object_name = "usuarios"
     paginate_by = 10
 
     def get_queryset(self):
+        """
+        Filtra os usuários por termo de busca (first_name/last_name),
+        username específico ou email.
+        """
         queryset = super().get_queryset()
 
         termo_busca = self.request.GET.get('q')
@@ -159,6 +210,7 @@ class UsuariosListView(LoginRequiredMixin, ListView):
         return queryset.order_by('username')
     
     def get_context_data(self, **kwargs):
+        """Adiciona os termos de busca e filtros atuais ao contexto."""
         context = super().get_context_data(**kwargs)
     
         context['termo_busca'] = self.request.GET.get('q', '') 
