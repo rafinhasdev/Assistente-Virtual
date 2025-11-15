@@ -78,7 +78,7 @@ class BacklogsDeleteView(LoginRequiredMixin, DeleteView):
 
 class SupportMensagensListView(LoginRequiredMixin, ListView):
     model = SupportMensagens
-    template_name = "dashboard/support/support_list.html"
+    template_name = "dashboard/suporte/support_list.html"
     context_object_name = "support"
     paginate_by = 10
 
