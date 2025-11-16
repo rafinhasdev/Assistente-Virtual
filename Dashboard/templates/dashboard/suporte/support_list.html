@@ -1,0 +1,355 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+
+<div class="container_main" style="
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 5%;
+">
+
+    <div style="
+        width: 100%;
+        background-color: #23313e;
+        border-radius: 20px;
+        padding: 15px;
+    ">
+        <!-- Container externo com borda verde -->
+        <div style="
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid #8CCE3B;
+            border-radius: 20px;
+            padding: 15px;
+            position: relative;
+        ">
+        
+            <!-- Botão Criar no canto superior direito -->
+            <div style="
+                position: absolute;
+                top: 0;
+                padding: 15px;
+                right: 0;
+                z-index: 10;
+            ">
+                <a href="{% url 'support_create' %}" style="
+                    background-color: #5B7FE8;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 12px 24px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    text-decoration: none;
+                ">
+                    <span>Enviar Mensagem</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+
+            <div style="height: 50px;"></div>
+
+            <!-- ===== FILTROS ===== -->
+            <div style="
+                width: 100%;
+                background-color: #374151;
+                border-radius: 13px;
+                padding: 20px;
+                margin-bottom: 20px;
+            ">
+                <h3 style="color: #8CCE3B; font-size: 16px; margin-bottom: 15px;">Filtros</h3>
+                
+                <form method="GET" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <label style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Usuário</label>
+                        <input 
+                            type="text" 
+                            name="user" 
+                            placeholder="Nome do usuário"
+                            value="{{ filtro_user }}"
+                            style="
+                                width: 100%;
+                                padding: 10px 12px;
+                                background-color: #23313e;
+                                border: 1px solid #4b5563;
+                                border-radius: 8px;
+                                color: white;
+                                font-size: 14px;
+                            "
+                        >
+                    </div>
+
+                    <div style="flex: 1; min-width: 200px;">
+                        <label style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Descrição</label>
+                        <input 
+                            type="text" 
+                            name="descricao" 
+                            placeholder="Buscar na descrição"
+                            value="{{ filtro_desc }}"
+                            style="
+                                width: 100%;
+                                padding: 10px 12px;
+                                background-color: #23313e;
+                                border: 1px solid #4b5563;
+                                border-radius: 8px;
+                                color: white;
+                                font-size: 14px;
+                            "
+                        >
+                    </div>
+
+                    <div style="flex: 1; min-width: 200px;">
+                        <label style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Data de Envio</label>
+                        <input 
+                            type="date" 
+                            name="data_env" 
+                            value="{{ filtro_data }}"
+                            style="
+                                width: 100%;
+                                padding: 10px 12px;
+                                background-color: #23313e;
+                                border: 1px solid #4b5563;
+                                border-radius: 8px;
+                                color: white;
+                                font-size: 14px;
+                            "
+                        >
+                    </div>
+
+                    <div style="display: flex; gap: 10px; align-items: flex-end;">
+                        <button 
+                            type="submit"
+                            style="
+                                background-color: #8CCE3B;
+                                color: white;
+                                border: none;
+                                border-radius: 8px;
+                                padding: 10px 20px;
+                                font-size: 14px;
+                                font-weight: 500;
+                                cursor: pointer;
+                            "
+                        >
+                            Filtrar
+                        </button>
+                        <a 
+                            href="{% url 'support_list' %}"
+                            style="
+                                background-color: #4b5563;
+                                color: white;
+                                border: none;
+                                border-radius: 8px;
+                                padding: 10px 20px;
+                                font-size: 14px;
+                                font-weight: 500;
+                                cursor: pointer;
+                                text-decoration: none;
+                                display: inline-block;
+                            "
+                        >
+                            Limpar
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Grid de Cards -->
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                width: 100%;
+            ">
+        
+                {% if support %}
+                    {% for i in support %}
+                    <!-- Card individual -->
+                    <div style="
+                        background-color: #374151;
+                        border-radius: 12px;
+                        padding: 20px;
+                        position: relative;
+                        min-height: 200px;
+                        display: flex;
+                        flex-direction: column;
+                    ">
+                        <!-- Header do card -->
+                        <div style="
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 15px;
+                        ">
+                            <span style="
+                                color: #8CCE3B;
+                                font-size: 14px;
+                                font-weight: 600;
+                            ">De:</span>
+                            <span style="
+                                color: white;
+                                font-size: 14px;
+                                margin-left: 8px;
+                            ">{{ i.usuario.nome }}</span>
+                        </div>
+                        <!-- Divisória -->
+                        <div style="
+                            width: 100%;
+                            height: 1px;
+                            background-color: #4b5563;
+                            margin-bottom: 15px;
+                        "></div>
+                        <!-- Conteúdo/Descrição -->
+                        <div style="
+                            color: #d1d5db;
+                            font-size: 13px;
+                            line-height: 1.6;
+                            flex-grow: 1;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        ">
+                            {{ i.descricao }}
+                        </div>
+                        <!-- Botão de ação no canto inferior direito -->
+                        <div style="
+                            position: absolute;
+                            bottom: 15px;
+                            right: 15px;
+                        ">
+                            <a href="{% url 'support_delete' i.pk %}" style="
+                                background-color: #374151;
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 8px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                text-decoration: none;
+                                border: 1px solid #4b5563;
+                            ">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- Informações adicionais (data) -->
+                        <div style="
+                            margin-top: 10px;
+                            padding-top: 10px;
+                            border-top: 1px solid #4b5563;
+                        ">
+                            <div style="
+                                display: flex;
+                                justify-content: space-between;
+                                font-size: 11px;
+                                color: #6b7280;
+                            ">
+                                <span>{{ i.data_envio|date:"d/m/Y H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        padding: 40px;
+                        color: #9ca3af;
+                    ">
+                        Nenhuma mensagem de suporte encontrada
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <!-- ===== PAGINAÇÃO ===== -->
+            {% if is_paginated %}
+            <div style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 30px;
+                padding: 20px;
+            ">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1&user={{ filtro_user }}&descricao={{ filtro_desc }}&data_env={{ filtro_data }}" style="
+                        background-color: #374151;
+                        color: white;
+                        padding: 10px 15px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-size: 14px;
+                    ">Primeira</a>
+                    <a href="?page={{ page_obj.previous_page_number }}&user={{ filtro_user }}&descricao={{ filtro_desc }}&data_env={{ filtro_data }}" style="
+                        background-color: #374151;
+                        color: white;
+                        padding: 10px 15px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-size: 14px;
+                    ">← Anterior</a>
+                {% endif %}
+
+                <div style="display: flex; gap: 5px;">
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <span style="
+                                background-color: #8CCE3B;
+                                color: white;
+                                padding: 10px 12px;
+                                border-radius: 8px;
+                                font-size: 14px;
+                                font-weight: 600;
+                            ">{{ num }}</span>
+                        {% else %}
+                            <a href="?page={{ num }}&user={{ filtro_user }}&descricao={{ filtro_desc }}&data_env={{ filtro_data }}" style="
+                                background-color: #374151;
+                                color: white;
+                                padding: 10px 12px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-size: 14px;
+                            ">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&user={{ filtro_user }}&descricao={{ filtro_desc }}&data_env={{ filtro_data }}" style="
+                        background-color: #374151;
+                        color: white;
+                        padding: 10px 15px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-size: 14px;
+                    ">Próxima →</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}&user={{ filtro_user }}&descricao={{ filtro_desc }}&data_env={{ filtro_data }}" style="
+                        background-color: #374151;
+                        color: white;
+                        padding: 10px 15px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-size: 14px;
+                    ">Última</a>
+                {% endif %}
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
