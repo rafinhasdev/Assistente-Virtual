@@ -157,7 +157,7 @@ class SupportMensagensDetailView(LoginRequiredMixin, DetailView):
 
 class SupportMensagensCreateView(LoginRequiredMixin, CreateView):
     model = SupportMensagens
-    template_name = "dashboard/support/support_form.html"
+    template_name = "dashboard/suporte/support_form.html"
     fields = "__all__"
     success_url = reverse_lazy("support_list")
 

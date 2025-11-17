@@ -23,12 +23,24 @@
         <ul class="navbar-nav">
           
           {% if user.is_authenticated %}
+    
+
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
               <button type="submit" class="btn btn-danger">Sair</button>
             </form>
           {% endif %}
 
+          <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard_index' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1" style="vertical-align: middle;">
+                        <path d="M3 3v18h18"></path>
+                        <path d="M18.7 8.7L12 15.4 9.3 12.7 5.6 16.4"></path>
+                        <path d="M10.3 3H21v10.7"></path>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'home' %}">
               <img src="{% static 'img/icon_index.svg' %}" alt="home" width="24" height="24">
