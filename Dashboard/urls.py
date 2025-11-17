@@ -36,7 +36,6 @@ urlpatterns = [
     ),
     path("usuarios/", UsuariosListView.as_view(), name="usuarios_list"),
     path("usuarios/<int:pk>/", UsuariosDetailView.as_view(), name="usuarios_detail"),
-    path("usuarios/create/", UsuariosCreateView.as_view(), name="usuarios_create"),
     path(
         "usuarios/<int:pk>/update/",
         UsuariosUpdateView.as_view(),
