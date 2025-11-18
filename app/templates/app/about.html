@@ -2,77 +2,132 @@
 
 {% block center %}
 
-<div class="container_main"
-style="
-display: flex;
-background-color: #1B232E;
-flex-direction: column;
-align-items: flex-start;
-width: 100%;
-height: 100%;
-padding-left: 5%;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-padding-inline-end: 80px;
-font-weight: bold;
-color: white;"
+<style>
+/* ======== CSS RESPONSIVO ======== */
 
->
-    <div style="position: absolute; top: 11%; left: 2%; display: flex; gap: 12px;">
-        <img src="../../../static/img/add_me_right.png" alt="" style="width: 116px; height: auto;">
-    </div>
+.container-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    padding: 40px 5%;
+    background-color: #1B232E;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow: hidden;
+}
 
-    <div style="position: absolute; top: 102%; left: 2%; display: flex; gap: 12px;">
-        <img src="../../../static/img/add_me_right.png" alt="" style="width: 116px; height: auto;">
-    </div>
+/* BLOCO DE CONTEÚDO */
+.content-block {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
 
-    <div style="position: absolute; top: 17%; left: 40%; display: flex; flex-direction: column; gap: 8px;">
-        <img src="../../../static/img/button_down_left.png" alt="" style="width: 100px; height: auto;">
-    </div>
+.content-block h2 {
+    color: #8CCE3B;
+    font-size: 32pt;
+    text-align: center;
+}
 
-    <div style="position: absolute; top: 144%; left: 37%; display: flex; flex-direction: column; gap: 8px;">
-        <img src="../../../static/img/line_dot_side.png" alt="" style="width: 120px; height: auto;">
-    </div>
+.content-block p {
+    text-align: justify;
+}
 
-    <div style="position: absolute; top: 50%; left: 40%; display: flex; flex-direction: column; gap: 8px;">
-        <img src="../../../static/img/L_format.png" alt="" style="width: 100px; height: auto;">
-    </div>
-
-    <div style="position: absolute; top: 61%; right: 4%; display: flex; flex-direction: column; gap: 8px; transform: rotate(180deg); transform: scaleY(-1);">
-        <img src="../../../static/img/L_format.png" alt="" style="width: 100px; height: auto;">
-    </div>
-
-    <div style="position: absolute; bottom: -25%; right: 36%; display: flex; flex-direction: column; gap: 8px;">
-        <img src="../../../static/img/almost_line.png" alt="" style="width: 130px; height: auto;">
-    </div>
-
-    <div class="block_01"
-    style="
+/* ALINHAMENTOS DESKTOP */
+.content-block.left {
     align-self: flex-start;
-    margin: 40px;
-    width: 500px;
-    height: 300px;
-    ">
-        <h2 style="color: #8CCE3B; text-align: center; font-size: 48pt">Quem é Felipe?</h2>
-        <p style="text-align: justify;"> Felipe é um asssitente virtual que tem o potencial de facilitar a sua navegação, esclarecer dúvidas, explicar funcionalidades e guir os estudantes na resolução de pendências que você tiver! Sua preseça promove uma maior autonomia aos usuários, tornando a plataforma mais acessível e intuítiva, especialmente para os alunos novatos. Além disso, Felipe também pode auxiliar os estudantes veteranos que continuam enfrentando dificuldades, garatindo suporte contínuo e contribuindo para a adaptação.</p>
+}
+
+.content-block.right {
+    align-self: flex-end;
+}
+
+/* IMAGENS DECORATIVAS */
+.decor {
+    position: absolute;
+    max-width: 160px;
+}
+
+.decor-top-left { top: 8%; left: 2%; }
+.decor-bottom-left { top: 100%; left: 2%; }
+.decor-mid-center { top: 18%; left: 40%; max-width: 100px; }
+.decor-line { top: 140%; left: 37%; max-width: 120px; }
+.decor-L-left { top: 52%; left: 40%; max-width: 100px; }
+.decor-L-right {
+    top: 60%;
+    right: 4%;
+    transform: rotate(180deg) scaleY(-1);
+    max-width: 100px;
+}
+.decor-bottom-center {
+    bottom: -20%;
+    right: 36%;
+    max-width: 130px;
+}
+
+/* 📱 RESPONSIVIDADE MÓVEL */
+@media (max-width: 900px) {
+    .decor {
+        max-width: 70px;
+        opacity: 0.5;
+    }
+
+    .content-block {
+        max-width: 100%;
+    }
+
+    .content-block h2 {
+        font-size: 26pt;
+    }
+
+    .content-block.left,
+    .content-block.right {
+        align-self: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .decor {
+        display: none;
+    }
+
+    .content-block h2 {
+        font-size: 22pt;
+    }
+}
+</style>
+
+<div class="container-main">
+
+    <!-- ELEMENTOS DECORATIVOS -->
+    <img class="decor decor-top-left" src="../../../static/img/add_me_right.png" alt="">
+    <img class="decor decor-bottom-left" src="../../../static/img/add_me_right.png" alt="">
+    <img class="decor decor-mid-center" src="../../../static/img/button_down_left.png" alt="">
+    <img class="decor decor-line" src="../../../static/img/line_dot_side.png" alt="">
+    <img class="decor decor-L-left" src="../../../static/img/L_format.png" alt="">
+    <img class="decor decor-L-right" src="../../../static/img/L_format.png" alt="">
+    <img class="decor decor-bottom-center" src="../../../static/img/almost_line.png" alt="">
+
+    <!-- BLOCO 01 -->
+    <div class="content-block left">
+        <h2>Quem é Felipe?</h2>
+        <p>Felipe é um assistente virtual que tem o potencial de facilitar a sua navegação, esclarecer dúvidas, explicar funcionalidades e guiar estudantes na resolução de pendências! Sua presença promove maior autonomia aos usuários e torna a plataforma mais acessível e intuitiva, especialmente para alunos novatos. Além disso, Felipe também pode auxiliar estudantes veteranos que enfrentam dificuldades.</p>
     </div>
-    <div class="block_02"style="
-    align-self: end;
-    margin: 20px;
-    width: 500px;
-    height: 300px;
-    ">
-        <h2 style="color: #8CCE3B; text-align: center; font-size: 48pt;">O que ele faz?</h2>
-        <p style="text-align: justify;"> O projeto tem como objetivo o desenvolvimento de um asssitente virtual para a rede de educação da comunidade acadêmica do Instituto Federal do Rio Grande do Norte IFRN. Em que, esse agente chamado Felipe será construído por uma rede de inteligência artificial (IA) baseado em modelos genertaivos de respostas (LLMs), da OpenAI, Ollama e Google Gemini. Sendo capaz de interagir e orientar tanto discentes quanto docentes nas demandas relacionadas ao ambiente escolar. O assistente visa atender tanto à necessidade de um suporte digital eficiente que facilite a navegação dos sistemas institucionais como o SUAP e o Portal IFRN</p>
+
+    <!-- BLOCO 02 -->
+    <div class="content-block right">
+        <h2>O que ele faz?</h2>
+        <p>O projeto tem como objetivo o desenvolvimento de um assistente virtual para a comunidade acadêmica do IFRN. O agente, chamado Felipe, será construído com IA generativa (LLMs) da OpenAI, Ollama e Google Gemini, capaz de interagir e orientar discentes e docentes sobre demandas institucionais como SUAP e Portal IFRN.</p>
     </div>
-    <div class="block_03" style="
-    align-self: flex-start;
-    margin: 20px;
-    width: 500px;
-    height: 300px;
-    ">
-        <h2 style="color: #8CCE3B; text-align: center; font-size: 38pt">Como falo com ele?</h2>
-        <p style="text-align: justify;"> O contao direto com o Assistente Felipe será por meio da plataforma de mensagens instantâneas Whatsapp, disponibilizada pela Meta. Nela, é possível troca de mensagens, aúdios e arquivos entre ambas as partes, com o objetivo de atender a diferentes necessidade. Felipe está disponível 24 horas por dia e pode responder a mais de um usuário simultaneamente, sem perda de eficiência ou comprometimento das convesas, que podem ocorrer tanto em mensagens privadas quanto em grupos dentro da plataforma Whatsapp.</p>
+
+    <!-- BLOCO 03 -->
+    <div class="content-block left">
+        <h2>Como falo com ele?</h2>
+        <p>O contato com Felipe será por meio do WhatsApp. É possível trocar mensagens, áudios e arquivos, atendendo diferentes necessidades. Felipe está disponível 24h por dia, responde simultaneamente a vários usuários e funciona tanto em conversas privadas quanto em grupos.</p>
     </div>
+
 </div>
 
 {% endblock %}
