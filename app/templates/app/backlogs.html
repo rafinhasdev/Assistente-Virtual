@@ -118,12 +118,10 @@
 </style>
 
 <div class="main_container">
-
     <div class="frame_container">
-
         <div class="backlogs">
 
-            {% for backlog in backlogs %}
+            {% for backlog in page_obj %}
 
                 <div class="backlog-item versao">
                     ATUALIZAÇÃO: 
@@ -141,12 +139,22 @@
                     <strong>Data:</strong> {{ backlog.data_alteracao }}
                 </div>
 
-            {% endfor %}
+                {% empty %}
+                <p>Nenhum backlog encontrado.</p>
 
+            {% endfor %}
+            
+                <div class="row mt-5">
+            <div class="col-12">
+                {% include 'includes/pagination.html' %}
+            </div>
+        </div>
+            
         </div>
 
-    </div>
+        
 
+    </div>
 </div>
 
 {% endblock %}

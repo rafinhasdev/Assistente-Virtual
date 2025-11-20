@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block center %}
 
 <style>
@@ -18,10 +18,34 @@
     overflow: hidden;
 }
 
+
+/* IGNORE OS ERROS. É O VSCODE TROLANDO*/
+.div1{
+    background-image: url('{% static 'img/1Background_about.png' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.div2{
+    background-image: url('{% static 'img/2Background_about.png' %}');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.div3{
+    background-image: url('{% static 'img/3Background_about.png' %}');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* BLOCO DE CONTEÚDO */
 .content-block {
     width: 100%;
     max-width: 600px;
+    min-height: 300px;
     padding: 20px;
 }
 
@@ -44,30 +68,7 @@
     align-self: flex-end;
 }
 
-/* IMAGENS DECORATIVAS */
-.decor {
-    position: absolute;
-    max-width: 160px;
-}
 
-.decor-top-left { top: 8%; left: 2%; }
-.decor-bottom-left { top: 100%; left: 2%; }
-.decor-mid-center { top: 18%; left: 40%; max-width: 100px; }
-.decor-line { top: 140%; left: 37%; max-width: 120px; }
-.decor-L-left { top: 52%; left: 40%; max-width: 100px; }
-.decor-L-right {
-    top: 60%;
-    right: 4%;
-    transform: rotate(180deg) scaleY(-1);
-    max-width: 100px;
-}
-.decor-bottom-center {
-    bottom: -20%;
-    right: 36%;
-    max-width: 130px;
-}
-
-/* 📱 RESPONSIVIDADE MÓVEL */
 @media (max-width: 900px) {
     .decor {
         max-width: 70px;
@@ -101,29 +102,20 @@
 
 <div class="container-main">
 
-    <!-- ELEMENTOS DECORATIVOS -->
-    <img class="decor decor-top-left" src="../../../static/img/add_me_right.png" alt="">
-    <img class="decor decor-bottom-left" src="../../../static/img/add_me_right.png" alt="">
-    <img class="decor decor-mid-center" src="../../../static/img/button_down_left.png" alt="">
-    <img class="decor decor-line" src="../../../static/img/line_dot_side.png" alt="">
-    <img class="decor decor-L-left" src="../../../static/img/L_format.png" alt="">
-    <img class="decor decor-L-right" src="../../../static/img/L_format.png" alt="">
-    <img class="decor decor-bottom-center" src="../../../static/img/almost_line.png" alt="">
-
     <!-- BLOCO 01 -->
-    <div class="content-block left">
+    <div class="content-block left div1">
         <h2>Quem é Felipe?</h2>
         <p>Felipe é um assistente virtual que tem o potencial de facilitar a sua navegação, esclarecer dúvidas, explicar funcionalidades e guiar estudantes na resolução de pendências! Sua presença promove maior autonomia aos usuários e torna a plataforma mais acessível e intuitiva, especialmente para alunos novatos. Além disso, Felipe também pode auxiliar estudantes veteranos que enfrentam dificuldades.</p>
     </div>
 
     <!-- BLOCO 02 -->
-    <div class="content-block right">
+    <div class="content-block right div2">
         <h2>O que ele faz?</h2>
         <p>O projeto tem como objetivo o desenvolvimento de um assistente virtual para a comunidade acadêmica do IFRN. O agente, chamado Felipe, será construído com IA generativa (LLMs) da OpenAI, Ollama e Google Gemini, capaz de interagir e orientar discentes e docentes sobre demandas institucionais como SUAP e Portal IFRN.</p>
     </div>
 
     <!-- BLOCO 03 -->
-    <div class="content-block left">
+    <div class="content-block left div3">
         <h2>Como falo com ele?</h2>
         <p>O contato com Felipe será por meio do WhatsApp. É possível trocar mensagens, áudios e arquivos, atendendo diferentes necessidades. Felipe está disponível 24h por dia, responde simultaneamente a vários usuários e funciona tanto em conversas privadas quanto em grupos.</p>
     </div>

@@ -19,21 +19,25 @@ class UsuarioForm(ModelForm):
         }
 
 
-class SupporteForms(ModelForm):
-
-    usuario = forms.ModelChoiceField(
-        queryset=Usuarios.objects.all(),
-        widget=forms.Select(attrs={"class": "form-control"}),
-        required=True,
-    )
-
+class SupporteForms(forms.ModelForm):
     class Meta:
         model = SupportMensagens
-        fields = ["usuario", "descricao"]
+        fields = ['descricao']
         widgets = {
-            "descricao": forms.Textarea(attrs={"class": "form-control"}),
+            'descricao': forms.Textarea(attrs={
+                'style': (
+                    'background: transparent;'
+                    'color: white;'
+                    'padding: 10px;'
+                    'width: 100%;'
+                    'height: 100%;'
+                    'resize: none;'
+                    'border: none;'
+                    'outline: none;'
+                ),
+                'placeholder': 'Descreva aqui o ocorrido...',
+            })
         }
-
 
 class BacklogsForm(ModelForm):
 

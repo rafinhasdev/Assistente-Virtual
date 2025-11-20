@@ -1,39 +1,57 @@
+/* ===== NAVBAR ===== */
 
-.container{
-    width: 100vh;
-    height: 100vh;
-    display: flex;
+.navbar {
+    background-color: #1B232E !important;
+    padding: 0.8rem 1rem;
 }
 
-.navbar{
-    background-color: #1B232E;
-
-}
-.container-fluid{
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-.navbar-brand{
-    color: #8CCE3B;
+.navbar-brand {
+    color: #8CCE3B !important;
     font-weight: bold;
-    font-size: 1.2rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.3rem;
 }
 
-.navbar-collapse{
+.navbar-nav .nav-link {
+    color: white !important;
+    font-size: 1.1rem;
+    margin: 0 0.7rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: 0.2s ease-in-out;
     display: flex;
-    justify-content: flex-end;
-    padding: 1rem;
     align-items: center;
+    gap: 8px;
 }
-.nav-link{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: normal;
-    font-style: normal;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+/* Hover padrão */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== LINK ATIVO ===== */
+
+.active-link {
+    background-color: white !important;
+    color: #1B232E !important;
+    border-radius: 8px;
+}
+
+/* Atualiza a cor do ícone dentro do link ativo */
+.active-link img {
+    filter: invert(1);
+}
+
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0.5rem 0;
+    }
 }

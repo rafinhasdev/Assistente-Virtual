@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block center %}
 
 <style>
@@ -128,12 +128,10 @@
 
 .felipe_asset {
     position: absolute;
-    width: 90%;
-    height: 90%;
+    width: 1000px;
+    height: 800px;
     object-fit: contain;
-    left: -50%;
-    top: 20%;
-    z-index: 2;
+    margin-right: 100px;
 }
 
 .phone_asset {
@@ -143,18 +141,17 @@
     z-index: 1;
 }
 
-/* ======== RESPONSIVIDADE ======== */
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .title { font-size: 50pt; }
     .subtitle { font-size: 28pt; }
     .desc { font-size: 13pt; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .container_main {
         flex-direction: column;
-        height: auto;
+        height: 100vh;
         padding-top: 40px;
         gap: 40px;
     }
@@ -180,12 +177,9 @@
     .phone_asset {
         display: none;
     }
-
-    /* Decorações reduzem */
-    .decor { width: 60px !important; opacity: 0.5; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .title { font-size: 40pt; }
     .subtitle { font-size: 22pt; }
     .desc { font-size: 12pt; }
@@ -196,7 +190,7 @@
         font-size: 16pt;
     }
 
-    .decor {
+    .felipe_asset {
         display: none; /* remove no mobile para não quebrar layout */
     }
 }
@@ -204,15 +198,7 @@
 </style>
 
 
-
-
 <div class="container_main">
-
-    <!-- DECORAÇÕES -->
-    <img class="decor decor-top-right" src="../../../static/img/cell_up_left.png" alt="">
-    <img class="decor decor-left-bottom" src="../../../static/img/button_down_left.png" alt="">
-    <img class="decor decor-center-bottom" src="../../../static/img/add_me_right.png" alt="">
-    <img class="decor decor-right-bottom" src="../../../static/img/cell-down-left.png" alt="">
 
     <!-- COLUNA ESQUERDA -->
     <div class="content_left">
@@ -238,8 +224,7 @@
 
     <!-- COLUNA DIREITA -->
     <div class="content_right">
-        <img src="../../../static/img/Felipe_asset.svg" class="felipe_asset" alt="Felipe">
-        <img src="../../../static/img/telphone.svg" class="phone_asset" alt="Telefone">
+        <img src="{% static 'img/INDEX.png'%}" class="felipe_asset" alt="Felipe">
     </div>
 
 </div>
