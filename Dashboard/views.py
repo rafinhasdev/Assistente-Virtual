@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -10,7 +14,10 @@ from django.views.generic import (
     UpdateView,
 )
 from django.db.models import Q
-from .models import Backlogs, SupportMensagens, Usuarios
+from .models import Backlogs, SupportMensagens, SupportReplyMensagens
+from accounts.models import Usuarios
+
+
 
 
 @login_required
@@ -173,6 +180,49 @@ class SupportMensagensDeleteView(LoginRequiredMixin, DeleteView):
     model = SupportMensagens
     template_name = "dashboard/support/support_confirm_delete.html"
     success_url = reverse_lazy("support_list")
+
+class SupportMensagemReplyView(LoginRequiredMixin, View):
+    template_name = "dashboard/suporte/support_reply.html"
+
+    def get(self, request, pk):
+        support = get_object_or_404(SupportMensagens, pk=pk)
+        return render(request, self.template_name, {"support": support})
+
+    def post(self, request, pk):
+        support = get_object_or_404(SupportMensagens, pk=pk)
+        resposta = request.POST.get("resposta")
+
+        if not resposta:
+            messages.error(request, "Você precisa escrever uma resposta.")
+            return redirect("support_reply", pk=pk)
+
+        SupportReplyMensagens.objects.create(
+            support=support,
+            descricao=resposta,
+            dev_responsavel=request.user.username,  
+        )
+
+        email = EmailMultiAlternatives(
+            subject="Resposta ao seu pedido de suporte",
+            body=resposta,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[support.usuario.email],
+        )
+
+        email.attach_alternative(f"""
+        <p>Olá <strong>{support.usuario.first_name}</strong>,</p>
+        <p>{resposta}</p>
+        <p>Atenciosamente,<br>Assitente Felipe</p>
+        """, "text/html")
+
+        email.send()
+
+        support.ativo = False
+        support.save()
+
+        messages.success(request, "Resposta enviada e registrada com sucesso!")
+        return redirect("support_list")
+
 
 
 class UsuariosListView(LoginRequiredMixin, ListView):

@@ -46,4 +46,9 @@ urlpatterns = [
         UsuariosDeleteView.as_view(),
         name="usuarios_delete",
     ),
+    path(
+    "support/<int:pk>/reply/",
+    SupportMensagemReplyView.as_view(),
+    name="support_reply",
+    ),
 ]
