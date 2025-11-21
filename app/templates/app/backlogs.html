@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% block center %}
 
 <style>
-
   .main_container {
     background-color: #1b232e;
     width: 100%;
@@ -52,7 +51,6 @@
     overflow-y: auto;
   }
 
-
   .backlog-item {
     width: 100%;
     color: white;
@@ -75,7 +73,6 @@
     margin-bottom: 20px;
     font-size: 0.9rem;
   }
-
 
   @media (max-width: 900px) {
     .frame_container {
@@ -132,13 +129,11 @@
       <p>Nenhum backlog encontrado.</p>
 
       {% endfor %}
-
-      
     </div>
   </div>
-    <div class="row mt-5">
+  <div class="row mt-5">
     <div class="col-12">{% include 'includes/pagination.html' %}</div>
-    </div>
+  </div>
 </div>
 
 {% endblock %}

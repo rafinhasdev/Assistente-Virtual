@@ -1,107 +1,131 @@
-{% extends 'nav.html' %}
+{% extends 'nav.html' %} {% block center %}
 
-{% block center %}
-
-<div class="container_main" style="
+<div
+  class="container_main"
+  style="
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     min-height: 100vh;
     padding: 40px 5%;
-">
-
-    <div style="
+  "
+>
+  <div
+    style="
+      width: 100%;
+      background-color: #23313e;
+      border-radius: 20px;
+      padding: 15px;
+    "
+  >
+    <div
+      style="
         width: 100%;
-        background-color: #23313e;
+        background-color: transparent;
+        border: 2px solid #8cce3b;
         border-radius: 20px;
-        padding: 15px;
-    ">
-        <div style="
-            width: 100%;
-            background-color: transparent;
-            border: 2px solid #8CCE3B;
-            border-radius: 20px;
-            padding: 25px;
-            position: relative;
-        ">
+        padding: 25px;
+        position: relative;
+      "
+    >
+      <h2 style="color: #8cce3b; font-size: 22px; margin-bottom: 20px">
+        Detalhes do Backlog
+      </h2>
 
-            <h2 style="color: #8CCE3B; font-size: 22px; margin-bottom: 20px;">
-                Detalhes do Backlog
-            </h2>
+      <div
+        style="
+          background-color: #374151;
+          border-radius: 13px;
+          padding: 25px;
+          margin-bottom: 25px;
+        "
+      >
+        <p
+          style="
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          <strong style="color: #8cce3b">Versão:</strong> {{ object.num_versao
+          }}
+        </p>
 
-            <div style="
-                background-color: #374151;
-                border-radius: 13px;
-                padding: 25px;
-                margin-bottom: 25px;
-            ">
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Desenvolvedor:</strong> {{
+          object.dev_responsavel }}
+        </p>
 
+        <p
+          style="
+            color: #d1d5db;
+            font-size: 15px;
+            margin-bottom: 10px;
+            white-space: pre-line;
+          "
+        >
+          <strong style="color: #8cce3b">Descrição:</strong> {{ object.descricao
+          }}
+        </p>
 
-                <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Versão:</strong> {{ object.num_versao }}
-                </p>
+        <p style="color: #6b7280; font-size: 13px; margin-top: 10px">
+          Postado em: {{ object.data_postagem|date:"d/m/Y" }}
+        </p>
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Desenvolvedor:</strong> {{ object.dev_responsavel }}
-                </p>
+        <p style="color: #6b7280; font-size: 13px">
+          Última alteração: {{ object.data_alteracao|date:"d/m/Y H:i" }}
+        </p>
+      </div>
 
+      <div style="display: flex; gap: 15px">
+        <a
+          href="{% url 'backlogs_update' object.pk %}"
+          style="
+            background-color: #8cce3b;
+            color: #0f172a;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+          "
+        >
+          Editar
+        </a>
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px; white-space: pre-line;">
-                    <strong style="color:#8CCE3B;">Descrição:</strong> {{ object.descricao }}
-                </p>
+        <a
+          href="{% url 'backlogs_delete' object.pk %}"
+          style="
+            background-color: #e35454;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+          "
+        >
+          Excluir
+        </a>
 
-
-                <p style="color: #6b7280; font-size: 13px; margin-top: 10px;">
-                    Postado em: {{ object.data_postagem|date:"d/m/Y" }}
-                </p>
-
-                <p style="color: #6b7280; font-size: 13px;">
-                    Última alteração: {{ object.data_alteracao|date:"d/m/Y H:i" }}
-                </p>
-
-            </div>
-
-
-            <div style="display: flex; gap: 15px;">
-                <a href="{% url 'backlogs_update' object.pk %}" style="
-                    background-color: #8CCE3B;
-                    color: #0f172a;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    text-decoration: none;
-                ">
-                    Editar
-                </a>
-
-                <a href="{% url 'backlogs_delete' object.pk %}" style="
-                    background-color: #E35454;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    text-decoration: none;
-                ">
-                    Excluir
-                </a>
-
-                <a href="{% url 'backlogs_list' %}" style="
-                    background-color: #4b5563;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    text-decoration: none;
-                ">
-                    Voltar
-                </a>
-            </div>
-
-        </div>
+        <a
+          href="{% url 'backlogs_list' %}"
+          style="
+            background-color: #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            text-decoration: none;
+          "
+        >
+          Voltar
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}

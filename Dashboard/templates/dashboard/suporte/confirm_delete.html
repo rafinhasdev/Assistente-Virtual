@@ -1,96 +1,116 @@
-{% extends 'nav.html' %}
+{% extends 'nav.html' %} {% block center %}
 
-{% block center %}
-
-<div class="container_main" style="
+<div
+  class="container_main"
+  style="
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     min-height: 100vh;
     padding: 40px 5%;
-">
-
-    <div style="
+  "
+>
+  <div
+    style="
+      width: 100%;
+      background-color: #23313e;
+      border-radius: 20px;
+      padding: 15px;
+    "
+  >
+    <div
+      style="
         width: 100%;
-        background-color: #23313e;
+        background-color: transparent;
+        border: 2px solid #8cce3b;
         border-radius: 20px;
-        padding: 15px;
-    ">
-        <div style="
-            width: 100%;
-            background-color: transparent;
-            border: 2px solid #8CCE3B;
-            border-radius: 20px;
-            padding: 25px;
-            position: relative;
-        ">
+        padding: 25px;
+        position: relative;
+      "
+    >
+      <h2 style="color: #8cce3b; font-size: 20px; margin-bottom: 20px">
+        Confirmar Exclusão
+      </h2>
 
-            <h2 style="color: #8CCE3B; font-size: 20px; margin-bottom: 20px;">
-                Confirmar Exclusão
-            </h2>
+      <div
+        style="
+          background-color: #374151;
+          border-radius: 13px;
+          padding: 25px;
+          margin-bottom: 25px;
+        "
+      >
+        <p style="color: #d1d5db; font-size: 15px; line-height: 1.6">
+          Tem certeza de que deseja excluir esta mensagem de suporte?
+        </p>
 
-            <div style="
-                background-color: #374151;
-                border-radius: 13px;
-                padding: 25px;
-                margin-bottom: 25px;
-            ">
-                <p style="color: #d1d5db; font-size: 15px; line-height: 1.6;">
-                    Tem certeza de que deseja excluir esta mensagem de suporte?
-                </p>
+        <div
+          style="
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #23313e;
+            border: 1px solid #4b5563;
+          "
+        >
+          <p
+            style="
+              color: #8cce3b;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 10px;
+            "
+          >
+            De: {{ object.usuario.first_name }} {{ object.usuario.last_name }}
+          </p>
 
-                <div style="
-                    margin-top: 20px;
-                    padding: 15px;
-                    border-radius: 10px;
-                    background-color: #23313e;
-                    border: 1px solid #4b5563;
-                ">
-                    <p style="color: #8CCE3B; font-size: 14px; font-weight: 600; margin-bottom: 10px;">
-                        De: {{ object.usuario.first_name }} {{ object.usuario.last_name }}
-                    </p>
+          <p style="color: #d1d5db; font-size: 14px; margin-bottom: 10px">
+            {{ object.descricao }}
+          </p>
 
-                    <p style="color: #d1d5db; font-size: 14px; margin-bottom: 10px;">
-                        {{ object.descricao }}
-                    </p>
-
-                    <p style="color: #6b7280; font-size: 12px;">
-                        Enviado em: {{ object.data_envio|date:"d/m/Y H:i" }}
-                    </p>
-                </div>
-            </div>
-
-            <form method="POST" style="display: flex; gap: 15px;">
-                {% csrf_token %}
-
-                <button type="submit" style="
-                    background-color: #E35454;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    cursor: pointer;
-                ">
-                    Confirmar Exclusão
-                </button>
-
-                <a href="{% url 'support_list' %}" style="
-                    background-color: #4b5563;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    text-decoration: none;
-                ">
-                    Cancelar
-                </a>
-            </form>
+          <p style="color: #6b7280; font-size: 12px">
+            Enviado em: {{ object.data_envio|date:"d/m/Y H:i" }}
+          </p>
         </div>
+      </div>
+
+      <form method="POST" style="display: flex; gap: 15px">
+        {% csrf_token %}
+
+        <button
+          type="submit"
+          style="
+            background-color: #e35454;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+          "
+        >
+          Confirmar Exclusão
+        </button>
+
+        <a
+          href="{% url 'support_list' %}"
+          style="
+            background-color: #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+          "
+        >
+          Cancelar
+        </a>
+      </form>
     </div>
+  </div>
 </div>
 
 {% endblock %}

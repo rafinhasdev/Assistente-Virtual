@@ -1,65 +1,88 @@
-{% extends 'nav.html' %}
+{% extends 'nav.html' %} {% block center %}
 
-{% block center %}
+<div
+  class="container_main"
+  style="
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 5%;
+  "
+>
+  <div
+    style="
+      width: 100%;
+      background-color: #23313e;
+      border-radius: 20px;
+      padding: 15px;
+    "
+  >
+    <div
+      style="
+        width: 100%;
+        border: 2px solid #8cce3b;
+        background-color: transparent;
+        border-radius: 20px;
+        padding: 25px;
+      "
+    >
+      <h2 style="color: #8cce3b; font-size: 20px; margin-bottom: 25px">
+        Adicionar Backlogs
+      </h2>
 
-<div class="container_main"
-     style="display:flex; flex-direction:column; width:100%; min-height:100vh; padding:40px 5%;">
+      <form method="POST" style="width: 100%">
+        {% csrf_token %}
 
-    <div style="width:100%; background-color:#23313e; border-radius:20px; padding:15px;">
-
-        <div style="
-            width:100%;
-            border:2px solid #8CCE3B;
-            background-color:transparent;
-            border-radius:20px;
-            padding:25px;
-        ">
-            <h2 style="color:#8CCE3B; font-size:20px; margin-bottom:25px;">
-                Adicionar Backlogs
-            </h2>
-
-            <form method="POST" style="width:100%;">
-                {% csrf_token %}
-
-                <!-- CARD DO FORM -->
-                <div style="
-                    background-color:#374151;
-                    border-radius:13px;
-                    padding:25px;
-                    margin-bottom:25px;
-                    display:flex;
-                    flex-direction:column;
-                    gap:22px;
-                ">
-
-                {{ form.as_div }}
-
-                </div>
-
-                <!-- Botão Enviar -->
-                <button type="submit"
-                        style="background-color:#8CCE3B; color:white; border:none;
-                               border-radius:8px; padding:12px 25px; font-size:15px;
-                               font-weight:600; cursor:pointer;">
-                    Enviar
-                </button>
-
-                <a href="{% url 'backlogs_list' %}" style="
-                    background-color: #4b5563;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 12px 25px;
-                    font-size: 15px;
-                    font-weight: 500;
-                    text-decoration: none;
-                ">
-                    Cancelar
-                </a>
-
-            </form>
-
+        <!-- CARD DO FORM -->
+        <div
+          style="
+            background-color: #374151;
+            border-radius: 13px;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+          "
+        >
+          {{ form.as_div }}
         </div>
+
+        <!-- Botão Enviar -->
+        <button
+          type="submit"
+          style="
+            background-color: #8cce3b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+          "
+        >
+          Enviar
+        </button>
+
+        <a
+          href="{% url 'backlogs_list' %}"
+          style="
+            background-color: #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+          "
+        >
+          Cancelar
+        </a>
+      </form>
     </div>
+  </div>
 </div>
 
 {% endblock %}

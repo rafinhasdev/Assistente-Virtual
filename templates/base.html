@@ -18,100 +18,130 @@
     <title>Document</title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
-    <div class="container-fluid">
-      <a class="navbar-brand text-success" href="{% url 'home' %}">
-        <img src="{% static 'img/IFRN_LOGO.png' %}" alt="IFRN" style="padding: 5px" />
-        IFRN
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#menuNavbar"
-        aria-controls="menuNavbar"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav
+      class="navbar navbar-expand-lg border-bottom border-body"
+      data-bs-theme="dark"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand text-success" href="{% url 'home' %}">
+          <img
+            src="{% static 'img/IFRN_LOGO.png' %}"
+            alt="IFRN"
+            style="padding: 5px"
+          />
+          IFRN
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menuNavbar"
+          aria-controls="menuNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="menuNavbar">
-        <ul class="navbar-nav ms-auto">
+        <div class="collapse navbar-collapse" id="menuNavbar">
+          <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger w-100 my-2">
+                  Sair
+                </button>
+              </form>
+            </li>
+            {% endif %} {% if user.is_superuser %}
 
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-outline-danger w-100 my-2">
-                Sair
-              </button>
-            </form>
-          </li>
-          {% endif %}
+            <li class="nav-item">
+              <a
+                class="nav-link text-success"
+                href="{% url 'dashboard_index' %}"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="me-1"
+                  style="vertical-align: middle"
+                >
+                  <path d="M3 3v18h18"></path>
+                  <path d="M18.7 8.7L12 15.4 9.3 12.7 5.6 16.4"></path>
+                  <path d="M10.3 3H21v10.7"></path>
+                </svg>
+                Dashboard
+              </a>
+            </li>
+            {% endif %}
 
-          {% if user.is_superuser %}
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/' %}active-link{% endif %}"
+                href="{% url 'home' %}"
+              >
+                <img
+                  src="{% static 'img/icon_index.svg' %}"
+                  width="24"
+                  height="24"
+                />
+                Principal
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link text-success" href="{% url 'dashboard_index' %}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round"
-                class="me-1" style="vertical-align: middle">
-                <path d="M3 3v18h18"></path>
-                <path d="M18.7 8.7L12 15.4 9.3 12.7 5.6 16.4"></path>
-                <path d="M10.3 3H21v10.7"></path>
-              </svg>
-              Dashboard
-            </a>
-          </li>
-          {% endif %}
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == '/app/backlogs/' %}active-link{% endif %}"
+                href="{% url 'backlogs' %}"
+              >
+                <img
+                  src="{% static 'img/icon_backlogs.svg' %}"
+                  width="24"
+                  height="24"
+                />
+                Backlogs
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.path == '/' %}active-link{% endif %}"
-              href="{% url 'home' %}"
-            >
-              <img src="{% static 'img/icon_index.svg' %}" width="24" height="24" />
-              Principal
-            </a>
-          </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == 'app/about/' %}active-link{% endif %}"
+                href="{% url 'about' %}"
+              >
+                <img
+                  src="{% static 'img/icon_about.svg' %}"
+                  width="24"
+                  height="24"
+                />
+                Sobre
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.path == '/app/backlogs/' %}active-link{% endif %}"
-              href="{% url 'backlogs' %}"
-            >
-              <img src="{% static 'img/icon_backlogs.svg' %}" width="24" height="24" />
-              Backlogs
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.path == 'app/about/' %}active-link{% endif %}"
-              href="{% url 'about' %}"
-            >
-              <img src="{% static 'img/icon_about.svg' %}" width="24" height="24" />
-              Sobre
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.path == 'app/support/' %}active-link{% endif %}"
-              href="{% url 'support' %}"
-            >
-              <img src="{% static 'img/icon_suporte.svg' %}" width="24" height="24" />
-              Suporte
-            </a>
-          </li>
-        </ul>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.path == 'app/support/' %}active-link{% endif %}"
+                href="{% url 'support' %}"
+              >
+                <img
+                  src="{% static 'img/icon_suporte.svg' %}"
+                  width="24"
+                  height="24"
+                />
+                Suporte
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="conteiner">{% block center %} {% endblock %}</div>
-
-</body>
+    <div class="conteiner">{% block center %} {% endblock %}</div>
+  </body>
 </html>

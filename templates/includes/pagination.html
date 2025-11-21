@@ -1,118 +1,123 @@
 {% if page_obj.has_other_pages %}
 
 <style>
+  .pagination {
+    display: flex;
+    gap: 8px;
+  }
 
-    .pagination {
-        display: flex;
-        gap: 8px;
-    }
+  .pagination .page-item .page-link {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(140, 206, 59, 0.6);
+    border-radius: 8px;
 
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    transition: 0.2s ease;
+  }
+
+  .pagination .page-item .page-link:hover {
+    background-color: rgba(140, 206, 59, 0.3);
+    border-color: #8cce3b;
+    color: #fff;
+  }
+
+  .pagination .page-item.active .page-link {
+    background-color: #8cce3b !important;
+    border-color: #8cce3b !important;
+    color: #1b232e !important;
+    font-weight: bold;
+    transform: scale(1.08);
+  }
+
+  .pagination .page-item.disabled .page-link {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 600px) {
     .pagination .page-item .page-link {
-        background-color: rgba(255, 255, 255, 0.08);
-        color: #fff;
-        border: 1px solid rgba(140, 206, 59, 0.6);
-        border-radius: 8px;
-
-        padding: 8px 14px;
-        font-size: 0.95rem;
-        transition: 0.2s ease;
+      padding: 6px 10px;
+      font-size: 0.85rem;
     }
-
-    .pagination .page-item .page-link:hover {
-        background-color: rgba(140, 206, 59, 0.3);
-        border-color: #8CCE3B;
-        color: #fff;
-    }
-
-    .pagination .page-item.active .page-link {
-        background-color: #8CCE3B !important;
-        border-color: #8CCE3B !important;
-        color: #1b232e !important;
-        font-weight: bold;
-        transform: scale(1.08);
-    }
-
-    .pagination .page-item.disabled .page-link {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.3);
-        cursor: not-allowed;
-    }
-
-    @media (max-width: 600px) {
-        .pagination .page-item .page-link {
-            padding: 6px 10px;
-            font-size: 0.85rem;
-        }
-    }
-
+  }
 </style>
 
 <nav aria-label="Navegação de páginas">
-    <ul class="pagination justify-content-center">
-        
-
-        {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Primeira">
-                    <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&laquo;&laquo;</span>
-            </li>
-        {% endif %}
-
-        {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Anterior">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&laquo;</span>
-            </li>
-        {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">{{ num }}</span>
-                </li>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ num }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}">{{ num }}</a>
-                </li>
-            {% endif %}
-        {% endfor %}
-
-
-        {% if page_obj.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Próxima">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&raquo;</span>
-            </li>
-        {% endif %}
-
-        {% if page_obj.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Última">
-                    <span aria-hidden="true">&raquo;&raquo;</span>
-                </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">&raquo;&raquo;</span>
-            </li>
-        {% endif %}
-
-    </ul>
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page=1{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}"
+        aria-label="Primeira"
+      >
+        <span aria-hidden="true">&laquo;&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&laquo;&laquo;</span>
+    </li>
+    {% endif %} {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.previous_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}"
+        aria-label="Anterior"
+      >
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&laquo;</span>
+    </li>
+    {% endif %} {% for num in page_obj.paginator.page_range %} {% if
+    page_obj.number == num %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{ num }}</span>
+    </li>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ num }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}"
+        >{{ num }}</a
+      >
+    </li>
+    {% endif %} {% endfor %} {% if page_obj.has_next %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.next_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}"
+        aria-label="Próxima"
+      >
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&raquo;</span>
+    </li>
+    {% endif %} {% if page_obj.has_next %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}"
+        aria-label="Última"
+      >
+        <span aria-hidden="true">&raquo;&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&raquo;&raquo;</span>
+    </li>
+    {% endif %}
+  </ul>
 </nav>
 {% endif %}

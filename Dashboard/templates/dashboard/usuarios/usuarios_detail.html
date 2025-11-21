@@ -1,127 +1,156 @@
-{% extends 'nav.html' %}
+{% extends 'nav.html' %} {% block center %}
 
-{% block center %}
-
-<div class="container_main" style="
+<div
+  class="container_main"
+  style="
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     min-height: 100vh;
     padding: 40px 5%;
-">
-
-    <div style="
+  "
+>
+  <div
+    style="
+      width: 100%;
+      background-color: #23313e;
+      border-radius: 20px;
+      padding: 15px;
+    "
+  >
+    <div
+      style="
         width: 100%;
-        background-color: #23313e;
+        background-color: transparent;
+        border: 2px solid #8cce3b;
         border-radius: 20px;
-        padding: 15px;
-    ">
-        <div style="
-            width: 100%;
-            background-color: transparent;
-            border: 2px solid #8CCE3B;
-            border-radius: 20px;
-            padding: 25px;
-            position: relative;
-        ">
+        padding: 25px;
+        position: relative;
+      "
+    >
+      <h2 style="color: #8cce3b; font-size: 22px; margin-bottom: 20px">
+        Detalhes do Usuário
+      </h2>
 
-            <h2 style="color: #8CCE3B; font-size: 22px; margin-bottom: 20px;">
-                Detalhes do Usuário
-            </h2>
+      <div
+        style="
+          background-color: #374151;
+          border-radius: 13px;
+          padding: 25px;
+          margin-bottom: 25px;
+        "
+      >
+        <p
+          style="
+            color: #8cce3b;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          <strong style="color: #8cce3b">Nome:</strong> {{ object.first_name }}
+          {{ object.last_name }}
+        </p>
 
-            <div style="
-                background-color: #374151;
-                border-radius: 13px;
-                padding: 25px;
-                margin-bottom: 25px;
-            ">
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Matrícula:</strong> {{ object.username
+          }}
+        </p>
 
-                <p style="color: #8CCE3B; font-size: 16px; font-weight: 600; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Nome:</strong> {{ object.first_name }} {{ object.last_name }}
-                </p>
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Email:</strong> {{ object.email }}
+        </p>
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Matrícula:</strong> {{ object.username }}
-                </p>
+        {% if object.numero %}
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Telefone:</strong> {{ object.numero }}
+        </p>
+        {% endif %}
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Email:</strong> {{ object.email }}
-                </p>
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Último login:</strong> {{
+          object.last_login }}
+        </p>
 
-                {% if object.numero %}
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Telefone:</strong> {{ object.numero }}
-                </p>
-                {% endif %}
+        <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px">
+          <strong style="color: #8cce3b">Data de cadastro:</strong> {{
+          object.date_joined }}
+        </p>
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Último login:</strong> {{ object.last_login }}
-                </p>
+        <div
+          style="
+            background-color: #23313e;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #4b5563;
+            margin-top: 15px;
+          "
+        >
+          <p
+            style="
+              color: #8cce3b;
+              font-size: 14px;
+              margin-bottom: 8px;
+              font-weight: 600;
+            "
+          >
+            Grupos
+          </p>
 
-                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
-                    <strong style="color:#8CCE3B;">Data de cadastro:</strong> {{ object.date_joined }}
-                </p>
-
-                <div style="
-                    background-color: #23313e;
-                    padding: 15px;
-                    border-radius: 10px;
-                    border: 1px solid #4b5563;
-                    margin-top: 15px;
-                ">
-                    <p style="color: #8CCE3B; font-size: 14px; margin-bottom: 8px; font-weight: 600;">
-                        Grupos
-                    </p>
-
-                    {% for g in object.groups.all %}
-                        <span style="
-                            display: inline-block;
-                            background-color: #4b5563;
-                            color: white;
-                            padding: 6px 12px;
-                            border-radius: 6px;
-                            font-size: 13px;
-                            margin-right: 6px;
-                            margin-bottom: 6px;
-                        ">
-                            {{ g.name }}
-                        </span>
-                    {% empty %}
-                        <p style="color: #6b7280; font-size: 13px;">Sem grupos atribuídos.</p>
-                    {% endfor %}
-                </div>
-
-            </div>
-
-            <div style="display: flex; gap: 15px;">
-
-                <a href="{% url 'usuarios_delete' object.pk %}" style="
-                    background-color: #E35454;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    text-decoration: none;
-                ">
-                    Excluir
-                </a>
-
-                <a href="{% url 'usuarios_list' %}" style="
-                    background-color: #4b5563;
-                    color: white;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    text-decoration: none;
-                ">
-                    Voltar
-                </a>
-            </div>
-
+          {% for g in object.groups.all %}
+          <span
+            style="
+              display: inline-block;
+              background-color: #4b5563;
+              color: white;
+              padding: 6px 12px;
+              border-radius: 6px;
+              font-size: 13px;
+              margin-right: 6px;
+              margin-bottom: 6px;
+            "
+          >
+            {{ g.name }}
+          </span>
+          {% empty %}
+          <p style="color: #6b7280; font-size: 13px">Sem grupos atribuídos.</p>
+          {% endfor %}
         </div>
+      </div>
+
+      <div style="display: flex; gap: 15px">
+        <a
+          href="{% url 'usuarios_delete' object.pk %}"
+          style="
+            background-color: #e35454;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+          "
+        >
+          Excluir
+        </a>
+
+        <a
+          href="{% url 'usuarios_list' %}"
+          style="
+            background-color: #4b5563;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            text-decoration: none;
+          "
+        >
+          Voltar
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
