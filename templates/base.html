@@ -50,6 +50,8 @@
           </li>
           {% endif %}
 
+          {% if user.is_superuser %}
+
           <li class="nav-item">
             <a class="nav-link text-success" href="{% url 'dashboard_index' %}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -63,6 +65,7 @@
               Dashboard
             </a>
           </li>
+          {% endif %}
 
           <li class="nav-item">
             <a
@@ -91,12 +94,6 @@
             >
               <img src="{% static 'img/icon_about.svg' %}" width="24" height="24" />
               Sobre
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'support_create' %}">
-              <img src="{% static 'img/icon_suporte.svg' %}" alt="info" width="24" height="24">
-              Suporte
             </a>
           </li>
 

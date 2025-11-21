@@ -1,7 +1,7 @@
 # SUAP/pipeline/save_user.py
 
 import logging
-
+from django.contrib.auth.models import Group
 from accounts.models import Usuarios
 
 logger = logging.getLogger(__name__)
@@ -30,9 +30,10 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
     )
 
     username = suap_id
-
+    default_password = f"IFRN{username}"
     # Verifica se já existe
     user = Usuarios.objects.filter(username=username).first()
+    
 
     if user:
         # ✅ Apenas atualiza os dados, sem criar novo
@@ -49,7 +50,18 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
             last_name=last_name,
             email=email,
         )
+
+        user.set_password(default_password)
+        user.save()
+
         created = True
+    
+    try: 
+        grupo_simples = Group.objects.get(name="USUARIO_SIMPLES")
+        user.groups.add(grupo_simples)
+    except:
+        logger.error("Grupo inexistente ou falha em adicionar-lo")
+
 
     logger.info(f"{'Criado' if created else 'Atualizado'} usuário {user.username}")
 

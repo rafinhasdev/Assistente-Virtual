@@ -1,13 +1,8 @@
-/* Por algum motivo, o login não consegue atualizar o CSS, mas o que está aqui ESTÁ CORRETO. */
-
-
-
 body{
     background-color: #1B232E;
     margin: 5px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: white;
-    /* width: 100vh; */
     height: 100vh;
     display: flex;
     align-items: center;
@@ -22,61 +17,120 @@ body{
     background-color: hsla(0, 0%, 100%, 0.05);
     border-radius: 20px;
     border: 2px solid #8CCE3B;
-    
+    overflow: hidden;
 }
+
 .div_img{
     align-self: center;
     width: 70%;
     height: 100%;
+    background-size: cover;
+    background-position: center;
 }
+
 .content{
     display: flex;
     width: 40%;
     height: 100%;
-    align-self: flex-end;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     background-color: #171717;
     border-radius: 0px 18px 18px 0px;
-    border: 1px solid #8CCE3B;
+    border-left: 1px solid #8CCE3B;
+}
 
+.content h1{
+    color: #8CCE3B;
+    font-size: 24pt;
+}
 
-    h1{
-        color: #8CCE3B;
-        font-size: 24pt;
+.content div{
+    font-size: 16pt;
+    color: #8CCE3B;
+    text-align: center;
+}
+
+.content div h2{
+    margin-bottom: 0px;
+}
+
+.content div p{
+    margin-top: 0px;
+    font-weight: bold;
+    font-size: 8pt;
+    color: white;
+}
+
+.content a{
+    text-decoration: none;
+    margin-bottom: 30px;
+    background-color: #8CCE3B;
+    color: #171717;
+    border-radius: 20px;
+    padding: 20px 30px;
+    font-size: 12pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .container_main{
+        width: 90%;
+        height: auto;
+        flex-direction: column;
     }
-    div{
-        font-size: 16pt;
-        color: #8CCE3B;
-        text-align: center;
 
-        h2{
-            margin-bottom: 0px;
-        }
-
-        p{
-            margin-top: 0px;
-            font-weight: bold;
-            font-size: 8pt;
-            color: white;
-        }
-    
+    .div_img{
+        width: 100%;
+        height: 250px;
     }
 
-    a{
-        font-style: none;
-        text-decoration: none;
-        margin-bottom: 30px;
-        background-color: #8CCE3B;
-        color: #171717;
-        border-radius: 20px;
-        padding: 20px 30px 20px 30px;
+    .content{
+        width: 100%;
+        height: auto;
+        padding: 20px 0;
+        border-radius: 0 0 18px 18px;
+        border-left: none;
+        border-top: 1px solid #8CCE3B;
+    }
+
+    .content h1{
+        font-size: 20pt;
+    }
+
+    .content div{
+        font-size: 14pt;
+    }
+
+    .content a{
+        margin: 20px 0;
+        padding: 15px 25px;
+        font-size: 11pt;
+    }
+}
+
+@media (max-width: 500px) {
+    body{
+        margin: 0;
+        height: auto;
+        align-items: flex-start;
+    }
+
+    .div_img{
+        height: 200px;
+    }
+
+    .content h1{
+        font-size: 18pt;
+    }
+
+    .content div{
         font-size: 12pt;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-
     }
 
+    .content a{
+        width: 80%;
+        text-align: center;
+        padding: 12px 20px;
+    }
 }

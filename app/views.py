@@ -36,7 +36,7 @@ def support(request):
     else:
         form = SupporteForms()
 
-    return render(request, "app/support/support_problem.html", context={"form": form})
+    return render(request, "app/support/support_form.html", context={"form": form})
 
 
 @login_required

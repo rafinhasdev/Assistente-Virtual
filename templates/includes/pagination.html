@@ -1,4 +1,61 @@
 {% if page_obj.has_other_pages %}
+
+<style>
+
+    .pagination {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pagination .page-item .page-link {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid rgba(140, 206, 59, 0.6);
+        border-radius: 8px;
+
+        padding: 8px 14px;
+        font-size: 0.95rem;
+        transition: 0.2s ease;
+    }
+
+    /* Hover */
+    .pagination .page-item .page-link:hover {
+        background-color: rgba(140, 206, 59, 0.3);
+        border-color: #8CCE3B;
+        color: #fff;
+    }
+
+    /* Página ativa */
+    .pagination .page-item.active .page-link {
+        background-color: #8CCE3B !important;
+        border-color: #8CCE3B !important;
+        color: #1b232e !important;
+        font-weight: bold;
+        transform: scale(1.08);
+    }
+
+    /* Desabilitado */
+    .pagination .page-item.disabled .page-link {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.3);
+        cursor: not-allowed;
+    }
+
+    /* Ajusta touch em telas pequenas */
+    @media (max-width: 600px) {
+        .pagination .page-item .page-link {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+        }
+    }
+
+
+</style>
+
+
+
+
 <nav aria-label="Navegação de páginas">
     <ul class="pagination justify-content-center">
         
@@ -68,13 +125,5 @@
         {% endif %}
 
     </ul>
-
-    <!-- Informações da Paginação -->
-    <div class="text-center text-muted mt-2">
-        <small>
-            Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ page_obj.paginator.count }} vaga(s)
-            (Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }})
-        </small>
-    </div>
 </nav>
 {% endif %}

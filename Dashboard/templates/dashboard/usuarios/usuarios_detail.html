@@ -98,36 +98,10 @@
                     {% endfor %}
                 </div>
 
-                <!-- Permissões custom -->
-                <div style="margin-top: 20px;">
-                    {% if object.is_admin %}
-                        <p style="color:#8CCE3B; font-size:14px; font-weight:600;">
-                            Este usuário é um ADMINISTRADOR
-                        </p>
-                    {% endif %}
-
-                    {% if object.is_user_simples %}
-                        <p style="color:#8CCE3B; font-size:14px; font-weight:600;">
-                            Este usuário é um USUÁRIO SIMPLES
-                        </p>
-                    {% endif %}
-                </div>
-
             </div>
 
             <!-- BOTÕES -->
             <div style="display: flex; gap: 15px;">
-                <a href="{% url 'usuarios_update' object.pk %}" style="
-                    background-color: #8CCE3B;
-                    color: #0f172a;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    text-decoration: none;
-                ">
-                    Editar
-                </a>
 
                 <a href="{% url 'usuarios_delete' object.pk %}" style="
                     background-color: #E35454;

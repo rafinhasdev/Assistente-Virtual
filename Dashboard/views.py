@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -22,6 +22,10 @@ from .forms import BacklogsForm
 
 @login_required
 def index(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, "Usuário não autorizado")
+        return redirect("home")
 
     num_usuarios = Usuarios.objects.all().count()
     total_suporte_mensagens = SupportMensagens.objects.all().count()
@@ -43,7 +47,7 @@ def index(request):
     return render(request, "dashboard/index.html", context)
 
 
-class BacklogsListView(LoginRequiredMixin, ListView):
+class BacklogsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     """
     View responsável por listar todos os Backlogs no dashboard.
 
@@ -58,6 +62,13 @@ class BacklogsListView(LoginRequiredMixin, ListView):
         context_object_name (str): O nome da variável de contexto para a lista de objetos.
         paginate_by (int): O número de itens por página.
     """
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
 
     model = Backlogs
     template_name = "dashboard/backlogs/backlogs_list.html"
@@ -110,13 +121,29 @@ class BacklogsListView(LoginRequiredMixin, ListView):
         return context
 
 
-class BacklogsDetailView(LoginRequiredMixin, DetailView):
+class BacklogsDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Backlogs
     template_name = "dashboard/backlogs/backlogs_detail.html"
     context_object_name = "backlogs"
 
 
-class BacklogsCreateView(LoginRequiredMixin, CreateView):
+class BacklogsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Backlogs
     form_class = BacklogsForm
     template_name = "dashboard/backlogs/backlogs_form.html"
@@ -126,7 +153,15 @@ class BacklogsCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class BacklogsUpdateView(LoginRequiredMixin, UpdateView):
+class BacklogsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Backlogs
     template_name = "dashboard/backlogs/backlogs_form.html"
     form_class = BacklogsForm
@@ -136,13 +171,29 @@ class BacklogsUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class BacklogsDeleteView(LoginRequiredMixin, DeleteView):
+class BacklogsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Backlogs
     template_name = "dashboard/backlogs/confirm_delete.html"
     success_url = reverse_lazy("backlogs_list")
 
 
-class SupportMensagensListView(LoginRequiredMixin, ListView):
+class SupportMensagensListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     """
     Lista todas as mensagens de suporte enviadas pelos usuários.
 
@@ -187,33 +238,73 @@ class SupportMensagensListView(LoginRequiredMixin, ListView):
         return context
 
 
-class SupportMensagensDetailView(LoginRequiredMixin, DetailView):
+class SupportMensagensDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = SupportMensagens
     template_name = "dashboard/support/support_detail.html"
     context_object_name = "support"
 
 
-class SupportMensagensCreateView(LoginRequiredMixin, CreateView):
+class SupportMensagensCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = SupportMensagens
     template_name = "dashboard/suporte/support_form.html"
     fields = "__all__"
     success_url = reverse_lazy("support_list")
 
 
-class SupportMensagensUpdateView(LoginRequiredMixin, UpdateView):
+class SupportMensagensUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = SupportMensagens
     template_name = "dashboard/support/support_form.html"
     fields = "__all__"
     success_url = reverse_lazy("support_list")
 
 
-class SupportMensagensDeleteView(LoginRequiredMixin, DeleteView):
+class SupportMensagensDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = SupportMensagens
     template_name = "dashboard/suporte/confirm_delete.html"
     success_url = reverse_lazy("support_list")
 
 
-class SupportMensagemReplyView(LoginRequiredMixin, View):
+class SupportMensagemReplyView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     template_name = "dashboard/suporte/support_reply.html"
 
     def get(self, request, pk):
@@ -238,7 +329,7 @@ class SupportMensagemReplyView(LoginRequiredMixin, View):
             subject="Resposta ao seu pedido de suporte",
             body=resposta,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[support.usuario.email],
+            to=['heyakilloficial@gmail.com'],
         )
 
         email.attach_alternative(
@@ -259,7 +350,15 @@ class SupportMensagemReplyView(LoginRequiredMixin, View):
         return redirect("support_list")
 
 
-class UsuariosListView(LoginRequiredMixin, ListView):
+class UsuariosListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+    
     """
     Lista todos os usuários registrados no sistema.
 
@@ -306,20 +405,44 @@ class UsuariosListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UsuariosDetailView(LoginRequiredMixin, DetailView):
+class UsuariosDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_detail.html"
     context_object_name = "usuarios"
 
 
-class UsuariosUpdateView(LoginRequiredMixin, UpdateView):
+class UsuariosUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_form.html"
     form_class = UsuariosForm
     success_url = reverse_lazy("usuarios_list")
 
 
-class UsuariosDeleteView(LoginRequiredMixin, DeleteView):
+class UsuariosDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.error(self.request, "Usuário não autorizado")
+        return redirect("home")
+
     model = Usuarios
     template_name = "dashboard/usuarios/confirm_delete.html"
     success_url = reverse_lazy("usuarios_list")
