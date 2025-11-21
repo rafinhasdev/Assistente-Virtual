@@ -30,7 +30,6 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
     username = suap_id
     default_password = f"IFRN{username}"
     user = Usuarios.objects.filter(username=username).first()
-    
 
     if user:
         user.first_name = first_name
@@ -50,13 +49,12 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
         user.save()
 
         created = True
-    
-    try: 
+
+    try:
         grupo_simples = Group.objects.get(name="USUARIO_SIMPLES")
         user.groups.add(grupo_simples)
     except:
         logger.error("Grupo inexistente ou falha em adicionar-lo")
-
 
     logger.info(f"{'Criado' if created else 'Atualizado'} usuário {user.username}")
 

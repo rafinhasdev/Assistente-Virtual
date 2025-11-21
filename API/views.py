@@ -6,7 +6,12 @@ from accounts.models import Usuarios
 from accounts.serializers import UsuariosSerializer, UsuariosSlimSerializerGet
 
 from .models import Credenciais
-from .serializers import CredenciaisSerializer, CredentiaisView, TelefoneCheckSerializer, TelefoneUpdateSerializer
+from .serializers import (
+    CredenciaisSerializer,
+    CredentiaisView,
+    TelefoneCheckSerializer,
+    TelefoneUpdateSerializer,
+)
 
 
 class CredenciaisCreateView(generics.CreateAPIView):
@@ -34,31 +39,30 @@ class UsuariosDeleteView(generics.DestroyAPIView):
     serializer_class = UsuariosSerializer
     lookup_field = "pk"
 
+
 class CheckTelefoneView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = TelefoneCheckSerializer(data=request.data)
         if serializer.is_valid():
-            numero = serializer.validated_data['numero']
-            
+            numero = serializer.validated_data["numero"]
+
             try:
                 usuario = Usuarios.objects.get(numero=numero)
-            
+
             except Usuarios.DoesNotExist:
                 return Response(
-                    {
-                        "exists": False, "usuario": None
-                    }, status=status.HTTP_200_OK
+                    {"exists": False, "usuario": None}, status=status.HTTP_200_OK
                 )
-        
+
             usuario_serializer = UsuariosSerializer(usuario)
 
             return Response(
-                {
-                    "exists": True, "usuario": usuario_serializer.data
-                }, status=status.HTTP_200_OK
+                {"exists": True, "usuario": usuario_serializer.data},
+                status=status.HTTP_200_OK,
             )
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UpdateTelefonePorMatriculaView(APIView):
     def get(self, request, matricula, *args, **kwargs):
@@ -82,8 +86,9 @@ class UpdateTelefonePorMatriculaView(APIView):
         usuario.save()
 
         return Response(
-            {"detail": "Telefone atualizado com sucesso.",
-             "usuario": UsuariosSerializer(usuario).data},
-            status=200
+            {
+                "detail": "Telefone atualizado com sucesso.",
+                "usuario": UsuariosSerializer(usuario).data,
+            },
+            status=200,
         )
-

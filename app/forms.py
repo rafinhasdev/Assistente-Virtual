@@ -22,22 +22,25 @@ class UsuarioForm(ModelForm):
 class SupporteForms(forms.ModelForm):
     class Meta:
         model = SupportMensagens
-        fields = ['descricao']
+        fields = ["descricao"]
         widgets = {
-            'descricao': forms.Textarea(attrs={
-                'style': (
-                    'background: transparent;'
-                    'color: white;'
-                    'padding: 10px;'
-                    'width: 100%;'
-                    'height: 100%;'
-                    'resize: none;'
-                    'border: none;'
-                    'outline: none;'
-                ),
-                'placeholder': 'Descreva aqui o ocorrido...',
-            })
+            "descricao": forms.Textarea(
+                attrs={
+                    "style": (
+                        "background: transparent;"
+                        "color: white;"
+                        "padding: 10px;"
+                        "width: 100%;"
+                        "height: 100%;"
+                        "resize: none;"
+                        "border: none;"
+                        "outline: none;"
+                    ),
+                    "placeholder": "Descreva aqui o ocorrido...",
+                }
+            )
         }
+
 
 class BacklogsForm(ModelForm):
 

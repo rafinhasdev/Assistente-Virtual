@@ -51,7 +51,7 @@ class BacklogsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -96,7 +96,7 @@ class BacklogsDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -110,7 +110,7 @@ class BacklogsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -128,7 +128,7 @@ class BacklogsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -146,7 +146,7 @@ class BacklogsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -160,7 +160,7 @@ class SupportMensagensListView(LoginRequiredMixin, UserPassesTestMixin, ListView
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -204,7 +204,7 @@ class SupportMensagensDetailView(LoginRequiredMixin, UserPassesTestMixin, Detail
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -218,7 +218,7 @@ class SupportMensagensCreateView(LoginRequiredMixin, UserPassesTestMixin, Create
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -233,7 +233,7 @@ class SupportMensagensUpdateView(LoginRequiredMixin, UserPassesTestMixin, Update
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -248,7 +248,7 @@ class SupportMensagensDeleteView(LoginRequiredMixin, UserPassesTestMixin, Delete
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -262,7 +262,7 @@ class SupportMensagemReplyView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -303,7 +303,7 @@ class SupportMensagemReplyView(LoginRequiredMixin, UserPassesTestMixin, View):
             subject="Resposta ao seu pedido de suporte",
             body=resposta,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            to=['heyakilloficial@gmail.com'],
+            to=["heyakilloficial@gmail.com"],
         )
 
         email.attach_alternative(
@@ -328,11 +328,10 @@ class UsuariosListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
-    
 
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_list.html"
@@ -375,7 +374,7 @@ class UsuariosDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -389,7 +388,7 @@ class UsuariosUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
@@ -404,7 +403,7 @@ class UsuariosDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
-    
+
     def handle_no_permission(self):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
