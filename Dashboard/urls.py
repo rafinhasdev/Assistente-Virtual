@@ -47,8 +47,8 @@ urlpatterns = [
         name="usuarios_delete",
     ),
     path(
-    "support/<int:pk>/reply/",
-    SupportMensagemReplyView.as_view(),
-    name="support_reply",
+        "support/<int:pk>/reply/",
+        SupportMensagemReplyView.as_view(),
+        name="support_reply",
     ),
 ]

@@ -23,7 +23,6 @@ urlpatterns = [
         "getcredentiais/", views.CredenciaisListView.as_view(), name="get_credentiais"
     ),
     path("check-telefone/", views.CheckTelefoneView.as_view(), name="check_telefone"),
-
     path(
         "usuarios/<str:matricula>/update-telefone/",
         views.UpdateTelefonePorMatriculaView.as_view(),

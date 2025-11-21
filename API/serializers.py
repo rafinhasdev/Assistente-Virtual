@@ -27,6 +27,7 @@ class CredentiaisView(serializers.ModelSerializer):
         model = Credenciais
         fields = ["suap_token", "bearer"]
 
+
 class TelefoneCheckSerializer(serializers.Serializer):
     numero = serializers.CharField(required=True)
 

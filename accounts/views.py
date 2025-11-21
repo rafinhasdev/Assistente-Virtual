@@ -1,9 +1,5 @@
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-
-from .models import Usuarios
+from django.contrib.auth import logout
+from django.shortcuts import redirect, render
 
 
 def login_view(request):
