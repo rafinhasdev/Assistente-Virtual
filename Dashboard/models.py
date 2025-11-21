@@ -20,9 +20,9 @@ class SupportMensagens(models.Model):
     data_envio = models.DateTimeField(auto_now_add=True, null=True)
     ativo = models.BooleanField(default=True, blank=True)
 
-
     def __str__(self):
         return f"{self.usuario.nome}: {self.data_envio}"
+
 
 class SupportReplyMensagens(models.Model):
     support = models.ForeignKey(SupportMensagens, on_delete=models.CASCADE, null=True)

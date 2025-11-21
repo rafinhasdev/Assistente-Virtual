@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from Dashboard.models import Backlogs, SupportMensagens
+from Dashboard.models import Backlogs
 from .forms import SupporteForms
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 
 
 @login_required
@@ -16,8 +15,9 @@ def index(request):
 def about(request):
     return render(request, "app/about.html")
 
+
 @login_required
-def support(request):  
+def support(request):
 
     if request.method == "POST":
         form = SupporteForms(request.POST)
@@ -29,12 +29,15 @@ def support(request):
             messages.success(request, "Mensagem enviada com sucesso!")
 
             return redirect("support")
-        else: 
-            messages.error(request, "Erro ao enviar. Verifique os campos e tente novamente!")
+        else:
+            messages.error(
+                request, "Erro ao enviar. Verifique os campos e tente novamente!"
+            )
     else:
         form = SupporteForms()
 
     return render(request, "app/support/support_problem.html", context={"form": form})
+
 
 @login_required
 def BacklogsListView(request):
@@ -45,7 +48,7 @@ def BacklogsListView(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    try: 
+    try:
         page_obj = paginator.page(page_number)
     except PageNotAnInteger:
         page_obj = paginator.page(1)
@@ -55,6 +58,3 @@ def BacklogsListView(request):
     context = {"page_obj": page_obj}
 
     return render(request, "app/backlogs.html", context)
-
-
-    
