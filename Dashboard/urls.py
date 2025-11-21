@@ -13,7 +13,7 @@ urlpatterns = [
         name="backlogs_update",
     ),
     path(
-        "backlogs/<int:pk>/delete/",
+        "backlogs/delete/<int:pk>/",
         BacklogsDeleteView.as_view(),
         name="backlogs_delete",
     ),
@@ -30,7 +30,7 @@ urlpatterns = [
         name="support_update",
     ),
     path(
-        "support/<int:pk>/delete/",
+        "support/delete/<int:pk>/",
         SupportMensagensDeleteView.as_view(),
         name="support_delete",
     ),

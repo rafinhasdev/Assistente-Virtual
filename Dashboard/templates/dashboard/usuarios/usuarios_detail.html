@@ -1,0 +1,160 @@
+{% extends 'nav.html' %}
+
+{% block center %}
+
+<div class="container_main" style="
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 5%;
+">
+
+    <div style="
+        width: 100%;
+        background-color: #23313e;
+        border-radius: 20px;
+        padding: 15px;
+    ">
+        <div style="
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid #8CCE3B;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+        ">
+
+            <h2 style="color: #8CCE3B; font-size: 22px; margin-bottom: 20px;">
+                Detalhes do Usuário
+            </h2>
+
+            <!-- BOX PRINCIPAL -->
+            <div style="
+                background-color: #374151;
+                border-radius: 13px;
+                padding: 25px;
+                margin-bottom: 25px;
+            ">
+
+                <!-- Nome -->
+                <p style="color: #8CCE3B; font-size: 16px; font-weight: 600; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Nome:</strong> {{ object.first_name }} {{ object.last_name }}
+                </p>
+
+                <!-- Username -->
+                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Matrícula:</strong> {{ object.username }}
+                </p>
+
+                <!-- Email -->
+                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Email:</strong> {{ object.email }}
+                </p>
+
+                <!-- Número -->
+                {% if object.numero %}
+                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Telefone:</strong> {{ object.numero }}
+                </p>
+                {% endif %}
+
+                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Último login:</strong> {{ object.last_login }}
+                </p>
+
+                <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
+                    <strong style="color:#8CCE3B;">Data de cadastro:</strong> {{ object.date_joined }}
+                </p>
+                
+                <!-- Grupos -->
+                <div style="
+                    background-color: #23313e;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid #4b5563;
+                    margin-top: 15px;
+                ">
+                    <p style="color: #8CCE3B; font-size: 14px; margin-bottom: 8px; font-weight: 600;">
+                        Grupos
+                    </p>
+
+                    {% for g in object.groups.all %}
+                        <span style="
+                            display: inline-block;
+                            background-color: #4b5563;
+                            color: white;
+                            padding: 6px 12px;
+                            border-radius: 6px;
+                            font-size: 13px;
+                            margin-right: 6px;
+                            margin-bottom: 6px;
+                        ">
+                            {{ g.name }}
+                        </span>
+                    {% empty %}
+                        <p style="color: #6b7280; font-size: 13px;">Sem grupos atribuídos.</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Permissões custom -->
+                <div style="margin-top: 20px;">
+                    {% if object.is_admin %}
+                        <p style="color:#8CCE3B; font-size:14px; font-weight:600;">
+                            Este usuário é um ADMINISTRADOR
+                        </p>
+                    {% endif %}
+
+                    {% if object.is_user_simples %}
+                        <p style="color:#8CCE3B; font-size:14px; font-weight:600;">
+                            Este usuário é um USUÁRIO SIMPLES
+                        </p>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- BOTÕES -->
+            <div style="display: flex; gap: 15px;">
+                <a href="{% url 'usuarios_update' object.pk %}" style="
+                    background-color: #8CCE3B;
+                    color: #0f172a;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-decoration: none;
+                ">
+                    Editar
+                </a>
+
+                <a href="{% url 'usuarios_delete' object.pk %}" style="
+                    background-color: #E35454;
+                    color: white;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-decoration: none;
+                ">
+                    Excluir
+                </a>
+
+                <a href="{% url 'usuarios_list' %}" style="
+                    background-color: #4b5563;
+                    color: white;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    text-decoration: none;
+                ">
+                    Voltar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -16,13 +16,27 @@ from django.views.generic import (
 from django.db.models import Q
 from .models import Backlogs, SupportMensagens, SupportReplyMensagens
 from accounts.models import Usuarios
-
-
+from accounts.forms import UsuariosForm
+from .forms import BacklogsForm
 
 
 @login_required
 def index(request):
-    return render(request, "dashboard/index.html")
+
+    num_usuarios = Usuarios.objects.all().count()
+    total_suporte_mensagens = SupportMensagens.objects.all().count()
+    total_suporte_mensagens_respondidas = SupportMensagens.objects.filter(ativo=False).count()
+    total_suporte_mensagens_nao_respondidas = SupportMensagens.objects.filter(ativo=True).count()
+    total_backlogs = Backlogs.objects.all().count()
+
+    context = {
+        "num_usuarios": num_usuarios,
+        "total_suporte_mensagens": total_suporte_mensagens,
+        "total_suporte_mensagens_respondidas": total_suporte_mensagens_respondidas,
+        "total_suporte_mensagens_nao_respondidas": total_suporte_mensagens_nao_respondidas,
+        "total_backlogs": total_backlogs,
+    }
+    return render(request, "dashboard/index.html", context)
 
 
 class BacklogsListView(LoginRequiredMixin, ListView):
@@ -94,24 +108,29 @@ class BacklogsDetailView(LoginRequiredMixin, DetailView):
     template_name = "dashboard/backlogs/backlogs_detail.html"
     context_object_name = "backlogs"
 
-
 class BacklogsCreateView(LoginRequiredMixin, CreateView):
     model = Backlogs
+    form_class = BacklogsForm
     template_name = "dashboard/backlogs/backlogs_form.html"
-    fields = "__all__"
     success_url = reverse_lazy("backlogs_list")
+
+    def form_valid(self, form):     
+        return super().form_valid(form)
 
 
 class BacklogsUpdateView(LoginRequiredMixin, UpdateView):
     model = Backlogs
     template_name = "dashboard/backlogs/backlogs_form.html"
-    fields = "__all__"
+    form_class = BacklogsForm
     success_url = reverse_lazy("backlogs_list")
+
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 
 class BacklogsDeleteView(LoginRequiredMixin, DeleteView):
     model = Backlogs
-    template_name = "dashboard/backlogs/backlogs_confirm_delete.html"
+    template_name = "dashboard/backlogs/confirm_delete.html"
     success_url = reverse_lazy("backlogs_list")
 
 
@@ -178,7 +197,7 @@ class SupportMensagensUpdateView(LoginRequiredMixin, UpdateView):
 
 class SupportMensagensDeleteView(LoginRequiredMixin, DeleteView):
     model = SupportMensagens
-    template_name = "dashboard/support/support_confirm_delete.html"
+    template_name = "dashboard/suporte/confirm_delete.html"
     success_url = reverse_lazy("support_list")
 
 class SupportMensagemReplyView(LoginRequiredMixin, View):
@@ -274,21 +293,14 @@ class UsuariosDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "usuarios"
 
 
-class UsuariosCreateView(LoginRequiredMixin, CreateView):
-    model = Usuarios
-    template_name = "dashboard/usuarios/usuarios_form.html"
-    fields = "__all__"
-    success_url = reverse_lazy("usuarios_list")
-
-
 class UsuariosUpdateView(LoginRequiredMixin, UpdateView):
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_form.html"
-    fields = "__all__"
+    form_class = UsuariosForm
     success_url = reverse_lazy("usuarios_list")
 
 
 class UsuariosDeleteView(LoginRequiredMixin, DeleteView):
     model = Usuarios
-    template_name = "dashboard/usuarios/usuarios_confirm_delete.html"
+    template_name = "dashboard/usuarios/confirm_delete.html"
     success_url = reverse_lazy("usuarios_list")

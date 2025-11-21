@@ -1,31 +1,65 @@
 {% extends 'nav.html' %}
 
 {% block center %}
-    <h2>Adicionar Backlogs</h2>
-    <form class="container text-light" method="post">
-        {% csrf_token %}
-        
-        <div class="mb-3">
-            <label for="nome" class="form-label">Versionamento</label>
-            {{ form.num_versao }}
+
+<div class="container_main"
+     style="display:flex; flex-direction:column; width:100%; min-height:100vh; padding:40px 5%;">
+
+    <div style="width:100%; background-color:#23313e; border-radius:20px; padding:15px;">
+
+        <div style="
+            width:100%;
+            border:2px solid #8CCE3B;
+            background-color:transparent;
+            border-radius:20px;
+            padding:25px;
+        ">
+            <h2 style="color:#8CCE3B; font-size:20px; margin-bottom:25px;">
+                Adicionar Backlogs
+            </h2>
+
+            <form method="POST" style="width:100%;">
+                {% csrf_token %}
+
+                <!-- CARD DO FORM -->
+                <div style="
+                    background-color:#374151;
+                    border-radius:13px;
+                    padding:25px;
+                    margin-bottom:25px;
+                    display:flex;
+                    flex-direction:column;
+                    gap:22px;
+                ">
+
+                {{ form.as_div }}
+
+                </div>
+
+                <!-- Botão Enviar -->
+                <button type="submit"
+                        style="background-color:#8CCE3B; color:white; border:none;
+                               border-radius:8px; padding:12px 25px; font-size:15px;
+                               font-weight:600; cursor:pointer;">
+                    Enviar
+                </button>
+
+                <a href="{% url 'backlogs_list' %}" style="
+                    background-color: #4b5563;
+                    color: white;
+                    border-radius: 8px;
+                    padding: 12px 25px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-decoration: none;
+                ">
+                    Cancelar
+                </a>
+
+            </form>
+
         </div>
-        
-        <div class="mb-3">
-            <label for="data_alteracao" class="form-label">Data de Alteração</label>
-            {{ form.data_alteracao }}
-        </div>
+    </div>
+</div>
 
-        <div class="mb-3">
-            <label for="descricao" class="form-label">Descrição</label>
-            {{ form.descricao }}
-        </div> 
-
-        <div class="mb-3">
-            <label for="dev_responsavel" class="form-label">Dev responsável</label>
-            {{ form.dev_responsavel }}
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
 {% endblock %}
