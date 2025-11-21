@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives, send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -48,20 +48,6 @@ def index(request):
 
 
 class BacklogsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
-    """
-    View responsável por listar todos os Backlogs no dashboard.
-
-    Permite a filtragem do queryset por:
-    - Desenvolvedor responsável (`dev`)
-    - Número da versão (`versao`)
-    - Data mínima de postagem (`data_ini`)
-
-    Attributes:
-        model (Model): O modelo Django a ser usado (Backlogs).
-        template_name (str): O caminho do template para renderização.
-        context_object_name (str): O nome da variável de contexto para a lista de objetos.
-        paginate_by (int): O número de itens por página.
-    """
 
     def test_func(self):
         return self.request.user.is_superuser
@@ -76,14 +62,7 @@ class BacklogsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        """
-        Retorna o queryset de Backlogs, aplicando filtros baseados em GET request.
 
-        A listagem é ordenada pela data de postagem de forma decrescente.
-
-        Returns:
-            QuerySet: Um QuerySet filtrado e ordenado do modelo Backlogs.
-        """
         queryset = super().get_queryset()
 
         filtro_dev = self.request.GET.get("dev")
@@ -103,15 +82,7 @@ class BacklogsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return queryset.order_by("-data_postagem")
 
     def get_context_data(self, **kwargs):
-        """
-        Adiciona os valores dos filtros de busca atuais ao contexto.
 
-        Esses valores são usados para preencher novamente os campos do formulário
-        de busca no template após a filtragem.
-
-        Returns:
-            dict: O dicionário de contexto estendido.
-        """
         context = super().get_context_data(**kwargs)
 
         context["filtro_dev"] = self.request.GET.get("dev", "")
@@ -194,11 +165,6 @@ class SupportMensagensListView(LoginRequiredMixin, UserPassesTestMixin, ListView
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
 
-    """
-    Lista todas as mensagens de suporte enviadas pelos usuários.
-
-    Permite a filtragem por nome de usuário, data de envio e descrição.
-    """
 
     model = SupportMensagens
     template_name = "dashboard/suporte/support_list.html"
@@ -206,10 +172,7 @@ class SupportMensagensListView(LoginRequiredMixin, UserPassesTestMixin, ListView
     paginate_by = 10
 
     def get_queryset(self):
-        """
-        Aplica filtros baseados em GET request (user, data_env, descricao)
-        e ordena por data de envio.
-        """
+
         queryset = super().get_queryset()
 
         filtro_user = self.request.GET.get("user")
@@ -225,10 +188,9 @@ class SupportMensagensListView(LoginRequiredMixin, UserPassesTestMixin, ListView
         if filtro_desc:
             queryset = queryset.filter(descricao__icontains=filtro_desc)
 
-        return queryset.order_by("data_envio")
+        return queryset.order_by("-ativo","-data_envio")
 
     def get_context_data(self, **kwargs):
-        """Adiciona os valores dos filtros de busca ao contexto."""
         context = super().get_context_data(**kwargs)
 
         context["filtro_user"] = self.request.GET.get("user", "")
@@ -309,10 +271,22 @@ class SupportMensagemReplyView(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def get(self, request, pk):
         support = get_object_or_404(SupportMensagens, pk=pk)
+
+        if not support.ativo:
+            messages.error(request, "Esta mensagem já foi respondida e está fechada.")
+            return redirect("support_list")
         return render(request, self.template_name, {"support": support})
+    
+        
 
     def post(self, request, pk):
         support = get_object_or_404(SupportMensagens, pk=pk)
+
+        if not support.ativo:
+            messages.error(request, "Esta mensagem já foi respondida e está fechada.")
+            return redirect("support_list")
+
+
         resposta = request.POST.get("resposta")
 
         if not resposta:
@@ -359,11 +333,6 @@ class UsuariosListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         messages.error(self.request, "Usuário não autorizado")
         return redirect("home")
     
-    """
-    Lista todos os usuários registrados no sistema.
-
-    Permite a busca por nome/sobrenome e filtragem por username ou email.
-    """
 
     model = Usuarios
     template_name = "dashboard/usuarios/usuarios_list.html"
@@ -371,10 +340,7 @@ class UsuariosListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        """
-        Filtra os usuários por termo de busca (first_name/last_name),
-        username específico ou email.
-        """
+
         queryset = super().get_queryset()
 
         termo_busca = self.request.GET.get("q")
@@ -395,7 +361,7 @@ class UsuariosListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return queryset.order_by("username")
 
     def get_context_data(self, **kwargs):
-        """Adiciona os termos de busca e filtros atuais ao contexto."""
+
         context = super().get_context_data(**kwargs)
 
         context["termo_busca"] = self.request.GET.get("q", "")

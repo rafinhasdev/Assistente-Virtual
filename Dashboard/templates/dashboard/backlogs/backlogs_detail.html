@@ -30,7 +30,6 @@
                 Detalhes do Backlog
             </h2>
 
-            <!-- BOX PRINCIPAL -->
             <div style="
                 background-color: #374151;
                 border-radius: 13px;
@@ -38,22 +37,21 @@
                 margin-bottom: 25px;
             ">
 
-                <!-- Versão -->
+
                 <p style="color: #ffffff; font-size: 16px; font-weight: 600; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Versão:</strong> {{ object.num_versao }}
                 </p>
 
-                <!-- Dev Responsável -->
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Desenvolvedor:</strong> {{ object.dev_responsavel }}
                 </p>
 
-                <!-- Descrição -->
+
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px; white-space: pre-line;">
                     <strong style="color:#8CCE3B;">Descrição:</strong> {{ object.descricao }}
                 </p>
 
-                <!-- Datas -->
+
                 <p style="color: #6b7280; font-size: 13px; margin-top: 10px;">
                     Postado em: {{ object.data_postagem|date:"d/m/Y" }}
                 </p>
@@ -64,7 +62,7 @@
 
             </div>
 
-            <!-- BOTÕES -->
+
             <div style="display: flex; gap: 15px;">
                 <a href="{% url 'backlogs_update' object.pk %}" style="
                     background-color: #8CCE3B;

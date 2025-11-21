@@ -18,14 +18,12 @@
         transition: 0.2s ease;
     }
 
-    /* Hover */
     .pagination .page-item .page-link:hover {
         background-color: rgba(140, 206, 59, 0.3);
         border-color: #8CCE3B;
         color: #fff;
     }
 
-    /* Página ativa */
     .pagination .page-item.active .page-link {
         background-color: #8CCE3B !important;
         border-color: #8CCE3B !important;
@@ -34,7 +32,6 @@
         transform: scale(1.08);
     }
 
-    /* Desabilitado */
     .pagination .page-item.disabled .page-link {
         background-color: rgba(255, 255, 255, 0.05);
         border-color: rgba(255, 255, 255, 0.1);
@@ -42,7 +39,6 @@
         cursor: not-allowed;
     }
 
-    /* Ajusta touch em telas pequenas */
     @media (max-width: 600px) {
         .pagination .page-item .page-link {
             padding: 6px 10px;
@@ -50,16 +46,12 @@
         }
     }
 
-
 </style>
-
-
-
 
 <nav aria-label="Navegação de páginas">
     <ul class="pagination justify-content-center">
         
-        <!-- Botão Primeira Página -->
+
         {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page=1{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Primeira">
@@ -72,7 +64,6 @@
             </li>
         {% endif %}
 
-        <!-- Botão Página Anterior -->
         {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Anterior">
@@ -85,7 +76,6 @@
             </li>
         {% endif %}
 
-        <!-- Números das Páginas -->
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
                 <li class="page-item active" aria-current="page">
@@ -98,7 +88,7 @@
             {% endif %}
         {% endfor %}
 
-        <!-- Botão Próxima Página -->
+
         {% if page_obj.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Próxima">
@@ -111,7 +101,6 @@
             </li>
         {% endif %}
 
-        <!-- Botão Última Página -->
         {% if page_obj.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.descricao %}&descricao={{ request.GET.descricao }}{% endif %}{% if request.GET.data_inicio %}&data_inicio={{ request.GET.data_inicio }}{% endif %}{% if request.GET.data_fim %}&data_fim={{ request.GET.data_fim }}{% endif %}{% if request.GET.apenas_ativas %}&apenas_ativas={{ request.GET.apenas_ativas }}{% endif %}" aria-label="Última">

@@ -30,7 +30,6 @@
                 Detalhes do Usuário
             </h2>
 
-            <!-- BOX PRINCIPAL -->
             <div style="
                 background-color: #374151;
                 border-radius: 13px;
@@ -38,22 +37,18 @@
                 margin-bottom: 25px;
             ">
 
-                <!-- Nome -->
                 <p style="color: #8CCE3B; font-size: 16px; font-weight: 600; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Nome:</strong> {{ object.first_name }} {{ object.last_name }}
                 </p>
 
-                <!-- Username -->
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Matrícula:</strong> {{ object.username }}
                 </p>
 
-                <!-- Email -->
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Email:</strong> {{ object.email }}
                 </p>
 
-                <!-- Número -->
                 {% if object.numero %}
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Telefone:</strong> {{ object.numero }}
@@ -67,8 +62,7 @@
                 <p style="color: #d1d5db; font-size: 15px; margin-bottom: 10px;">
                     <strong style="color:#8CCE3B;">Data de cadastro:</strong> {{ object.date_joined }}
                 </p>
-                
-                <!-- Grupos -->
+
                 <div style="
                     background-color: #23313e;
                     padding: 15px;
@@ -100,7 +94,6 @@
 
             </div>
 
-            <!-- BOTÕES -->
             <div style="display: flex; gap: 15px;">
 
                 <a href="{% url 'usuarios_delete' object.pk %}" style="

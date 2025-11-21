@@ -1,5 +1,3 @@
-import re
-
 from social_core.backends.oauth import BaseOAuth2
 
 

@@ -1,5 +1,3 @@
-# SUAP/pipeline/save_user.py
-
 import logging
 from django.contrib.auth.models import Group
 from accounts.models import Usuarios
@@ -31,19 +29,16 @@ def save_suap_user(strategy, details, response, backend, *args, **kwargs):
 
     username = suap_id
     default_password = f"IFRN{username}"
-    # Verifica se já existe
     user = Usuarios.objects.filter(username=username).first()
     
 
     if user:
-        # ✅ Apenas atualiza os dados, sem criar novo
         user.first_name = first_name
         user.last_name = last_name
         user.email = email
         user.save(update_fields=["first_name", "last_name", "email"])
         created = False
     else:
-        # ✅ Cria apenas uma vez
         user = Usuarios.objects.create(
             username=username,
             first_name=first_name,

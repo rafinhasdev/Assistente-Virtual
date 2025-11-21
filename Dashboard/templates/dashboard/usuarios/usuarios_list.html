@@ -16,8 +16,7 @@
         border-radius: 20px;
         padding: 15px;
     ">
-        
-        <!-- Container interno MENOR com padding -->
+
         <div style="
             width: 100%;
             background-color: transparent;
@@ -26,40 +25,6 @@
             padding: 15px;
             position: relative;
         ">
-<!--botao criar usuarios no canto superior direito
-            <div style="
-                position: absolute;
-                top: 0;
-                padding: 15px;
-                right: 0;
-                z-index: 10;
-            ">
-                <a href="#" style="
-                    background-color: #5B7FE8;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 12px 24px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    text-decoration: none;
-                ">
-                    <span>Criar Usuário</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                </a>
-            </div>
-
-            <div style="height: 50px;"></div>
-        -->
-            <!-- ===== FILTROS ===== -->
             <div style="
                 width: 100%;
                 background-color: #374151;
@@ -164,7 +129,7 @@
                 </form>
             </div>
 
-            <!-- ===== TABELA ===== -->
+
             <div style="
                 margin-top: 20px;
                 width: 100%;
@@ -173,7 +138,6 @@
                 overflow: hidden;
             ">
                 
-                <!-- Cabeçalho da tabela -->
                 <div style="
                     display: flex;
                     background-color: #374151;
@@ -186,8 +150,7 @@
                     <div style="flex: 1; color: #8CCE3B; font-size: 13px; font-weight: 600;">TELEFONE</div>
                     <div style="width: 180px; color: #8CCE3B; font-size: 13px; font-weight: 600;">AÇÕES</div>
                 </div>
-                
-                <!-- Linhas da tabela -->
+
                 {% if usuarios %}
                     {% for i in usuarios %}
                     <div style="
@@ -200,10 +163,9 @@
                         <div style="flex: 1; color: white; font-size: 14px; font-weight: 500;">{{ i.first_name }} {{ i.last_name }}</div>
                         <div style="flex: 1; color: white; font-size: 14px; font-weight: 500;">{{ i.username }}</div>
                         <div style="flex: 1; color: white; font-size: 14px; font-weight: 500;">{{ i.numero }}</div>
-                        
-                        <!-- Botões de ação -->
+
                         <div style="width: 180px; display: flex; justify-content: flex-end; gap: 10px;">
-                            <!-- Botão Ver -->
+
                             <a href="{% url 'usuarios_detail' i.pk %}" style="
                                 background-color: white;
                                 width: 40px;
@@ -222,7 +184,7 @@
                                 </svg>
                             </a>
                             
-                            <!-- Botão Deletar -->
+
                             <a href="{% url 'usuarios_delete' i.pk %}" style="
                                 background-color: #ef4444;
                                 width: 40px;
@@ -260,7 +222,7 @@
 
             </div>
 
-            <!-- ===== PAGINAÇÃO ===== -->
+
             {% if is_paginated %}
             <div style="
                 display: flex;
@@ -336,7 +298,6 @@
 
         </div>
 
-        <!-- Espaço vazio abaixo -->
         <div style="
             width: 100%;
             min-height: 200px;

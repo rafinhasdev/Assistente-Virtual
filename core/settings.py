@@ -180,8 +180,6 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
-
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT"))

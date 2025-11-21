@@ -17,7 +17,7 @@ color: white;">
     <h4>Digite aqui o que aconteceu!</h4>
 
     {% if messages %}
-    <div style="width: 700px; margin-top: 20px;"> <!-- IGNORA OS ALERTAS DE ERRO. O CODIGO FUNCIONA TRANQUILO!!!!!!!!-->
+    <div class="auto-remove-message" style="width: 700px; margin-top: 20px;">
         {% for message in messages %}
             <div style="
                 padding: 10px;
@@ -65,8 +65,17 @@ color: white;">
         Enviar
         </button>
     </form>
-    
-
 </div>
+<script>
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.auto-remove-message');
+        alerts.forEach(alert => {
+            alert.style.transition = "opacity 0.5s ease";
+            alert.style.opacity = "0";
+
+            setTimeout(() => alert.remove(), 600);
+        });
+    }, 5000);
+</script>
 
 {% endblock %}
