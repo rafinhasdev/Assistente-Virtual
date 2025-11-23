@@ -19,13 +19,9 @@ urlpatterns = [
         views.UsuariosSlimListView.as_view(),
         name="listar-usuarios-slim",
     ),
-    path(
-        "getcredentiais/", views.CredenciaisListView.as_view(), name="get_credentiais"
-    ),
+ 
+    path("credenciais/<str:username>/", views.CredenciaisUpsertView.as_view(), name="credenciais-upsert"),
+    path("get-credenciais/<str:username>/", views.CredenciaisRetrieveView.as_view(), name="credenciais-get"),
     path("check-telefone/", views.CheckTelefoneView.as_view(), name="check_telefone"),
-    path(
-        "usuarios/<str:matricula>/update-telefone/",
-        views.UpdateTelefonePorMatriculaView.as_view(),
-        name="update_telefone",
-    ),
+    path("telefone/<str:username>/", views.TelefoneView.as_view(), name="telefone-view"),
 ]

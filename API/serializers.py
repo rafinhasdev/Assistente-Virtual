@@ -21,8 +21,19 @@ class CredenciaisSerializer(serializers.ModelSerializer):
         credencial = Credenciais.objects.create(usuario=usuario, **validated_data)
         return credencial
 
+class CredenciaisUpsertSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Credenciais
+        fields = ["suap_token", "bearer"]
 
-class CredentiaisView(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance
+
+class CredenciaisRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Credenciais
         fields = ["suap_token", "bearer"]
@@ -31,6 +42,3 @@ class CredentiaisView(serializers.ModelSerializer):
 class TelefoneCheckSerializer(serializers.Serializer):
     numero = serializers.CharField(required=True)
 
-
-class TelefoneUpdateSerializer(serializers.Serializer):
-    numero = serializers.CharField(required=True, max_length=20)

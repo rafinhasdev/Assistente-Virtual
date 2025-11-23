@@ -8,10 +8,45 @@ from accounts.serializers import UsuariosSerializer, UsuariosSlimSerializerGet
 from .models import Credenciais
 from .serializers import (
     CredenciaisSerializer,
-    CredentiaisView,
+    CredenciaisRetrieveSerializer,
     TelefoneCheckSerializer,
-    TelefoneUpdateSerializer,
+    CredenciaisUpsertSerializer,
 )
+
+class CredenciaisUpsertView(generics.GenericAPIView):
+    serializer_class = CredenciaisUpsertSerializer
+
+    def post(self, request, username):
+
+        try:
+            usuario = Usuarios.objects.get(username=username)
+        except Usuarios.DoesNotExist:
+            return Response({"error": "Usuário não encontrado"}, status=404)
+
+        credenciais = Credenciais.objects.filter(usuario=usuario).first()
+
+        serializer = self.get_serializer(
+            instance=credenciais,
+            data=request.data,
+            partial=True 
+        )
+
+        serializer.is_valid(raise_exception=True)
+
+        if credenciais:
+            serializer.save()
+            return Response(
+                {"message": "Credenciais atualizadas com sucesso", "data": serializer.data},
+                status=status.HTTP_200_OK,
+            )
+
+        serializer.save(usuario=usuario)
+        return Response(
+            {"message": "Credenciais criadas com sucesso", "data": serializer.data},
+            status=status.HTTP_201_CREATED,
+        )
+
+
 
 
 class CredenciaisCreateView(generics.CreateAPIView):
@@ -19,9 +54,21 @@ class CredenciaisCreateView(generics.CreateAPIView):
     serializer_class = CredenciaisSerializer
 
 
-class CredenciaisListView(generics.ListAPIView):
-    queryset = Credenciais.objects.all()
-    serializer_class = CredentiaisView
+class CredenciaisRetrieveView(generics.GenericAPIView):
+    serializer_class = CredenciaisRetrieveSerializer
+
+    def get(self, request, username):
+        try:
+            usuario = Usuarios.objects.get(username=username)
+        except Usuarios.DoesNotExist:
+            return Response({"error": "Usuário não encontrado"}, status=404)
+
+        credenciais = Credenciais.objects.filter(usuario=usuario).first()
+        if not credenciais:
+            return Response({"error": "Credenciais não encontradas"}, status=404)
+
+        serializer = self.get_serializer(credenciais)
+        return Response(serializer.data, status=200)
 
 
 class UsuariosListView(generics.ListAPIView):
@@ -63,32 +110,43 @@ class CheckTelefoneView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class TelefoneView(generics.GenericAPIView):
+    serializer_class = TelefoneCheckSerializer
 
-class UpdateTelefonePorMatriculaView(APIView):
-    def get(self, request, matricula, *args, **kwargs):
+    def get_user(self, username):
         try:
-            usuario = Usuarios.objects.get(username=matricula)
+            return Usuarios.objects.get(username=username)
         except Usuarios.DoesNotExist:
-            return Response({"detail": "Usuário não encontrado."}, status=404)
+            return None
 
-        return Response(UsuariosSerializer(usuario).data)
+    def get(self, request, username):
+        user = self.get_user(username)
+        if not user:
+            return Response({"error": "Usuário não encontrado"}, status=404)
 
-    def patch(self, request, matricula, *args, **kwargs):
-        serializer = TelefoneUpdateSerializer(data=request.data)
+        return Response({"numero": user.numero}, status=200)
+
+    def post(self, request, username):
+        """
+        Cria ou atualiza o número do usuário.
+        """
+        user = self.get_user(username)
+        if not user:
+            return Response({"error": "Usuário não encontrado"}, status=404)
+
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        try:
-            usuario = Usuarios.objects.get(username=matricula)
-        except Usuarios.DoesNotExist:
-            return Response({"detail": "Usuário não encontrado."}, status=404)
-
-        usuario.numero = serializer.validated_data["numero"]
-        usuario.save()
+        user.numero = serializer.validated_data["numero"]
+        user.save()
 
         return Response(
-            {
-                "detail": "Telefone atualizado com sucesso.",
-                "usuario": UsuariosSerializer(usuario).data,
-            },
-            status=200,
+            {"message": "Número salvo/atualizado com sucesso", "numero": user.numero},
+            status=200
         )
+
+    def put(self, request, username):
+        return self.post(request, username)
+
+    def patch(self, request, username):
+        return self.post(request, username)
