@@ -1,0 +1,11 @@
+django==5.2
+djangorestframework==3.14.0
+python-dotenv
+psycopg2-binary==2.9.11
+social-auth-core
+social-auth-app-django
+fastapi==0.115.8
+gunicorn==23.0.0
+asyncpg==0.30.0
+pydantic==2.10.6
+pydantic_core==2.27.2

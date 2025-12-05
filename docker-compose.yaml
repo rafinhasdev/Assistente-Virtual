@@ -14,17 +14,20 @@ services:
     - evolution_n8n_net
 
   django:
-    build: .
+    build: 
+      context: .
+      dockerfile: ./compose/django/Dockerfile
     container_name: AssistenteVirtual
-    command: python manage.py runserver 0.0.0.0:8000 
+    command: ./start.sh
     volumes:
-      - .:/app
-    ports:
-      - "8000:8000"
+        - static_data:/app/staticfiles
+        - media_data:/app/media
+    #ports:
+    #  - "8000:8000"
     environment:
       - POSTGRES_DB=default
       - POSTGRES_USER=default
-      - POSTGRES_PASSWORD=default
+      - POSTGRES_PASSWORD=pgadmin
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
     depends_on:
@@ -33,6 +36,20 @@ services:
 
     networks:
     - evolution_n8n_net
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/nginx/Dockerfile
+    volumes:
+      - static_data:/app/staticfiles
+      - media_data:/app/media
+    ports:
+      - 86:80
+    networks:
+      - evolution_n8n_net
+    restart: unless-stopped
 
   evolution-api:
     container_name: evolution_api
@@ -150,6 +167,8 @@ volumes:
   n8n_data:
   postgres_data:
   redis_data:
+  static_data:
+  media_data:
 
 networks:
   evolution_n8n_net:
